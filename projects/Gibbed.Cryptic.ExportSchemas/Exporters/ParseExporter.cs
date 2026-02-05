@@ -66,23 +66,23 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             "INT_WAS_BOOL", // 13
         };
 
-        public ParseExporter(RuntimeProcess runtime) : base(runtime)
-        {
-        }
+        public ParseExporter(RuntimeBase runtime)
+            : base(runtime) { }
 
         public void Export(string outputBasePath, List<KeyValuePair<string, IntPtr>> enums)
         {
             var runtime = this.Runtime;
 
-            var locators = runtime.Is32Bit == false
-                ? new LocateDelegate[] // 64
-                {
-                    Locators.x64.ParseTableInfosLocator1.Locate,
-                }
-                : new LocateDelegate[] // 32
-                {
-                    Locators.x32.ParseTableInfosLocator1.Locate,
-                };
+            var locators =
+                runtime.Is32Bit == false
+                    ? new LocateDelegate[] // 64
+                    {
+                        Locators.x64.ParseTableInfosLocator1.Locate,
+                    }
+                    : new LocateDelegate[] // 32
+                    {
+                        Locators.x32.ParseTableInfosLocator1.Locate,
+                    };
             if (this.Locate(out var stashPointerPointer, locators) == false)
             {
                 Console.WriteLine("Warning: failed to locate parse table.");
@@ -105,10 +105,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
                 Console.WriteLine("[parse] {0}", name);
 
-                var settings = new XmlWriterSettings()
-                {
-                    Indent = true,
-                };
+                var settings = new XmlWriterSettings() { Indent = true };
 
                 var outputPath = Path.Combine(outputBasePath, "parses", name + ".parse.xml");
                 using (var xml = XmlWriter.Create(outputPath, settings))
@@ -131,27 +128,33 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             IntPtr pointer,
             XmlWriter xml,
             List<StashTableEntry<IntPtr>> parses,
-            List<KeyValuePair<string, IntPtr>> enums)
+            List<KeyValuePair<string, IntPtr>> enums
+        )
         {
             var runtime = this.Runtime;
+
             var address = this.ToStaticAddress(pointer);
 
             //xml.WriteComment(_($" {address:X8} "));
 
             var columns = new List<KeyValuePair<ParseColumn, string>>();
-            var columnSize = runtime.Is32Bit == false
-                ? Marshal.SizeOf(typeof(ParseColumn))
-                : Marshal.SizeOf(typeof(x32.ParseColumn));
+            var columnSize =
+                runtime.Is32Bit == false
+                    ? Marshal.SizeOf(typeof(ParseColumn))
+                    : Marshal.SizeOf(typeof(x32.ParseColumn));
+
             var columnPointer = pointer;
             while (true)
             {
                 var columnAddress = this.ToStaticAddress(columnPointer);
-                var column = runtime.Is32Bit == false
-                    ? runtime.ReadStructure<ParseColumn>(columnPointer)
-                    : runtime.ReadStructure<x32.ParseColumn>(columnPointer).Upgrade();
-                var name = column.NamePointer != default
-                    ? runtime.ReadStringZ(column.NamePointer, Encoding.ASCII)
-                    : null;
+                var column =
+                    runtime.Is32Bit == false
+                        ? runtime.ReadStructure<ParseColumn>(columnPointer)
+                        : runtime.ReadStructure<x32.ParseColumn>(columnPointer).Upgrade();
+                var name =
+                    column.NamePointer != default
+                        ? runtime.ReadStringZ(column.NamePointer, Encoding.ASCII)
+                        : null;
                 if (column.Type == 0 && string.IsNullOrEmpty(name) == true)
                 {
                     break;
@@ -172,15 +175,24 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                     xml.WriteAttributeString("name", name);
                 }
 
+                // Debug: show token before lookup
+                if (column.Token >= Parse.GlobalTokens.Count)
+                {
+                    Console.WriteLine(
+                        $"  ERROR: Invalid token {column.Token} for column '{name}', Type=0x{column.Type:X}"
+                    );
+                    xml.WriteAttributeString("type", $"UNKNOWN_TOKEN_{column.Token}");
+                    xml.WriteEndElement();
+                    continue;
+                }
+
                 var token = Parse.GlobalTokens.GetToken(column.Token);
 
                 var (tokenName, tokenFlags) = column.GetTokenNameAndFlags();
 
                 xml.WriteAttributeString("type", tokenName);
 
-                if (column.Token != 0 &&
-                    column.Token != 1 &&
-                    column.Token != 2)
+                if (column.Token != 0 && column.Token != 1 && column.Token != 2)
                 {
                     xml.WriteElementString("offset", _($"{column.Offset}"));
                 }
@@ -218,10 +230,15 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                     {
                         var aliased = columns
                             .Where(c => c.Key != column)
-                            .Where(c => c.Key.Flags.HasAny(Parse.ColumnFlags.REDUNDANTNAME) == false)
+                            .Where(c =>
+                                c.Key.Flags.HasAny(Parse.ColumnFlags.REDUNDANTNAME) == false
+                            )
                             .Where(c => c.Key.Offset == column.Offset)
                             .Where(c => c.Key.Token == column.Token)
-                            .FirstOrDefault(c => c.Key.Token != 23 || c.Key.Parameter0.Pointer == column.Parameter0.Pointer);
+                            .FirstOrDefault(c =>
+                                c.Key.Token != 23
+                                || c.Key.Parameter0.Pointer == column.Parameter0.Pointer
+                            );
                         if (aliased.Key != null)
                         {
                             xml.WriteElementString("redundant_name", aliased.Value);
@@ -233,7 +250,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                         {
                             if (column.Token == 7)
                             {
-                                xml.WriteElementString("float_rounding", _FloatRounding[column.MinBits]);
+                                xml.WriteElementString(
+                                    "float_rounding",
+                                    _FloatRounding[column.MinBits]
+                                );
                             }
                             else
                             {
@@ -245,7 +265,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                         {
                             case Parse.ColumnParameter.NumberOfElements:
                             {
-                                xml.WriteElementString("num_elements", _($"{column.Parameter0.Int32}"));
+                                xml.WriteElementString(
+                                    "num_elements",
+                                    _($"{column.Parameter0.Int32}")
+                                );
                                 break;
                             }
 
@@ -253,14 +276,20 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                             {
                                 if (column.Parameter0.Int32 != 0)
                                 {
-                                    xml.WriteElementString("default", _($"{column.Parameter0.Int32}"));
+                                    xml.WriteElementString(
+                                        "default",
+                                        _($"{column.Parameter0.Int32}")
+                                    );
                                 }
                                 break;
                             }
 
                             case Parse.ColumnParameter.StringLength:
                             {
-                                xml.WriteElementString("string_length", _($"{column.Parameter0.Int32}"));
+                                xml.WriteElementString(
+                                    "string_length",
+                                    _($"{column.Parameter0.Int32}")
+                                );
                                 break;
                             }
 
@@ -268,7 +297,13 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                             {
                                 if (column.Parameter0.Pointer != default)
                                 {
-                                    xml.WriteElementString("default_string", runtime.ReadStringZ(column.Parameter0.Pointer, Encoding.ASCII) ?? "");
+                                    xml.WriteElementString(
+                                        "default_string",
+                                        runtime.ReadStringZ(
+                                            column.Parameter0.Pointer,
+                                            Encoding.ASCII
+                                        ) ?? ""
+                                    );
                                 }
                                 break;
                             }
@@ -277,7 +312,13 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                             {
                                 if (column.Parameter0.Pointer != default)
                                 {
-                                    xml.WriteElementString("command_string", runtime.ReadStringZ(column.Parameter0.Pointer, Encoding.ASCII) ?? "");
+                                    xml.WriteElementString(
+                                        "command_string",
+                                        runtime.ReadStringZ(
+                                            column.Parameter0.Pointer,
+                                            Encoding.ASCII
+                                        ) ?? ""
+                                    );
                                 }
                                 break;
                             }
@@ -290,7 +331,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
                             case Parse.ColumnParameter.BitOffset:
                             {
-                                xml.WriteElementString("bit_offset", _($"{column.Parameter0.Int32}"));
+                                xml.WriteElementString(
+                                    "bit_offset",
+                                    _($"{column.Parameter0.Int32}")
+                                );
                                 break;
                             }
                         }
@@ -303,13 +347,19 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                                 {
                                     xml.WriteStartElement("static_define_list");
 
-                                    var external = enums.SingleOrDefault(e => e.Value == column.Parameter1.Pointer);
+                                    var external = enums.SingleOrDefault(e =>
+                                        e.Value == column.Parameter1.Pointer
+                                    );
                                     if (external.Key == default)
                                     {
-                                        var staticAddress = this.ToStaticAddress(column.Parameter1.Pointer);
-                                        xml.WriteComment(staticAddress != default
-                                            ? $" dynamic enum? {staticAddress:X} "
-                                            : $" dynamic enum? ");
+                                        var staticAddress = this.ToStaticAddress(
+                                            column.Parameter1.Pointer
+                                        );
+                                        xml.WriteComment(
+                                            staticAddress != default
+                                                ? $" dynamic enum? {staticAddress:X} "
+                                                : $" dynamic enum? "
+                                        );
                                     }
                                     else
                                     {
@@ -326,7 +376,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                             {
                                 if (column.Parameter1.Pointer != default)
                                 {
-                                    var value = runtime.ReadStringZ(column.Parameter1.Pointer, Encoding.ASCII);
+                                    var value = runtime.ReadStringZ(
+                                        column.Parameter1.Pointer,
+                                        Encoding.ASCII
+                                    );
                                     xml.WriteElementString("dictionary_name", value);
                                 }
                                 break;
@@ -342,7 +395,9 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                                 {
                                     xml.WriteStartElement("subtable");
 
-                                    var parse = parses.SingleOrDefault(p => p.Value == column.Parameter1.Pointer);
+                                    var parse = parses.SingleOrDefault(p =>
+                                        p.Value == column.Parameter1.Pointer
+                                    );
                                     if (parse.Name == null)
                                     {
                                         //xml.WriteElementString("subtable", "NOT FOUND? " + column.Parameter1.ToString("X*"));
@@ -365,7 +420,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                         if (format != 0)
                         {
                             string formatName;
-                            if (format < _FormatNames.Length && (formatName = _FormatNames[format]) != null)
+                            if (
+                                format < _FormatNames.Length
+                                && (formatName = _FormatNames[format]) != null
+                            )
                             {
                                 xml.WriteElementString("format", formatName);
                             }

@@ -26,16 +26,29 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
 {
     internal static class RuntimeHelpers
     {
-        public static bool Search(this RuntimeProcess runtime, ByteSearch.Pattern pattern, out IntPtr result)
+        public static bool Search(
+            this RuntimeBase runtime,
+            ByteSearch.Pattern pattern,
+            out IntPtr result
+        )
         {
+            var address = runtime.MainModuleBase;
+            var totalSize = runtime.MainModuleSize;
+
             const int blockSize = 0x00A00000;
             var data = new byte[blockSize];
-            var address = runtime.Process.MainModule.BaseAddress;
-            var totalSize = runtime.Process.MainModule.ModuleMemorySize;
             for (int i = 0; i < totalSize; i += blockSize - pattern.Count)
             {
                 int size = Math.Min(blockSize, totalSize - i);
-                runtime.Read(address + i, data, 0, size);
+                try
+                {
+                    runtime.Read(address + i, data, 0, size);
+                }
+                catch
+                {
+                    // Skip unreadable regions
+                    continue;
+                }
 
                 int offset;
                 if (ByteSearch.Match(data, 0, size, pattern, out offset) == true)

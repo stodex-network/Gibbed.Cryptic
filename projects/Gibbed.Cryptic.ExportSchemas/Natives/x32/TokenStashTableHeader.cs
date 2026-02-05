@@ -28,7 +28,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Natives.x32
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     internal struct TokenStashTableHeader
     {
-        public static readonly uint Signature = 33;
+        public const long Signature = 33;
 
         public uint Magic;
         public uint ValuePointer;
@@ -37,7 +37,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Natives.x32
         {
             return new x64.TokenStashTableHeader()
             {
-                Magic = new IntPtr(this.Magic),
+                Magic = this.Magic,
                 ValuePointer = new IntPtr(this.ValuePointer),
             };
         }

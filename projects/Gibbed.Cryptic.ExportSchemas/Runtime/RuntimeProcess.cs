@@ -34,13 +34,21 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
         private IntPtr _Handle = IntPtr.Zero;
         private bool _Is32Bit;
 
-        public RuntimeProcess() : base(nameof(RuntimeProcess))
+        public RuntimeProcess()
+            : base(nameof(RuntimeProcess)) { }
+
+        public Process Process
         {
+            get { return this._Process; }
         }
 
-        public Process Process { get { return this._Process; } }
-
-        public override bool Is32Bit { get { return this._Is32Bit; } }
+        public override bool Is32Bit
+        {
+            get { return this._Is32Bit; }
+        }
+        public override IntPtr MainModuleBase =>
+            this._Process?.MainModule?.BaseAddress ?? IntPtr.Zero;
+        public override int MainModuleSize => this._Process?.MainModule?.ModuleMemorySize ?? 0;
 
         protected override void Dispose(bool disposing)
         {
@@ -80,8 +88,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
             this._Process = process;
             this._Handle = handle;
             this._Is32Bit =
-                Win32.IsWow64Process(handle, out var isWow64Process) == true &&
-                isWow64Process == true;
+                Win32.IsWow64Process(handle, out var isWow64Process) == true
+                && isWow64Process == true;
             return true;
         }
 
@@ -190,7 +198,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
                 address,
                 bufferHandle.AddrOfPinnedObject() + offset,
                 size,
-                out var read);
+                out var read
+            );
 
             bufferHandle.Free();
 
@@ -237,7 +246,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
                 address,
                 bufferHandle.AddrOfPinnedObject() + offset,
                 size,
-                out var written);
+                out var written
+            );
 
             bufferHandle.Free();
 

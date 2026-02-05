@@ -37,14 +37,16 @@ namespace Gibbed.Cryptic.ExportSchemas.Natives.x32
 
         public x64.StashTableHeader Upgrade()
         {
+            // Note: x32 and x64 stash table layouts are different
+            // This mapping is approximate based on semantic meaning
             return new x64.StashTableHeader()
             {
-                Count1 = this.Count1,
-                Count2 = this.Count2,
-                AllocatedCount = this.AllocatedCount,
-                Unknown0C = this.Unknown0C,
-                Unknown10 = new IntPtr(this.Unknown10),
                 EntriesPointer = new IntPtr(this.EntriesPointer),
+                Type = this.Count2,
+                Mask = this.Unknown0C,
+                Unknown14 = this.Unknown10,
+                Unknown18 = 0,
+                AllocatedCount = this.AllocatedCount,
             };
         }
     }

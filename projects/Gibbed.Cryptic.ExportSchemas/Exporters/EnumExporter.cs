@@ -36,9 +36,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 {
     internal class EnumExporter : BaseExporter
     {
-        public EnumExporter(RuntimeProcess runtime) : base(runtime)
-        {
-        }
+        public EnumExporter(RuntimeBase runtime)
+            : base(runtime) { }
 
         public List<KeyValuePair<string, IntPtr>> Export(string outputBasePath)
         {
@@ -46,23 +45,34 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
             var enums = new List<KeyValuePair<string, IntPtr>>();
 
-            var locators = runtime.Is32Bit == false
-                ? new LocateDelegate[] // 64
-                {
-                    Locators.x64.EnumTableInfosLocator1.Locate,
-                }
-                : new LocateDelegate[] // 32
-                {
-                    Locators.x32.EnumTableInfosLocator1.Locate,
-                };
+            var locators =
+                runtime.Is32Bit == false
+                    ? new LocateDelegate[] // 64
+                    {
+                        Locators.x64.EnumTableInfosLocator1.Locate,
+                    }
+                    : new LocateDelegate[] // 32
+                    {
+                        Locators.x32.EnumTableInfosLocator1.Locate,
+                    };
             if (this.Locate(out var stashPointerPointer, locators) == false)
             {
                 Console.WriteLine("Warning: failed to locate enum table.");
                 return enums;
             }
 
+            Console.WriteLine($"  Enum table pointer pointer: 0x{stashPointerPointer.ToInt64():X}");
             var stashPointer = runtime.ReadPointer(stashPointerPointer);
+            Console.WriteLine($"  Enum table stash pointer: 0x{stashPointer.ToInt64():X}");
+
             var stashTable = runtime.ReadStashTable(stashPointer).ToList();
+            Console.WriteLine($"  Enum stash table count: {stashTable.Count}");
+            for (int i = 0; i < Math.Min(3, stashTable.Count); i++)
+            {
+                Console.WriteLine(
+                    $"  StashEntry[{i}]: Name='{stashTable[i].Name}', Value=0x{stashTable[i].Value.ToInt64():X}"
+                );
+            }
             var pointerMap = new Dictionary<IntPtr, string>();
             foreach (var stashEntry in stashTable)
             {
@@ -108,10 +118,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
                 Console.WriteLine("[enum] {0}", name);
 
-                var settings = new XmlWriterSettings()
-                {
-                    Indent = true,
-                };
+                var settings = new XmlWriterSettings() { Indent = true };
 
                 var outputPath = Path.Combine(outputBasePath, "enums", name + ".enum.xml");
                 using (var xml = XmlWriter.Create(outputPath, settings))
@@ -127,13 +134,21 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                         xml.WriteEndElement();
                     }
                     xml.WriteStartElement("elements");
-                    xml.WriteAttributeString("type", info.ValueType switch
-                    {
-                        EnumValueType.Int => "int",
-                        EnumValueType.String => "string",
-                        _ => throw new NotSupportedException(),
-                    });
-                    foreach (var kv in info.Elements.OrderBy(kv => kv.Value, GetComparerByType(info.ValueType)))
+                    xml.WriteAttributeString(
+                        "type",
+                        info.ValueType switch
+                        {
+                            EnumValueType.Int => "int",
+                            EnumValueType.String => "string",
+                            _ => throw new NotSupportedException(),
+                        }
+                    );
+                    foreach (
+                        var kv in info.Elements.OrderBy(
+                            kv => kv.Value,
+                            GetComparerByType(info.ValueType)
+                        )
+                    )
                     {
                         xml.WriteStartElement("element");
                         xml.WriteAttributeString("name", kv.Key);
@@ -190,18 +205,20 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             var runtime = this.Runtime;
             //var address = this.ToStaticAddress(pointer);
 
-            var elementSize = runtime.Is32Bit == false
-                ? Marshal.SizeOf(typeof(EnumElement))
-                : Marshal.SizeOf(typeof(x32.EnumElement));
+            var elementSize =
+                runtime.Is32Bit == false
+                    ? Marshal.SizeOf(typeof(EnumElement))
+                    : Marshal.SizeOf(typeof(x32.EnumElement));
 
             IntPtr parentPointer = default;
             var elements = new List<KeyValuePair<string, string>>();
             var valueType = EnumValueType.Invalid;
             while (true)
             {
-                var element = runtime.Is32Bit == false
-                    ? runtime.ReadStructure<EnumElement>(pointer)
-                    : runtime.ReadStructure<x32.EnumElement>(pointer).Upgrade();
+                var element =
+                    runtime.Is32Bit == false
+                        ? runtime.ReadStructure<EnumElement>(pointer)
+                        : runtime.ReadStructure<x32.EnumElement>(pointer).Upgrade();
                 if (element.Name.Pointer == default)
                 {
                     break;
@@ -223,15 +240,25 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                     var dynamicInfoPointer = runtime.ReadPointer(element.Value.Pointer);
                     while (dynamicInfoPointer != default)
                     {
-                        var dynamicInfo = runtime.Is32Bit == false
-                            ? runtime.ReadStructure<EnumDynamicInfo>(dynamicInfoPointer)
-                            : runtime.ReadStructure<x32.EnumDynamicInfo>(dynamicInfoPointer).Upgrade();
+                        var dynamicInfo =
+                            runtime.Is32Bit == false
+                                ? runtime.ReadStructure<EnumDynamicInfo>(dynamicInfoPointer)
+                                : runtime
+                                    .ReadStructure<x32.EnumDynamicInfo>(dynamicInfoPointer)
+                                    .Upgrade();
                         if (dynamicInfo.StashTablePointer != default)
                         {
-                            var dynamicElements = runtime.ReadStringStashTable(dynamicInfo.StashTablePointer);
+                            var dynamicElements = runtime.ReadStringStashTable(
+                                dynamicInfo.StashTablePointer
+                            );
                             foreach (var dynamicElement in dynamicElements)
                             {
-                                elements.Add(new KeyValuePair<string, string>(dynamicElement.Name, dynamicElement.Value));
+                                elements.Add(
+                                    new KeyValuePair<string, string>(
+                                        dynamicElement.Name,
+                                        dynamicElement.Value
+                                    )
+                                );
                             }
                         }
                         dynamicInfoPointer = dynamicInfo.NextPointer;
@@ -248,7 +275,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 object value = valueType switch
                 {
                     EnumValueType.Int => element.Value.Int32,
-                    EnumValueType.String => runtime.ReadStringZ(element.Value.Pointer, Encoding.ASCII),
+                    EnumValueType.String => runtime.ReadStringZ(
+                        element.Value.Pointer,
+                        Encoding.ASCII
+                    ),
                     _ => throw new NotSupportedException(),
                 };
                 elements.Add(new KeyValuePair<string, string>(name, _($"{value}")));

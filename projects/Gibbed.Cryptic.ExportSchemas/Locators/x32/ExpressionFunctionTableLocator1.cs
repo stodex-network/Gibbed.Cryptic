@@ -27,7 +27,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Locators.x32
 {
     internal static class ExpressionFunctionTableLocator1
     {
-        public static bool Locate(RuntimeProcess runtime, out IntPtr result)
+        public static bool Locate(RuntimeBase runtime, out IntPtr result)
         {
             var codePattern = new ByteSearch.Pattern()
             {

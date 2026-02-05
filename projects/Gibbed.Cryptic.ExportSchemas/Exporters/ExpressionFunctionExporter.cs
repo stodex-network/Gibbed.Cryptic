@@ -32,23 +32,23 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 {
     internal class ExpressionFunctionExporter : BaseExporter
     {
-        public ExpressionFunctionExporter(RuntimeProcess runtime) : base(runtime)
-        {
-        }
+        public ExpressionFunctionExporter(RuntimeBase runtime)
+            : base(runtime) { }
 
         public void Export(string outputPath)
         {
             var runtime = this.Runtime;
 
-            var locators = runtime.Is32Bit == false
-                ? new LocateDelegate[] // 64
-                {
-                    Locators.x64.ExpressionFunctionTableLocator1.Locate,
-                }
-                : new LocateDelegate[] // 32
-                {
-                    Locators.x32.ExpressionFunctionTableLocator1.Locate,
-                };
+            var locators =
+                runtime.Is32Bit == false
+                    ? new LocateDelegate[] // 64
+                    {
+                        Locators.x64.ExpressionFunctionTableLocator1.Locate,
+                    }
+                    : new LocateDelegate[] // 32
+                    {
+                        Locators.x32.ExpressionFunctionTableLocator1.Locate,
+                    };
             if (this.Locate(out var stashPointerPointer, locators) == false)
             {
                 Console.WriteLine("Warning: failed to locate expression function table.");
@@ -56,6 +56,13 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             }
 
             var stashPointer = runtime.ReadPointer(stashPointerPointer);
+            if (stashPointer == IntPtr.Zero)
+            {
+                Console.WriteLine(
+                    "Warning: expression function table not populated in dump (lazy initialization)."
+                );
+                return;
+            }
             var stashEntries = runtime.ReadStashTable(stashPointer).ToList();
             if (stashEntries.Count == 0)
             {
@@ -79,9 +86,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
             var sb = new StringBuilder();
 
-            var func = runtime.Is32Bit == false
-                ? runtime.ReadStructure<ExpressionFunction>(pointer)
-                : runtime.ReadStructure<x32.ExpressionFunction>(pointer).Upgrade();
+            var func =
+                runtime.Is32Bit == false
+                    ? runtime.ReadStructure<ExpressionFunction>(pointer)
+                    : runtime.ReadStructure<x32.ExpressionFunction>(pointer).Upgrade();
 
             var handlerStaticAddress = this.ToStaticAddress(func.Handler);
 
@@ -96,9 +104,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 tags[i] = runtime.ReadStringZ(func.TagPointers[i], Encoding.ASCII);
             }
 
-            var validTags = tags
-                .Where(t => string.IsNullOrWhiteSpace(t) == false)
-                .ToArray();
+            var validTags = tags.Where(t => string.IsNullOrWhiteSpace(t) == false).ToArray();
             if (validTags.Length > 0)
             {
                 sb.AppendFormat("{0} : ", string.Join(", ", validTags));
@@ -116,7 +122,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 sb.AppendFormat(
                     "{0} {1}",
                     this.GetArgumentType(func.Arguments[i]),
-                    runtime.ReadStringZ(func.Arguments[i].NamePointer, Encoding.ASCII));
+                    runtime.ReadStringZ(func.Arguments[i].NamePointer, Encoding.ASCII)
+                );
             }
 
             sb.Append(")");

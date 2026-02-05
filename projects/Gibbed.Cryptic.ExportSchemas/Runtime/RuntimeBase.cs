@@ -40,6 +40,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
         }
 
         public abstract bool Is32Bit { get; }
+        public abstract IntPtr MainModuleBase { get; }
+        public abstract int MainModuleSize { get; }
 
         ~RuntimeBase()
         {

@@ -27,7 +27,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Locators.x32
 {
     internal static class ParseTableInfosLocator1
     {
-        public static bool Locate(RuntimeProcess runtime, out IntPtr result)
+        public static bool Locate(RuntimeBase runtime, out IntPtr result)
         {
             var namePattern = ByteSearch.ToPattern("ff_ParseTableInfos");
             if (runtime.Search(namePattern, out var nameOffset) == false)

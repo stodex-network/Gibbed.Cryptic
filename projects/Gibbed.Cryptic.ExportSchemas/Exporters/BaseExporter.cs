@@ -33,14 +33,14 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 {
     internal abstract class BaseExporter
     {
-        protected readonly RuntimeProcess Runtime;
+        protected readonly RuntimeBase Runtime;
 
-        protected BaseExporter(RuntimeProcess runtime)
+        protected BaseExporter(RuntimeBase runtime)
         {
             this.Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
         }
 
-        protected delegate bool LocateDelegate(RuntimeProcess runtime, out IntPtr result);
+        protected delegate bool LocateDelegate(RuntimeBase runtime, out IntPtr result);
 
         protected bool Locate(out IntPtr result, params LocateDelegate[] locators)
         {
@@ -85,29 +85,29 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
         protected ulong ToStaticAddress(IntPtr pointer)
         {
             var runtime = this.Runtime;
-            var mainModule = runtime.Process.MainModule;
-            var minimum = mainModule.BaseAddress.ToInt64();
-            var maximum = (mainModule.BaseAddress + mainModule.ModuleMemorySize).ToInt64();
+            var minimum = runtime.MainModuleBase.ToInt64();
+            var maximum = (runtime.MainModuleBase + runtime.MainModuleSize).ToInt64();
             var value = pointer.ToInt64();
             if (value < minimum || value >= maximum)
             {
                 return 0;
             }
             value -= minimum;
-            value += runtime.Is32Bit == false
-                ? 0x140000000
-                : 0x400000;
+            value += runtime.Is32Bit == false ? 0x140000000 : 0x400000;
             return (ulong)value;
         }
 
         protected static List<KeyValuePair<string, int>> GetOffsets<T>()
         {
             var offsets = new List<KeyValuePair<string, int>>();
-            foreach (var field in typeof(T)
-                .GetFields(
-                    System.Reflection.BindingFlags.Public |
-                    System.Reflection.BindingFlags.Instance)
-                .Select(f => f.Name))
+            foreach (
+                var field in typeof(T)
+                    .GetFields(
+                        System.Reflection.BindingFlags.Public
+                            | System.Reflection.BindingFlags.Instance
+                    )
+                    .Select(f => f.Name)
+            )
             {
                 var offset = Marshal.OffsetOf(typeof(T), field).ToInt32();
                 offsets.Add(new KeyValuePair<string, int>(field, offset));

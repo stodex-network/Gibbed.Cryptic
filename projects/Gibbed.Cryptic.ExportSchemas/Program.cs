@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using Gibbed.Cryptic.ExportSchemas.Exporters;
 using Gibbed.Cryptic.ExportSchemas.Runtime;
+using NDesk.Options;
 
 namespace Gibbed.Cryptic.ExportSchemas
 {
@@ -40,33 +41,132 @@ namespace Gibbed.Cryptic.ExportSchemas
 
         public static void Main(string[] args)
         {
-            var process = FindSuitableProcess(out var projectName);
-            if (process == null)
+            string dumpPath = null;
+            string projectName = null;
+            string outputPath = null;
+            bool showHelp = false;
+
+            var options = new OptionSet()
             {
+                { "d|dump=", "path to a memory dump file (.dmp)", v => dumpPath = v },
+                {
+                    "p|project=",
+                    "project name (e.g. 'Star Trek Online/Live')",
+                    v => projectName = v
+                },
+                { "o|output=", "output directory for schemas", v => outputPath = v },
+                { "h|help", "show this help message", v => showHelp = v != null },
+            };
+
+            try
+            {
+                options.Parse(args);
+            }
+            catch (OptionException e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+                Console.WriteLine("Try --help for usage information.");
                 return;
             }
 
-            using (var runtime = new RuntimeProcess())
+            if (showHelp)
             {
-                if (runtime.OpenProcess(process) == false)
+                Console.WriteLine("Usage: Gibbed.Cryptic.ExportSchemas [OPTIONS]");
+                Console.WriteLine();
+                Console.WriteLine(
+                    "Export schema information from a running game client or memory dump."
+                );
+                Console.WriteLine();
+                Console.WriteLine("Options:");
+                options.WriteOptionDescriptions(Console.Out);
+                Console.WriteLine();
+                Console.WriteLine("Examples:");
+                Console.WriteLine("  Export from running process:");
+                Console.WriteLine("    Gibbed.Cryptic.ExportSchemas");
+                Console.WriteLine();
+                Console.WriteLine("  Export from dump file:");
+                Console.WriteLine(
+                    "    Gibbed.Cryptic.ExportSchemas -d GameClient.dmp -p \"Star Trek Online/Live\" -o ./output"
+                );
+                return;
+            }
+
+            if (dumpPath != null)
+            {
+                // Use dump file
+                if (projectName == null)
                 {
+                    Console.WriteLine("Error: --project is required when using --dump");
                     return;
                 }
 
-                Export(runtime, projectName);
+                if (File.Exists(dumpPath) == false)
+                {
+                    Console.WriteLine($"Error: Dump file not found: {dumpPath}");
+                    return;
+                }
+
+                using (var runtime = new RuntimeDump())
+                {
+                    if (runtime.OpenDump(dumpPath) == false)
+                    {
+                        Console.WriteLine("Failed to open dump file.");
+                        return;
+                    }
+
+                    Console.WriteLine($"Opened dump file: {dumpPath}");
+                    Console.WriteLine($"  Architecture: {(runtime.Is32Bit ? "x86" : "x64")}");
+                    Console.WriteLine(
+                        $"  Main module base: 0x{runtime.MainModuleBase.ToInt64():X}"
+                    );
+                    Console.WriteLine($"  Main module size: 0x{runtime.MainModuleSize:X}");
+
+                    Export(runtime, projectName, outputPath);
+                }
+            }
+            else
+            {
+                // Use running process
+                var process = FindSuitableProcess(out projectName);
+                if (process == null)
+                {
+                    Console.WriteLine("No suitable game process found.");
+                    Console.WriteLine(
+                        "Make sure a game client is running, or use --dump to analyze a dump file."
+                    );
+                    return;
+                }
+
+                using (var runtime = new RuntimeProcess())
+                {
+                    if (runtime.OpenProcess(process) == false)
+                    {
+                        Console.WriteLine("Failed to open process.");
+                        return;
+                    }
+
+                    Export(runtime, projectName, outputPath);
+                }
             }
         }
 
-        private static void Export(RuntimeProcess runtime, string projectName)
+        private static void Export(RuntimeBase runtime, string projectName, string outputBasePath)
         {
             var expressionFunctionExporter = new ExpressionFunctionExporter(runtime);
             var enumExporter = new EnumExporter(runtime);
             var parseExporter = new ParseExporter(runtime);
 
-            var executablePath = GetExecutablePath();
-            var binPath = Path.GetDirectoryName(executablePath);
-
-            var outputPath = Path.Combine(binPath, "..", "configs", "schemas", projectName);
+            string outputPath;
+            if (outputBasePath != null)
+            {
+                outputPath = Path.Combine(outputBasePath, projectName);
+            }
+            else
+            {
+                var executablePath = GetExecutablePath();
+                var binPath = Path.GetDirectoryName(executablePath);
+                outputPath = Path.Combine(binPath, "..", "configs", "schemas", projectName);
+            }
             Directory.CreateDirectory(outputPath);
 
             expressionFunctionExporter.Export(outputPath);
@@ -76,19 +176,15 @@ namespace Gibbed.Cryptic.ExportSchemas
 
         private static Process FindSuitableProcess(out string projectName)
         {
-            var gameNames = new[]
-            {
-                "Champions Online",
-                "Star Trek Online",
-                "Neverwinter",
-            };
+            var gameNames = new[] { "Champions Online", "Star Trek Online", "Neverwinter" };
 
             Process process;
 
             projectName = null;
 
-            process = Process.GetProcessesByName("GameClient")
-                             .FirstOrDefault(p => Array.IndexOf(gameNames, p.MainWindowTitle) >= 0);
+            process = Process
+                .GetProcessesByName("GameClient")
+                .FirstOrDefault(p => Array.IndexOf(gameNames, p.MainWindowTitle) >= 0);
             if (process != null)
             {
                 var path = process.MainModule.FileName;
@@ -116,8 +212,7 @@ namespace Gibbed.Cryptic.ExportSchemas
 
             foreach (var gameName in gameNames)
             {
-                process = Process.GetProcessesByName(gameName)
-                                 .FirstOrDefault();
+                process = Process.GetProcessesByName(gameName).FirstOrDefault();
                 if (process != null)
                 {
                     projectName = Path.Combine(gameName, "Launcher");
