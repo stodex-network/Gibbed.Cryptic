@@ -98,6 +98,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
             Directory.CreateDirectory(Path.Combine(outputBasePath, "parses"));
 
+            var failures = new List<string>();
+
             foreach (var parse in parses.OrderBy(kv => kv.Name))
             {
                 var name = parse.Name;
@@ -108,19 +110,54 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 var settings = new XmlWriterSettings() { Indent = true };
 
                 var outputPath = Path.Combine(outputBasePath, "parses", name + ".parse.xml");
-                using (var xml = XmlWriter.Create(outputPath, settings))
+
+                /* A single unreadable table should not abandon the export: the
+                 * remaining hundreds are still worth having, and naming the one
+                 * that failed is what makes it diagnosable. Reading a live
+                 * process means an address can always turn out to be stale or
+                 * unmapped.
+                 */
+                try
                 {
-                    xml.WriteStartDocument();
-                    xml.WriteStartElement("parse");
-                    xml.WriteAttributeString("name", name);
+                    using (var xml = XmlWriter.Create(outputPath, settings))
+                    {
+                        xml.WriteStartDocument();
+                        xml.WriteStartElement("parse");
+                        xml.WriteAttributeString("name", name);
 
-                    xml.WriteStartElement("table");
-                    Export(pointer, xml, parses, enums);
-                    xml.WriteEndElement();
+                        xml.WriteStartElement("table");
+                        Export(pointer, xml, parses, enums);
+                        xml.WriteEndElement();
 
-                    xml.WriteEndElement();
-                    xml.WriteEndDocument();
+                        xml.WriteEndElement();
+                        xml.WriteEndDocument();
+                    }
                 }
+                catch (Exception e)
+                {
+                    failures.Add(name);
+                    Console.WriteLine("  Warning: failed to export '{0}': {1}", name, e.Message);
+
+                    /* Don't leave a truncated document behind for the
+                     * converters to trip over later.
+                     */
+                    try
+                    {
+                        File.Delete(outputPath);
+                    }
+                    catch (IOException)
+                    {
+                    }
+                }
+            }
+
+            if (failures.Count > 0)
+            {
+                Console.WriteLine(
+                    "Warning: {0} of {1} parse tables failed to export: {2}",
+                    failures.Count,
+                    parses.Count,
+                    string.Join(", ", failures));
             }
         }
 
