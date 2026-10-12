@@ -95,5 +95,48 @@ namespace Gibbed.Cryptic.ExportSchemas
         {
             return runtime.ReadStashTable(pointer, p => runtime.ReadStringZ(p, Encoding.ASCII));
         }
+
+        // Current x64 ff_ParseTableInfos buckets are keyed by the parse table
+        // pointer itself. The first field of that table is its name pointer.
+        public static StashTableEntry<IntPtr>[] ReadPointerKeyedParseTable(
+            this RuntimeBase runtime, IntPtr pointer)
+        {
+            if (runtime.Is32Bit || pointer == IntPtr.Zero)
+            {
+                return runtime.ReadStashTable(pointer);
+            }
+
+            var header = runtime.ReadStructure<StashTableHeader>(pointer);
+            if (header.AllocatedCount <= 0)
+            {
+                return Array.Empty<StashTableEntry<IntPtr>>();
+            }
+
+            var buckets = runtime.ReadStructureArray<Natives.x64.StashTableEntry>(
+                header.EntriesPointer, header.AllocatedCount);
+            var items = new StashTableEntry<IntPtr>[header.AllocatedCount];
+            var count = 0;
+            foreach (var bucket in buckets)
+            {
+                var tablePointer = bucket.NamePointer;
+                if (tablePointer == IntPtr.Zero)
+                {
+                    continue;
+                }
+                var namePointer = runtime.ReadPointer(tablePointer);
+                if (namePointer == IntPtr.Zero)
+                {
+                    continue;
+                }
+                var name = runtime.ReadStringZ(namePointer, Encoding.ASCII);
+                if (string.IsNullOrEmpty(name))
+                {
+                    continue;
+                }
+                items[count++] = new StashTableEntry<IntPtr>(name, tablePointer);
+            }
+            Array.Resize(ref items, count);
+            return items;
+        }
     }
 }

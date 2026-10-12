@@ -41,8 +41,6 @@ namespace Gibbed.Cryptic.ExportSchemas.Natives.x32
             return new x64.ParseColumn()
             {
                 NamePointer = new IntPtr(this.NamePointer),
-                FilePointer = IntPtr.Zero, // x32 doesn't have FilePointer
-                Unknown10 = IntPtr.Zero, // x32 doesn't have this
                 Type = this.Type,
                 Format = this.Format,
                 Offset = this.Offset,

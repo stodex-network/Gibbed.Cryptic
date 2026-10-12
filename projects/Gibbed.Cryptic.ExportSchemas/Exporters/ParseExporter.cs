@@ -90,11 +90,44 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             }
 
             var stashPointer = runtime.ReadPointer(stashPointerPointer);
-            var parses = runtime.ReadStashTable(stashPointer).ToList();
+            var parses = (runtime.Is32Bit
+                ? runtime.ReadStashTable(stashPointer)
+                : runtime.ReadPointerKeyedParseTable(stashPointer)).ToList();
             if (parses.Count <= 0)
             {
                 return;
             }
+
+            // Local repair: registry keys identify tables, but their first field
+            // need not be a PARSETABLE_INFO name. Preserve colliding tables and
+            // resolve all subtable links through the same unique name map.
+            parses = parses.GroupBy(p => p.Value).Select(g => g.First()).ToList();
+            var anchorSpec = Environment.GetEnvironmentVariable("GIBBED_PARSE_ANCHORS");
+            if (string.IsNullOrEmpty(anchorSpec) == false)
+            {
+                foreach (var anchor in anchorSpec.Split(';'))
+                {
+                    var pair = anchor.Split('=');
+                    if (pair.Length != 2 || string.IsNullOrWhiteSpace(pair[0]))
+                    {
+                        throw new InvalidOperationException("Expected NAME=HEX_RVA parse anchor.");
+                    }
+                    var rva = Convert.ToInt64(pair[1], 16);
+                    if (rva < 0 || rva >= runtime.MainModuleSize)
+                    {
+                        throw new InvalidOperationException("Parse anchor is outside the module.");
+                    }
+                    var pointer = new IntPtr(runtime.MainModuleBase.ToInt64() + rva);
+                    var index = parses.FindIndex(p => p.Value == pointer);
+                    if (index < 0)
+                    {
+                        throw new InvalidOperationException("Parse anchor is absent from the live registry.");
+                    }
+                    Console.WriteLine("[anchor] {0} -> {1} at RVA {2:X}", parses[index].Name, pair[0], rva);
+                    parses[index] = new StashTableEntry<IntPtr>(pair[0], pointer);
+                }
+            }
+            parses = UniqueNames(parses, runtime.MainModuleBase);
 
             Directory.CreateDirectory(Path.Combine(outputBasePath, "parses"));
 
@@ -109,7 +142,10 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
 
                 var settings = new XmlWriterSettings() { Indent = true };
 
-                var outputPath = Path.Combine(outputBasePath, "parses", name + ".parse.xml");
+                var invalidFileNameChars = Path.GetInvalidFileNameChars();
+                var safeName = new string(name.Select(c =>
+                    invalidFileNameChars.Contains(c) ? '_' : c).ToArray());
+                var outputPath = Path.Combine(outputBasePath, "parses", safeName + ".parse.xml");
 
                 /* A single unreadable table should not abandon the export: the
                  * remaining hundreds are still worth having, and naming the one
@@ -121,9 +157,13 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 {
                     using (var xml = XmlWriter.Create(outputPath, settings))
                     {
-                        xml.WriteStartDocument();
-                        xml.WriteStartElement("parse");
-                        xml.WriteAttributeString("name", name);
+                    xml.WriteStartDocument();
+                    xml.WriteStartElement("parse");
+                    xml.WriteAttributeString("name", name);
+                    // Session-specific ASLR address, exported solely to permit
+                    // read-only correlation with live resource registrations.
+                    xml.WriteAttributeString("runtime_pointer", $"0x{pointer.ToInt64():X}");
+                        xml.WriteAttributeString("runtime_address", _($"0x{pointer.ToInt64():X}"));
 
                         xml.WriteStartElement("table");
                         Export(pointer, xml, parses, enums);
@@ -151,6 +191,7 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 }
             }
 
+
             if (failures.Count > 0)
             {
                 Console.WriteLine(
@@ -159,6 +200,27 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                     parses.Count,
                     string.Join(", ", failures));
             }
+        }
+
+        internal static List<StashTableEntry<IntPtr>> UniqueNames(
+            List<StashTableEntry<IntPtr>> parses, IntPtr moduleBase)
+        {
+            var invalid = Path.GetInvalidFileNameChars();
+            Func<string, string> sanitize = name => new string(
+                name.Select(c => invalid.Contains(c) ? '_' : c).ToArray());
+            var collisions = new HashSet<string>(parses
+                .GroupBy(p => sanitize(p.Name), StringComparer.OrdinalIgnoreCase)
+                .Where(g => g.Count() > 1).Select(g => g.Key), StringComparer.OrdinalIgnoreCase);
+            var result = parses.Select(p => new StashTableEntry<IntPtr>(
+                collisions.Contains(sanitize(p.Name))
+                    ? sanitize(p.Name) + "__RVA_" + (p.Value.ToInt64() - moduleBase.ToInt64()).ToString("X")
+                    : sanitize(p.Name), p.Value)).ToList();
+            if (result.Select(p => p.Name).Distinct(StringComparer.OrdinalIgnoreCase).Count() != result.Count)
+            {
+                throw new InvalidOperationException("Parse output names still collide; refusing to overwrite tables.");
+            }
+            Console.WriteLine("[parse names] {0} tables; {1} ambiguous name groups", result.Count, collisions.Count);
+            return result;
         }
 
         private void Export(
@@ -206,6 +268,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 var name = kv.Value;
 
                 xml.WriteStartElement("column");
+                xml.WriteAttributeString("raw_type", _($"{column.Type}"));
+                xml.WriteAttributeString("raw_parameter0", _($"{column.Parameter0.UInt64}"));
 
                 if (string.IsNullOrEmpty(name) == false)
                 {
@@ -224,6 +288,9 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
                 }
 
                 var token = Parse.GlobalTokens.GetToken(column.Token);
+                xml.WriteAttributeString(
+                    "hash_parameter0_kind",
+                    token.GetParameter(column.Flags, 0).ToString());
 
                 var (tokenName, tokenFlags) = column.GetTokenNameAndFlags();
 

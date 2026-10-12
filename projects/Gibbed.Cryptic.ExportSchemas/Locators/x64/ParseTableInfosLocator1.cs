@@ -27,63 +27,78 @@ namespace Gibbed.Cryptic.ExportSchemas.Locators.x64
 {
     internal static class ParseTableInfosLocator1
     {
+        /* Matches the lazy initializer for the "ff_ParseTableInfos" stash
+         * table, the 64-bit counterpart of Locators/x32/ParseTableInfosLocator1:
+         *
+         *   mov  rcx, [rip+pointer1]              ; +0,  displacement at +3
+         *   test rcx, rcx                         ; +7
+         *   jne  already_created                  ; +10
+         *   mov  r8d, <line>                      ; +16
+         *   lea  rdx, [rip+"ff_ParseTableInfos"]  ; +22
+         *   mov  ecx, 0x400                       ; +29
+         *   call StashTableCreateWithStringKeys   ; +34
+         *   mov  dl, 1                            ; +39
+         *   mov  rcx, rax                         ; +41
+         *   mov  rbx, rax                         ; +44
+         *   call ...                              ; +47
+         *   mov  rcx, [rip+...]                   ; +52
+         *   mov  [rip+pointer2], rbx              ; +59, displacement at +62
+         *
+         * Unlike the 32-bit locator this cannot anchor on the address of the
+         * "ff_ParseTableInfos" string, because the reference to it is
+         * RIP-relative and therefore position-dependent. The `mov ecx, 0x400`
+         * table size plays the same anchoring role it does in 32-bit.
+         */
         public static bool Locate(RuntimeBase runtime, out IntPtr result)
         {
-            // x64 pattern for Parser_LookupParseTableInfo (0x14053c320)
-            // This finds the g_ParseTableInfos stash table
-            //
-            // Actually we found TWO stash tables:
-            // - 0x143373d60 - accessed by Parser_LookupParseTableInfo
-            // - 0x143373d50 - accessed by FUN_14053c360
-            // Let's try both and see which has valid column data
-            //
-            // 14053c320: SUB RSP,0x28                        ; 48 83 EC 28
-            // 14053c324: MOV RDX,RCX                         ; 48 8B D1
-            // 14053c327: MOV RCX,qword ptr [0x143373d60]     ; 48 8B 0D xx xx xx xx
-            // 14053c32e: TEST RCX,RCX                        ; 48 85 C9
-            // 14053c331: JZ                                  ; 74 18
-            // 14053c333: LEA R8,[RSP + 0x38]                 ; 4C 8D 44 24 38
-            // 14053c338: CALL StashTable_Lookup              ; E8 xx xx xx xx
-
             var codePattern = new ByteSearch.Pattern()
             {
-                // SUB RSP,0x28
-                new byte[] { 0x48, 0x83, 0xEC, 0x28 },
-                // MOV RDX,RCX
-                new byte[] { 0x48, 0x8B, 0xD1 },
-                // MOV RCX,qword ptr [RIP+offset]
-                new byte[] { 0x48, 0x8B, 0x0D },
+                new byte[] { 0x48, 0x8B, 0x0D }, // mov rcx, [rip+pointer1]
                 ByteSearch.AnyBytes(4),
-                // TEST RCX,RCX
-                new byte[] { 0x48, 0x85, 0xC9 },
-                // JZ short
-                new byte[] { 0x74 },
-                ByteSearch.AnyBytes(1),
-                // LEA R8,[RSP + 0x38]
-                new byte[] { 0x4C, 0x8D, 0x44, 0x24, 0x38 },
+                new byte[] { 0x48, 0x85, 0xC9 }, // test rcx, rcx
+                new byte[] { 0x0F, 0x85 }, // jne
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0x41, 0xB8 }, // mov r8d, <line>
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0x48, 0x8D, 0x15 }, // lea rdx, [rip+"ff_ParseTableInfos"]
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0xB9, 0x00, 0x04, 0x00, 0x00 }, // mov ecx, 0x400
+                new byte[] { 0xE8 }, // call
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0xB2, 0x01 }, // mov dl, 1
+                new byte[] { 0x48, 0x8B, 0xC8 }, // mov rcx, rax
+                new byte[] { 0x48, 0x8B, 0xD8 }, // mov rbx, rax
+                new byte[] { 0xE8 }, // call
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0x48, 0x8B, 0x0D }, // mov rcx, [rip+...]
+                ByteSearch.AnyBytes(4),
+                new byte[] { 0x48, 0x89, 0x1D }, // mov [rip+pointer2], rbx
+                ByteSearch.AnyBytes(4),
             };
-
             if (runtime.Search(codePattern, out var codeOffset) == false)
             {
                 result = default;
                 return false;
             }
 
-            // SUB: 4, MOV RDX: 3 = 7 bytes before MOV RCX
-            // MOV RCX,qword ptr [RIP+offset] starts at offset 7
-            // The RIP-relative offset is at offset 10 (7 + 3 for the opcode 48 8B 0D)
-            // The instruction is 7 bytes, so next instruction is at offset 14
-            var movInstructionOffset = codeOffset + 7;
-            var ripRelativeOffset = runtime.ReadValueS32(movInstructionOffset + 3);
-            var nextInstructionAddress = movInstructionOffset + 7;
-            var pointer = new IntPtr(nextInstructionAddress.ToInt64() + ripRelativeOffset);
-
-            if (pointer == IntPtr.Zero)
+            var pointer1 = RipRelative.Resolve(runtime, codeOffset, 3, 7);
+            if (pointer1 == IntPtr.Zero)
             {
                 throw new InvalidOperationException();
             }
 
-            result = pointer;
+            var pointer2 = RipRelative.Resolve(runtime, codeOffset, 62, 66);
+            if (pointer2 == IntPtr.Zero)
+            {
+                throw new InvalidOperationException();
+            }
+
+            if (pointer1 != pointer2)
+            {
+                throw new InvalidOperationException();
+            }
+
+            result = pointer1;
             return true;
         }
     }

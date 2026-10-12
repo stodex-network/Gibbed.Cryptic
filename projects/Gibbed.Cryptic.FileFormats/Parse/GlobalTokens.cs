@@ -123,7 +123,7 @@ namespace Gibbed.Cryptic.FileFormats.Parse
                 }
             }
 
-            throw new ArgumentException("token not found", "name");
+            throw new ArgumentException("token not found: " + name, "name");
         }
 
         public static Token GetToken(TokenType tokenType)
