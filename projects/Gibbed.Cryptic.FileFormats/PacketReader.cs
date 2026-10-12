@@ -545,6 +545,19 @@ namespace Gibbed.Cryptic.FileFormats
                 (a, b) => a.ReadValueStructure<TType>(false, b));
         }
 
+        public List<TType> ReadListEmbeddedStructure<TType>(int maxCount, object state)
+            where TType : Serialization.IStructure, new()
+        {
+            return this.ReadNativeList(
+                state,
+                (a, b) =>
+                {
+                    var instance = new TType();
+                    instance.Deserialize(a, b);
+                    return instance;
+                });
+        }
+
         // ReSharper disable RedundantIfElseBlock
         public object ReadValuePolymorph(Type[] validTypes, bool optional, object state)
         {

@@ -101,6 +101,7 @@ namespace Gibbed.Cryptic.FileFormats.Serialization
         TType ReadValueStructure<TType>(bool optional, object state) where TType : IStructure, new();
         TType[] ReadArrayStructure<TType>(int count, object state) where TType : IStructure, new();
         List<TType> ReadListStructure<TType>(int maxCount, object state) where TType : IStructure, new();
+        List<TType> ReadListEmbeddedStructure<TType>(int maxCount, object state) where TType : IStructure, new();
 
         object ReadValuePolymorph(Type[] validTypes, bool optional, object state);
         object[] ReadArrayPolymorph(Type[] validTypes, int count, object state);

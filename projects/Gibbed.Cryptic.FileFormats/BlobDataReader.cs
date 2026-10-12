@@ -545,12 +545,20 @@ namespace Gibbed.Cryptic.FileFormats
 
             if (this._Input.Position < end)
             {
-                throw new FormatException("buffer underrun on serializing structure");
+                // Current resources can retain trailing/versioned fields that
+                // are not represented in the registered runtime parse table.
+                // Structure records are length-delimited, so skip them safely.
+                this._Input.Position = end;
             }
 
             if (this._Input.Position > end)
             {
-                throw new FormatException("buffer overrun on serializing structure");
+                throw new FormatException(string.Format(
+                    "buffer overrun while deserializing {0} (start 0x{1:X}, expected end 0x{2:X}, actual 0x{3:X})",
+                    type.FullName,
+                    start,
+                    end,
+                    this._Input.Position));
             }
 
             return instance;
@@ -578,6 +586,20 @@ namespace Gibbed.Cryptic.FileFormats
                 maxCount,
                 state,
                 (a, b) => a.ReadValueStructure<TType>(false, b));
+        }
+
+        public List<TType> ReadListEmbeddedStructure<TType>(int maxCount, object state)
+            where TType : Serialization.IStructure, new()
+        {
+            return this.ReadNativeList(
+                maxCount,
+                state,
+                (a, b) =>
+                {
+                    var instance = new TType();
+                    instance.Deserialize(a, b);
+                    return instance;
+                });
         }
 
         public object ReadValuePolymorph(Type[] validTypes, bool optional, object state)

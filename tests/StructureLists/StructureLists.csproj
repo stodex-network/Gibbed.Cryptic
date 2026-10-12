@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <GibbedBundle Condition="'$(GibbedBundle)' == ''">$(MSBuildThisFileDirectory)..\..\bin-net10</GibbedBundle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gibbed.Cryptic.FileFormats"><HintPath>$(GibbedBundle)\Gibbed.Cryptic.FileFormats.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>
