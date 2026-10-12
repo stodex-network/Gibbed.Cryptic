@@ -81,7 +81,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
             string name = "Read";
 
-            if (column.Flags.HasAny(Parse.ColumnFlags.EARRAY | Parse.ColumnFlags.FIXED_ARRAY) == false)
+            if (IsValueColumn(column) == true)
             {
                 name += "Value";
             }
@@ -119,7 +119,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
             string name = "Write";
 
-            if (column.Flags.HasAny(Parse.ColumnFlags.EARRAY | Parse.ColumnFlags.FIXED_ARRAY) == false)
+            if (IsValueColumn(column) == true)
             {
                 name += "Value";
             }
@@ -149,6 +149,18 @@ namespace Gibbed.Cryptic.GenerateSerializer
             }
 
             return methodInfo;
+        }
+
+        public static bool IsValueColumn(ParseSchema.Column column)
+        {
+            // MATPYR is one serialized PYR triplet. The runtime schema reports
+            // its 3x3 in-memory representation as FIXED_ARRAY/9; that metadata
+            // does not mean the BIN contains nine MATPYR values.
+            return column.Flags.HasAny(Parse.ColumnFlags.EARRAY | Parse.ColumnFlags.FIXED_ARRAY) == false ||
+                   (column.Token == Parse.TokenType.MATPYR &&
+                    column.Flags.HasAny(Parse.ColumnFlags.FIXED_ARRAY) == true &&
+                    column.Flags.HasAny(Parse.ColumnFlags.EARRAY) == false &&
+                    column.NumberOfElements == 9);
         }
     }
 }

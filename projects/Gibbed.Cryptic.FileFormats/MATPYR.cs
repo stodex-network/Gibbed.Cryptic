@@ -24,5 +24,8 @@ namespace Gibbed.Cryptic.FileFormats
 {
     public class MATPYR
     {
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Z { get; set; }
     }
 }

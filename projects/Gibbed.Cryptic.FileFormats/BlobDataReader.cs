@@ -199,7 +199,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public long ReadValueInt64(object state)
         {
-            throw new NotImplementedException();
+            return this._Input.ReadValueS64();
         }
 
         public long[] ReadArrayInt64(int count, object state)
@@ -415,7 +415,12 @@ namespace Gibbed.Cryptic.FileFormats
 
         public MATPYR ReadValueMATPYR(object state)
         {
-            throw new NotImplementedException();
+            return new MATPYR()
+            {
+                X = this._Input.ReadValueF32(),
+                Y = this._Input.ReadValueF32(),
+                Z = this._Input.ReadValueF32(),
+            };
         }
 
         public MATPYR[] ReadArrayMATPYR(int count, object state)
@@ -436,7 +441,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueFilename(object state)
         {
-            throw new NotImplementedException();
+            return this._Input.ReadStringPascalUncapped();
         }
 
         public string[] ReadArrayFilename(int count, object state)

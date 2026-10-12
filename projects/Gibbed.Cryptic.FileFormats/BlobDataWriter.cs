@@ -228,7 +228,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public void WriteValueInt64(long value, object state)
         {
-            throw new NotImplementedException();
+            this._Output.WriteValueS64(value);
         }
 
         public void WriteArrayInt64(long[] array, int count, object state)
@@ -464,7 +464,9 @@ namespace Gibbed.Cryptic.FileFormats
 
         public void WriteValueMATPYR(MATPYR value, object state)
         {
-            throw new NotImplementedException();
+            this._Output.WriteValueF32(value.X);
+            this._Output.WriteValueF32(value.Y);
+            this._Output.WriteValueF32(value.Z);
         }
 
         public void WriteArrayMATPYR(MATPYR[] array, int count, object state)
@@ -487,7 +489,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public void WriteValueFilename(string value, object state)
         {
-            throw new NotImplementedException();
+            this._Output.WriteStringPascalUncapped(value);
         }
 
         public void WriteArrayFilename(string[] array, int count, object state)

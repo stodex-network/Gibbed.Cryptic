@@ -311,7 +311,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 return typeof(List<>).MakeGenericType(e);
             }
 
-            if (column.Flags.HasAny(Parse.ColumnFlags.EARRAY | Parse.ColumnFlags.FIXED_ARRAY) == false)
+            if (Helpers.IsValueColumn(column) == true)
             {
                 switch (column.Token)
                 {
@@ -1380,9 +1380,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 }
                 else
                 {
-                    if (column.Flags.HasAny(
-                        Parse.ColumnFlags.EARRAY |
-                        Parse.ColumnFlags.FIXED_ARRAY) == false)
+                    if (Helpers.IsValueColumn(column) == true)
                     {
                         msil.Emit(OpCodes.Ldarg_1); // parser
                         msil.Emit(OpCodes.Ldarg_0); // this
@@ -1657,9 +1655,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 }
                 else
                 {
-                    if (column.Flags.HasAny(
-                        Parse.ColumnFlags.EARRAY |
-                        Parse.ColumnFlags.FIXED_ARRAY) == false)
+                    if (Helpers.IsValueColumn(column) == true)
                     {
                         msil.Emit(OpCodes.Ldarg_0); // this
                         msil.Emit(OpCodes.Ldarg_1); // parser
@@ -2013,9 +2009,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 }
                 else
                 {
-                    if (column.Flags.HasAny(
-                        Parse.ColumnFlags.EARRAY |
-                        Parse.ColumnFlags.FIXED_ARRAY) == false)
+                    if (Helpers.IsValueColumn(column) == true)
                     {
                         msil.Emit(OpCodes.Ldarg_0); // this
                         msil.Emit(OpCodes.Ldarg_1); // parser
