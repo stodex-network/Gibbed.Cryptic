@@ -37,7 +37,7 @@ Commit any source changes first: the build script records the source commit and 
 python scripts/build-sto.py --build ST.372.20260910a.24 --schema-dir "private/schemas/Star Trek Online/Live" --schema-id local-export --mappings scripts/sto-ST.372.20260910a.19.json
 ```
 
-Use the actual client build for `--build`, your XML directory for `--schema-dir`, and a label for this export or repair for `--schema-id`. The mapping file's historical `.19` filename is retained because its parser hashes also match the six resources checked on `.24`. Check those hashes against your own BINs before using it for another patch.
+Use the actual client build for `--build`, your XML directory for `--schema-dir`, and a label for this export or repair for `--schema-id`. The mapping file's historical `.19` filename is retained because its parser hashes also match the eight resources checked on `.24`. Check those hashes against your own BINs before using it for another patch.
 
 The script builds the tools, generates the serializer, and writes a complete bundle to `bin-net10/`. Use `--output` to choose a different directory.
 
@@ -75,7 +75,7 @@ bin-net10/Gibbed.Cryptic.ConvertResource.exe -x private/Bin/Costumegeometry.Bin 
 
 Successful conversion writes both `@resource.xml` and `entries.xml` and reaches `Saving index...`. Inspect the records and compare with known working output when available. An exit code alone does not confirm decoding: an unsupported resource can return without producing entries.
 
-The supplied mappings cover CostumeSkeleton, CostumeGeometry, DynGroundRegData, ModelHeaders, English client messages and UI fonts. Validate any additional mappings against real resources. The CURRENTFILE fallback, Materials dependencies and object-mode conversion remain experimental.
+The supplied mappings cover CostumeSkeleton, CostumeGeometry, DynGroundRegData, ModelHeaders, English client messages, UI fonts, color palettes and named colors. Validate any additional mappings against real resources. The CURRENTFILE fallback and Materials dependencies remain experimental. Object-mode color resources have been checked against the real BINs; other object mappings need their own validation.
 
 ## Export schemas from a running client
 

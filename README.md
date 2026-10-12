@@ -25,7 +25,7 @@ dotnet build "Cryptic Studios.sln" --configuration Release
 
 Building the tools does not give you a game-specific serializer. Game files and schema XML are not included in this repository. Bring an export for the client build you want to read, then follow [BUILDING.md](BUILDING.md) to generate the bundle and decode a resource.
 
-The included resource mappings cover costume skeletons, costume geometry, ground region data, model headers, English client messages and UI fonts. They were checked against build `ST.372.20260910a.24`. Other resources need matching schemas and mappings; copying a mapping or changing its build label is not enough.
+The included resource mappings cover costume skeletons, costume geometry, ground region data, model headers, English client messages, UI fonts, color palettes and named colors. They were checked against build `ST.372.20260910a.24`. Other resources need matching schemas and mappings; copying a mapping or changing its build label is not enough.
 
 ## Branches
 
