@@ -1,0 +1,8 @@
+[
+  {"name":"Costumeskeleton","mode":"single","targets":[{"parse_hash":1007899907,"class":"Gibbed.StarTrekOnline.Serialization.PCSkeletonDef","key":"Name","versions":[]}]},
+  {"name":"Costumegeometry","mode":"single","targets":[{"parse_hash":1143128247,"class":"Gibbed.StarTrekOnline.Serialization.PCGeometryDef","key":"Name","versions":[]}]},
+  {"name":"Dyngroundregdata","mode":"single","targets":[{"parse_hash":782419353,"class":"Gibbed.StarTrekOnline.Serialization.DynGroundRegData","key":"Name","versions":[]}]},
+  {"name":"Modelheaders","mode":"single","targets":[{"parse_hash":2454075613,"class":"Gibbed.StarTrekOnline.Serialization.ModelHeader","key":"Name","versions":[]}]},
+  {"name":"Clientmessagesenglish","mode":"single","targets":[{"parse_hash":187771444,"class":"Gibbed.StarTrekOnline.Serialization.Message","key":"MessageKey","versions":[]}]},
+  {"name":"Uifonts","mode":"single","targets":[{"parse_hash":3735082712,"class":"Gibbed.StarTrekOnline.Serialization.UIStyleFont","key":"Name","versions":[]}]}
+]
