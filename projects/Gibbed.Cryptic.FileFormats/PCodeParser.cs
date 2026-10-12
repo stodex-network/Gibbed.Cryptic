@@ -93,6 +93,10 @@ namespace Gibbed.Cryptic.FileFormats
 
         public static CDataWrapper ToStringValue(List<MultiValue> list)
         {
+            if (list == null)
+            {
+                return "";
+            }
             var sb = new StringBuilder();
 
             var labels = new string[list.Count];
