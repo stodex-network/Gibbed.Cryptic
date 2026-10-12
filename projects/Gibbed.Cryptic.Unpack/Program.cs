@@ -233,7 +233,8 @@ namespace Gibbed.Cryptic.Unpack
                         continue;
                     }
 
-                    var entryPath = Path.Combine(outputPath, name);
+                    name = SanitizeRelativePath(name);
+                    var entryPath = ToExtendedPath(Path.Combine(outputPath, name));
 
                     if (overwriteFiles == false && File.Exists(entryPath) == true)
                     {
@@ -257,6 +258,38 @@ namespace Gibbed.Cryptic.Unpack
                     }
                 }
             }
+        }
+
+        private static string SanitizeRelativePath(string name)
+        {
+            var invalid = new HashSet<char>(Path.GetInvalidFileNameChars());
+            var parts = name.Replace('/', '\\').Split('\\');
+            for (var i = 0; i < parts.Length; i++)
+            {
+                var part = parts[i];
+                if (part == "." || part == "..")
+                {
+                    part = string.Concat(part.Select(c => $"_x{(int)c:X2}_"));
+                }
+                var sb = new StringBuilder();
+                foreach (var c in part)
+                {
+                    sb.Append(invalid.Contains(c) || char.IsControl(c)
+                        ? $"_x{(int)c:X2}_"
+                        : c.ToString());
+                }
+                parts[i] = sb.ToString().TrimEnd(' ', '.');
+                if (parts[i].Length == 0) parts[i] = "__EMPTY";
+            }
+            return string.Join(Path.DirectorySeparatorChar.ToString(), parts);
+        }
+
+        private static string ToExtendedPath(string path)
+        {
+            path = Path.GetFullPath(path);
+            if (path.StartsWith(@"\\?\")) return path;
+            if (path.StartsWith(@"\\")) return @"\\?\UNC\" + path.Substring(2);
+            return @"\\?\" + path;
         }
 
         private static MemoryStream ReadFileData(
