@@ -101,7 +101,7 @@ GenerateSerializer accepts the STOdex `hogg-schemas.json` tree as an alternative
 Gibbed.Cryptic.GenerateSerializer.exe --game=StarTrekOnline --schema-json=<bundle>/hogg-schemas.json --version=<build>/<schema-id> STO.Serialization.<build>.dll
 ```
 
-Choose either `--schema-json` or `--path`. The tool reads JSON, reconstructs the existing schema model in memory and uses the same persisted serializer generator. It writes no intermediate XML and does not need the private schema checkout. The prebuilt tool requires the .NET 10 runtime; building the tool still requires the SDK. This step generates a DLL. Automatic generation/loading in the HOGG server and runtime Bridge bindings remain separate work.
+Choose either `--schema-json` or `--path`. The tool reads JSON, reconstructs the existing schema model in memory and uses the same persisted serializer generator. It writes no intermediate XML and does not need the private schema checkout. The prebuilt tool requires the .NET 10 runtime; building the tool still requires the SDK. This step generates a DLL. The HOGG bundle loader can now generate and cache this DLL from a JSON-only schema update; runtime Bridge bindings remain separate work.
 
 The input must be version 1 `stodex-schema-tree` with `bin-schema-metadata` representation. A native-memory representation is rejected. File size, tree depth, node count, schema counts and individual text values are bounded. Root schema names, external references, inline tables and enums retain the XML loader's behavior.
 
