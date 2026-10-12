@@ -100,7 +100,8 @@ namespace Gibbed.Cryptic.FileFormats
             this.ParseHash = input.ReadValueU32();
 
             var flags = input.ReadValueU32();
-            if (flags != 1)
+            // Current STO Live resources use 0; older resources used 1.
+            if (flags != 0 && flags != 1)
             {
                 throw new FormatException();
             }
@@ -149,9 +150,23 @@ namespace Gibbed.Cryptic.FileFormats
             using (var data = input.ReadToMemoryStream((int)extraFileInfoSize))
             {
                 var count = data.ReadValueU32();
-                if (count != 0)
+                // Materials.bin uses the second Files1 block for additional
+                // file dependencies.  Older resources normally leave it
+                // empty, which is why the original reader rejected any
+                // non-zero count.  The entries have the same wire shape as
+                // the primary file catalogue; consume them so the following
+                // dependency block remains aligned.  They are not source-file
+                // indices for the parsed resource entries, so do not append
+                // them to Files.
+                for (uint i = 0; i < count; i++)
                 {
-                    throw new FormatException("did not read blob extra data correctly");
+                    data.ReadStringPascal(260);
+                    data.ReadValueU32();
+                }
+
+                if (data.Position != data.Length)
+                {
+                    throw new FormatException("did not read blob extra file entry correctly");
                 }
             }
 
