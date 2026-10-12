@@ -22,6 +22,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -33,6 +34,8 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
         private Process _Process;
         private IntPtr _Handle = IntPtr.Zero;
         private bool _Is32Bit;
+        private const int ReadCachePageSize = 4096;
+        private readonly Dictionary<long, byte[]> _ReadCache = new Dictionary<long, byte[]>();
 
         public RuntimeProcess()
             : base(nameof(RuntimeProcess)) { }
@@ -190,30 +193,51 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
                 throw new InvalidOperationException("process handle is invalid");
             }
 
+            /* Schema memory is immutable for the duration of an export, while
+             * ReadStringZ historically issued one ReadProcessMemory call per
+             * character.  Cache successful 4 KiB pages to make recursive
+             * parser hashing practical on the 64-bit client. */
+            var remaining = length;
+            var destination = offset;
+            var current = address.ToInt64();
+            while (remaining > 0)
+            {
+                var pageAddress = current & ~(ReadCachePageSize - 1L);
+                var pageOffset = (int)(current - pageAddress);
+                var take = Math.Min(remaining, ReadCachePageSize - pageOffset);
+                if (this._ReadCache.TryGetValue(pageAddress, out var page) == false)
+                {
+                    page = new byte[ReadCachePageSize];
+                    if (this.ReadDirect(new IntPtr(pageAddress), page, 0, page.Length) != page.Length)
+                    {
+                        throw new InvalidOperationException("could not read cache page");
+                    }
+                    this._ReadCache.Add(pageAddress, page);
+                }
+                Buffer.BlockCopy(page, pageOffset, buffer, destination, take);
+                current += take;
+                destination += take;
+                remaining -= take;
+            }
+            return length;
+        }
+
+        private int ReadDirect(IntPtr address, byte[] buffer, int offset, int length)
+        {
             var bufferHandle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-
-            uint size = (uint)length;
-            var result = Win32.ReadProcessMemory(
-                this._Handle,
-                address,
-                bufferHandle.AddrOfPinnedObject() + offset,
-                size,
-                out var read
-            );
-
-            bufferHandle.Free();
-
-            if (result == false)
+            try
             {
-                throw new Win32Exception();
+                var size = (uint)length;
+                var result = Win32.ReadProcessMemory(this._Handle, address,
+                    bufferHandle.AddrOfPinnedObject() + offset, size, out var read);
+                if (result == false) throw new Win32Exception();
+                if (read != size) throw new InvalidOperationException($"only read {read} instead of {size}");
+                return (int)read;
             }
-
-            if (read != size)
+            finally
             {
-                throw new InvalidOperationException($"only read {read} instead of {size}");
+                bufferHandle.Free();
             }
-
-            return (int)read;
         }
 
         public override int Write(IntPtr address, byte[] buffer, int offset, int length)
