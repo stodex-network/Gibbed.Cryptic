@@ -38,8 +38,9 @@ namespace Gibbed.Cryptic.GenerateSerializer
 {
     internal class Generator
     {
-        private AssemblyBuilder _AssemblyBuilder;
+        private PersistedAssemblyBuilder _AssemblyBuilder;
         private ModuleBuilder _ModuleBuilder;
+        private readonly Dictionary<Type, string> _EnumZeroNames = new Dictionary<Type, string>();
 
         private readonly TargetGame _TargetGame;
         private readonly string _BaseTypeName;
@@ -92,9 +93,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 Name = Path.GetFileNameWithoutExtension(outputPath),
             };
 
-            this._AssemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.Save);
+            this._AssemblyBuilder = new PersistedAssemblyBuilder(assemblyName, typeof(object).Assembly);
 
             if (version != null)
             {
@@ -104,12 +103,10 @@ namespace Gibbed.Cryptic.GenerateSerializer
                         new object[] { version }));
             }
 
-            this._AssemblyBuilder.DefineVersionInfoResource();
-
             this._ModuleBuilder = this._AssemblyBuilder.DefineDynamicModule(
-                assemblyName.Name,
-                fileName);
+                assemblyName.Name);
 
+            this._EnumZeroNames.Clear();
             this._EnumTypes = new Dictionary<ParseSchema.Enumeration, Type>();
             this._TableTypes = new Dictionary<ParseSchema.Table, TypeBuilder>();
 
@@ -504,6 +501,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
                 var type = builder.CreateType();
                 this._EnumTypes.Add(e, type);
+                this._EnumZeroNames.Add(type, e.Elements.FirstOrDefault(kv => long.Parse(kv.Value) == 0).Key);
                 return type;
             }
             else
@@ -538,6 +536,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
                 var type = builder.CreateType();
                 this._EnumTypes.Add(e, type);
+                this._EnumZeroNames.Add(type, e.Elements.FirstOrDefault(kv => long.Parse(kv.Value) == 0).Key);
                 return type;
             }
         }
@@ -649,7 +648,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 if (string.IsNullOrEmpty(column.StaticDefineListExternalName) == false ||
                     column.StaticDefineList != null)
                 {
-                    builder.SetConstant(Enum.ToObject(type, defaultValue));
+                    builder.SetConstant(defaultValue);
                 }
                 else
                 {
@@ -683,7 +682,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 getIL.Emit(OpCodes.Ldarg_0);
                 getIL.Emit(OpCodes.Ldfld, builder);
                 getIL.EmitConstant(column.NumberOfElements);
-                getIL.Emit(OpCodes.Call, typeof(FieldListParser<>).MakeGenericType(fieldEnum).GetMethod("ToList"));
+                getIL.Emit(OpCodes.Call, TypeBuilder.GetMethod(typeof(FieldListParser<>).MakeGenericType(fieldEnum), typeof(FieldListParser<>).GetMethod("ToList")));
                 getIL.Emit(OpCodes.Ret);
 
                 var setBuilder = structure.DefineMethod(
@@ -698,7 +697,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 setIL.Emit(OpCodes.Ldarg_0);
                 setIL.Emit(OpCodes.Ldarg_1);
                 setIL.EmitConstant(column.NumberOfElements);
-                setIL.Emit(OpCodes.Call, typeof(FieldListParser<>).MakeGenericType(fieldEnum).GetMethod("FromList"));
+                setIL.Emit(OpCodes.Call, TypeBuilder.GetMethod(typeof(FieldListParser<>).MakeGenericType(fieldEnum), typeof(FieldListParser<>).GetMethod("FromList")));
                 setIL.Emit(OpCodes.Stfld, builder);
                 setIL.Emit(OpCodes.Ret);
 
@@ -821,7 +820,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     var getIL = getBuilder.GetILGenerator();
                     getIL.Emit(OpCodes.Ldarg_0);
                     getIL.Emit(OpCodes.Ldfld, builder);
-                    getIL.Emit(OpCodes.Call, typeof(EnumParser<>).MakeGenericType(type).GetMethod("ToStringValue"));
+                    getIL.Emit(OpCodes.Call, TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(type), typeof(EnumParser<>).GetMethod("ToStringValue")));
                     getIL.Emit(OpCodes.Ret);
 
                     var setBuilder = structure.DefineMethod(
@@ -835,7 +834,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     var setIL = setBuilder.GetILGenerator();
                     setIL.Emit(OpCodes.Ldarg_0);
                     setIL.Emit(OpCodes.Ldarg_1);
-                    setIL.Emit(OpCodes.Call, typeof(EnumParser<>).MakeGenericType(type).GetMethod("FromStringValue"));
+                    setIL.Emit(OpCodes.Call, TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(type), typeof(EnumParser<>).GetMethod("FromStringValue")));
                     setIL.Emit(OpCodes.Stfld, builder);
                     setIL.Emit(OpCodes.Ret);
 
@@ -845,7 +844,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     wrapperBuilder.SetCustomAttribute(
                         new CustomAttributeBuilder(
                             GetConstructor<DefaultValueAttribute>(typeof(string)),
-                            new object[] { Enum.GetName(type, 0) }));
+                            new object[] { this._EnumZeroNames[type] }));
 
                     wrapperBuilder.SetCustomAttribute(
                         new CustomAttributeBuilder(
@@ -886,7 +885,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     getIL.Emit(OpCodes.Ldarg_0);
                     getIL.Emit(OpCodes.Ldfld, builder);
                     getIL.Emit(OpCodes.Call,
-                               typeof(EnumParser<>).MakeGenericType(elementType).GetMethod("ToStringArray"));
+                               TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(elementType), typeof(EnumParser<>).GetMethod("ToStringArray")));
                     getIL.Emit(OpCodes.Ret);
 
                     var setBuilder = structure.DefineMethod(
@@ -901,7 +900,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     setIL.Emit(OpCodes.Ldarg_0);
                     setIL.Emit(OpCodes.Ldarg_1);
                     setIL.Emit(OpCodes.Call,
-                               typeof(EnumParser<>).MakeGenericType(elementType).GetMethod("FromStringArray"));
+                               TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(elementType), typeof(EnumParser<>).GetMethod("FromStringArray")));
                     setIL.Emit(OpCodes.Stfld, builder);
                     setIL.Emit(OpCodes.Ret);
 
@@ -947,7 +946,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     getIL.Emit(OpCodes.Ldarg_0);
                     getIL.Emit(OpCodes.Ldfld, builder);
                     getIL.Emit(OpCodes.Call,
-                               typeof(EnumParser<>).MakeGenericType(elementType).GetMethod("ToStringList"));
+                               TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(elementType), typeof(EnumParser<>).GetMethod("ToStringList")));
                     getIL.Emit(OpCodes.Ret);
 
                     var setBuilder = structure.DefineMethod(
@@ -962,7 +961,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     setIL.Emit(OpCodes.Ldarg_0);
                     setIL.Emit(OpCodes.Ldarg_1);
                     setIL.Emit(OpCodes.Call,
-                               typeof(EnumParser<>).MakeGenericType(elementType).GetMethod("FromStringList"));
+                               TypeBuilder.GetMethod(typeof(EnumParser<>).MakeGenericType(elementType), typeof(EnumParser<>).GetMethod("FromStringList")));
                     setIL.Emit(OpCodes.Stfld, builder);
                     setIL.Emit(OpCodes.Ret);
 
@@ -1100,7 +1099,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     msil.Emit(OpCodes.Ldfld, fieldBuilder);
                     msil.Emit(OpCodes.Ldnull);
                     msil.Emit(OpCodes.Ceq);
-                    msil.Emit(OpCodes.Brfalse_S, label);
+                    msil.Emit(OpCodes.Brfalse, label);
 
                     msil.Emit(OpCodes.Ldarg_0); // this
 
@@ -1187,7 +1186,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 msil.Emit(OpCodes.Ceq);
                 msil.Emit(OpCodes.Ldc_I4_0);
                 msil.Emit(OpCodes.Ceq);
-                msil.Emit(OpCodes.Brtrue_S, label);
+                msil.Emit(OpCodes.Brtrue, label);
 
                 msil.Emit(OpCodes.Ldstr, "writer");
                 msil.Emit(OpCodes.Newobj, GetConstructor<ArgumentNullException>(typeof(string)));
@@ -1464,7 +1463,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 msil.Emit(OpCodes.Ceq);
                 msil.Emit(OpCodes.Ldc_I4_0);
                 msil.Emit(OpCodes.Ceq);
-                msil.Emit(OpCodes.Brtrue_S, label);
+                msil.Emit(OpCodes.Brtrue, label);
 
                 msil.Emit(OpCodes.Ldstr, "reader");
                 msil.Emit(OpCodes.Newobj, GetConstructor<ArgumentNullException>(typeof(string)));
@@ -1775,7 +1774,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
             msil.Emit(OpCodes.Ldloc, unknownFlagLocal);
             msil.Emit(OpCodes.Ldc_I4_0);
             msil.Emit(OpCodes.Ceq);
-            msil.Emit(OpCodes.Brtrue_S, readHasFieldLabel);
+            msil.Emit(OpCodes.Brtrue, readHasFieldLabel);
 
             msil.Emit(OpCodes.Newobj, GetConstructor<FormatException>());
             msil.Emit(OpCodes.Throw);
@@ -1783,7 +1782,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
             msil.MarkLabel(readHasFieldLabel);
             msil.Emit(OpCodes.Ldarg_1);
             msil.Emit(OpCodes.Callvirt, typeof(Serialization.IPacketReader).GetMethod("ReadNativeBoolean"));
-            msil.Emit(OpCodes.Brtrue_S, readFieldIndexLabel);
+            msil.Emit(OpCodes.Brtrue, readFieldIndexLabel);
             msil.Emit(OpCodes.Br, returnLabel);
 
             msil.MarkLabel(readFieldIndexLabel);
