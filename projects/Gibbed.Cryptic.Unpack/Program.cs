@@ -48,6 +48,7 @@ namespace Gibbed.Cryptic.Unpack
             bool showHelp = false;
             bool? extractUnknowns = null;
             bool overwriteFiles = false;
+            bool listOnly = false;
             bool verbose = true;
             string pattern = null;
 
@@ -63,6 +64,7 @@ namespace Gibbed.Cryptic.Unpack
                     v => extractUnknowns = v != null ? true : extractUnknowns
                 },
                 { "v|verbose", "be verbose", v => verbose = v != null },
+                { "l|list-only", "list matching files without extracting them", v => listOnly = v != null },
                 { "f|filter=", "match files using pattern", v => pattern = v },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -101,7 +103,14 @@ namespace Gibbed.Cryptic.Unpack
                 regex = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
 
-            using (var input = File.OpenRead(inputPath))
+            // GameClient keeps patch-streamed HOGGs open for both reads and
+            // writes.  Permit a read-only snapshot inspection while the game
+            // is running instead of requiring the client to be stopped.
+            using (var input = new FileStream(
+                inputPath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite | FileShare.Delete))
             {
                 var hog = new HogFile();
                 hog.Deserialize(input);
@@ -234,6 +243,13 @@ namespace Gibbed.Cryptic.Unpack
                     }
 
                     name = SanitizeRelativePath(name);
+
+                    if (listOnly == true)
+                    {
+                        Console.WriteLine("{0}", name);
+                        continue;
+                    }
+
                     var entryPath = ToExtendedPath(Path.Combine(outputPath, name));
 
                     if (overwriteFiles == false && File.Exists(entryPath) == true)
