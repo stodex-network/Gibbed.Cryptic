@@ -33,6 +33,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
     {
         private readonly Dictionary<string, string> _Paths;
         private readonly Dictionary<string, ParseSchemaFile> _LoadedParses;
+        private readonly IReadOnlyDictionary<string, ParseSchemaFile> _Documents;
 
         public IEnumerable<string> ParseNames
         {
@@ -54,6 +55,14 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
                 this._Paths.Add(name, inputPath);
             }
+        }
+
+        // STOdex JSON input uses the same reference resolution as XML exports.
+        public ParseLoader(IReadOnlyDictionary<string, ParseSchemaFile> documents)
+        {
+            this._Documents = documents ?? throw new ArgumentNullException(nameof(documents));
+            this._Paths = documents.Keys.Where(name => name != "ReferenceEArrayTemplate").ToDictionary(name => name, name => name);
+            this._LoadedParses = new Dictionary<string, ParseSchemaFile>();
         }
 
         private void ResolveParse(ParseSchema.Table table)
@@ -91,7 +100,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 return this._LoadedParses[name];
             }
 
-            var parse = ParseSchemaFile.LoadFile(this._Paths[name]);
+            var parse = this._Documents != null ? this._Documents[name] : ParseSchemaFile.LoadFile(this._Paths[name]);
             this._LoadedParses.Add(name, parse);
             ResolveParse(parse.Table);
             return parse;

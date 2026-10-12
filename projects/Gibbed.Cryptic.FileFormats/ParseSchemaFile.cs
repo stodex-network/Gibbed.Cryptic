@@ -194,24 +194,29 @@ namespace Gibbed.Cryptic.FileFormats
         {
             using (var input = File.OpenRead(path))
             {
-                var doc = new XPathDocument(input);
-                var nav = doc.CreateNavigator();
-
-                var schema = new ParseSchemaFile();
-
-                var root = nav.SelectSingleNode("/parse");
-                if (root == null)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                schema.Name = root.GetAttribute("name", "");
-
-                var table = root.SelectSingleNode("table");
-                schema.Table = LoadTable(table, path);
-
-                return schema;
+                return LoadDocument(new XPathDocument(input), path);
             }
+        }
+
+        // STOdex: allow validated in-memory schemas without materializing XML files.
+        public static ParseSchemaFile LoadDocument(XPathDocument document, string sourceName)
+        {
+            var nav = document.CreateNavigator();
+
+            var schema = new ParseSchemaFile();
+
+            var root = nav.SelectSingleNode("/parse");
+            if (root == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            schema.Name = root.GetAttribute("name", "");
+
+            var table = root.SelectSingleNode("table");
+            schema.Table = LoadTable(table, sourceName);
+
+            return schema;
         }
 
         public static string GetNameFromFile(string path)

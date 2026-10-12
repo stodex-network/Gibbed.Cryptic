@@ -49,13 +49,16 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
             var showHelp = false;
             string version = null;
+            string schemaJson = null;
+            bool explicitPath = false;
             string inputPath = Path.Combine(binPath, "..", "configs", "schemas", "Star Trek Online", "Live");
             string targetGameName = "StarTrekOnline";
 
             var options = new OptionSet()
             {
                 { "g|game=", "set target game", v => targetGameName = v },
-                { "p|path=", "set input path", v => inputPath = v },
+                { "p|path=", "set input path", v => { inputPath = v; explicitPath = true; } },
+                { "j|schema-json=", "load STOdex BIN schema JSON instead of an XML directory", v => schemaJson = v },
                 { "v|version=", "set version", v => version = v },
                 { "h|help", "show this message and exit", v => showHelp = v != null },
             };
@@ -107,10 +110,13 @@ namespace Gibbed.Cryptic.GenerateSerializer
             inputPath = Path.GetFullPath(inputPath);
 
             Console.WriteLine("Target = {0}", targetGame);
-            Console.WriteLine("Base = {0}", inputPath);
+            Console.WriteLine("Base = {0}", schemaJson != null ? Path.GetFullPath(schemaJson) : inputPath);
 
-            var parseLoader = new ParseLoader(inputPath);
-            var enumLoader = new EnumLoader(inputPath);
+            if (schemaJson != null && explicitPath) throw new ArgumentException("Choose --path or --schema-json, not both");
+            var json = schemaJson != null ? new JsonSchemaBundle(schemaJson) : null;
+            var parseLoader = json != null ? json.Parses : new ParseLoader(inputPath);
+            var enumLoader = json != null ? json.Enums : new EnumLoader(inputPath);
+            if (json != null) Console.WriteLine("Schema JSON = {0}/{1}", json.GameBuild, json.SchemaId);
 
             Func<string> defaultName = () => "Gibbed." + targetGame.ToString() + ".Serialization.dll";
             var outputPath = extras.Count > 0 ? extras[0] : defaultName();

@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Gibbed.Cryptic.FileFormats;
 
 namespace Gibbed.Cryptic.GenerateSerializer
@@ -31,6 +32,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
     {
         private readonly Dictionary<string, string> _Paths;
         private readonly Dictionary<string, ParseEnumFile> _LoadedEnums;
+        private readonly IReadOnlyDictionary<string, ParseEnumFile> _Documents;
 
         public IEnumerable<string> EnumNames
         {
@@ -47,6 +49,13 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 var name = ParseEnumFile.GetNameFromFile(inputPath);
                 this._Paths.Add(name, inputPath);
             }
+        }
+
+        public EnumLoader(IReadOnlyDictionary<string, ParseEnumFile> documents)
+        {
+            this._Documents = documents ?? throw new ArgumentNullException(nameof(documents));
+            this._Paths = documents.Keys.ToDictionary(name => name, name => name);
+            this._LoadedEnums = new Dictionary<string, ParseEnumFile>();
         }
 
         public ParseEnumFile LoadEnum(string name)
@@ -66,7 +75,7 @@ namespace Gibbed.Cryptic.GenerateSerializer
                 return this._LoadedEnums[name];
             }
 
-            var e = ParseEnumFile.LoadFile(this._Paths[name]);
+            var e = this._Documents != null ? this._Documents[name] : ParseEnumFile.LoadFile(this._Paths[name]);
             this._LoadedEnums.Add(name, e);
             return e;
         }

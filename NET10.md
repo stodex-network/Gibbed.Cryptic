@@ -17,4 +17,4 @@ Use [BUILDING.md](BUILDING.md) in this branch for the current STO bundle. It nee
 
 The older Framework source remains on `64bit-update-kurgh`. The earlier combined port is kept on `archive/net10-with-stodex-patches`. Local Framework bundles belong in `bin-net48/`, separate from the current `bin-net10/` output. These ignored bundles are not supplied by cloning the repository.
 
-The HOGG server's JSON protocol did not change with this port, so app clients can use the modern server independently. Loading game schemas from JSON at runtime is separate work; this build still generates a serializer DLL from XML.
+The HOGG server's JSON protocol did not change with this port, so app clients can use the modern server independently. The STOdex layer accepts validated schema JSON as generator input, as well as XML. It generates the same kind of serializer DLL. Automatic HOGG schema loading and runtime Bridge bindings remain separate work; the upstream-facing port branch is unchanged by this feature.

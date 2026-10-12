@@ -97,24 +97,29 @@ namespace Gibbed.Cryptic.FileFormats
         {
             using (var input = File.OpenRead(path))
             {
-                var doc = new XPathDocument(input);
-                var nav = doc.CreateNavigator();
-
-                var schema = new ParseEnumFile();
-
-                var root = nav.SelectSingleNode("/enum");
-                if (root == null)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                schema.Name = root.GetAttribute("name", "");
-
-                var table = root.SelectSingleNode("elements");
-                schema.Enum = LoadEnumeration(table);
-
-                return schema;
+                return LoadDocument(new XPathDocument(input), path);
             }
+        }
+
+        // STOdex: allow validated in-memory schemas without materializing XML files.
+        public static ParseEnumFile LoadDocument(XPathDocument document, string sourceName)
+        {
+            var nav = document.CreateNavigator();
+
+            var schema = new ParseEnumFile();
+
+            var root = nav.SelectSingleNode("/enum");
+            if (root == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            schema.Name = root.GetAttribute("name", "");
+
+            var table = root.SelectSingleNode("elements");
+            schema.Enum = LoadEnumeration(table);
+
+            return schema;
         }
 
         public static string GetNameFromFile(string path)

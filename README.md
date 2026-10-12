@@ -6,7 +6,7 @@ Tools for unpacking Star Trek Online's game files and converting its binary data
 
 - **Unpack** extracts files from `.hogg` archives, or lists their contents.
 - **ExportSchemas** reads a running client or a memory dump and exports XML descriptions of the game's data structures.
-- **GenerateSerializer** compiles those descriptions into a serializer DLL.
+- **GenerateSerializer** compiles XML descriptions or validated STOdex schema JSON into a serializer DLL.
 - **ConvertResource** and **ConvertObject** use a serializer to convert binary game data to and from XML.
 
 To decode a BIN file, you need the converter, a serializer built from matching schemas, and a JSON mapping that tells the converter which class to use. The schemas describe the data layout; the mapping connects a BIN's parser hash to that layout. A game patch can change either one.
@@ -23,7 +23,7 @@ cd Gibbed.Cryptic
 dotnet build "Cryptic Studios.sln" --configuration Release
 ```
 
-Building the tools does not give you a game-specific serializer. Game files and schema XML are not included in this repository. Bring an export for the client build you want to read, then follow [BUILDING.md](BUILDING.md) to generate the bundle and decode a resource.
+Building the tools does not give you a game-specific serializer. Game files and schema XML are not included in this repository. Bring XML or a validated JSON export for the client build you want to read, then follow [BUILDING.md](BUILDING.md) to generate the bundle and decode a resource.
 
 The included resource mappings cover costume skeletons, costume geometry, ground region data, model headers, English client messages, UI fonts, color palettes and named colors. They were checked against build `ST.372.20260910a.24`. Other resources need matching schemas and mappings; copying a mapping or changing its build label is not enough.
 
