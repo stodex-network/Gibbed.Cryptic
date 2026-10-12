@@ -262,6 +262,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueCurrentFile(object state)
         {
+            var start = this._Input.Position;
             var index = this._Input.ReadValueU32();
 
             if (index == 0)
@@ -274,7 +275,20 @@ namespace Gibbed.Cryptic.FileFormats
                 return this._Input.ReadStringPascalUncapped();
             }
 
-            return this._GetFileNameFromIndex((int)(index - 2));
+            try
+            {
+                return this._GetFileNameFromIndex((int)(index - 2));
+            }
+            catch (KeyNotFoundException) when (this._Input.CanSeek == true)
+            {
+                // Some current resources (notably Materials.bin) serialize a
+                // CURRENTFILE column as the direct Pascal-string form even
+                // though the runtime parse descriptor marks it indirect.
+                // An inline string's first four bytes cannot be a valid file
+                // catalogue index. Rewind and consume the direct wire form.
+                this._Input.Position = start;
+                return this._Input.ReadStringPascalUncapped();
+            }
         }
 
         public string[] ReadArrayCurrentFile(int count, object state)
