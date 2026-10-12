@@ -209,10 +209,6 @@ namespace Gibbed.Cryptic.ConvertResource
                         });
                     }
 
-                    var loadResource = typeof(BlobDataReader)
-                        .GetMethod("LoadResource", BindingFlags.Public | BindingFlags.Static)
-                        .MakeGenericMethod(type);
-
                     Console.WriteLine("Loading entries...");
 
                     Func<int, string> getFileNameFromIndex =
@@ -226,9 +222,27 @@ namespace Gibbed.Cryptic.ConvertResource
                             return resource.Files[i].Name;
                         };
 
-                    var list = (IList)loadResource.Invoke(
-                        null,
-                        new object[] { input, parse.IsClient, parse.IsServer, getFileNameFromIndex });
+                    IList list;
+                    if (parse.Mode.Equals("object", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var loadObject = typeof(BlobDataReader)
+                            .GetMethod("LoadObject", BindingFlags.Public | BindingFlags.Static)
+                            .MakeGenericMethod(type);
+                        var instance = loadObject.Invoke(
+                            null,
+                            new object[] { input, parse.IsClient, parse.IsServer, getFileNameFromIndex });
+                        list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
+                        list.Add(instance);
+                    }
+                    else
+                    {
+                        var loadResource = typeof(BlobDataReader)
+                            .GetMethod("LoadResource", BindingFlags.Public | BindingFlags.Static)
+                            .MakeGenericMethod(type);
+                        list = (IList)loadResource.Invoke(
+                            null,
+                            new object[] { input, parse.IsClient, parse.IsServer, getFileNameFromIndex });
+                    }
 
                     var entries = list.Cast<object>();
                     var listType = typeof(List<>).MakeGenericType(type);
@@ -236,6 +250,21 @@ namespace Gibbed.Cryptic.ConvertResource
                     Console.WriteLine("Saving entries to XML...");
                     switch (parse.Mode.ToLowerInvariant())
                     {
+                        case "object":
+                        {
+                            var serializer = new DataContractSerializer(type);
+
+                            const string entryName = "entries.xml";
+                            resource.Entries.Add(entryName);
+                            var entryPath = Path.Combine(outputPath, entryName);
+                            Directory.CreateDirectory(Path.GetDirectoryName(entryPath));
+                            using (var output = File.Create(entryPath))
+                            {
+                                serializer.WriteObject(output, entries.Single());
+                            }
+                            break;
+                        }
+
                         case "single":
                         {
                             var serializer = new DataContractSerializer(listType);
