@@ -447,13 +447,14 @@ namespace Gibbed.Cryptic.GenerateSerializer
 
             if (e.Type != ParseSchema.EnumerationType.Int)
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException($"enum type {e.Type} for column {column.Name}");
             }
 
             Type underlyingType;
 
-            if (column.Format == ParseSchema.ColumnFormat.None ||
-                column.Format == ParseSchema.ColumnFormat.FLAGS)
+            // Formats other than COLOR are presentation hints and do not
+            // change the integer storage type used by the current client.
+            if (column.Format != ParseSchema.ColumnFormat.COLOR)
             {
                 underlyingType = column.Token switch
                 {
@@ -461,20 +462,16 @@ namespace Gibbed.Cryptic.GenerateSerializer
                     Parse.TokenType.Int16 => typeof(short),
                     Parse.TokenType.Int32 => typeof(int),
                     Parse.TokenType.Bit => typeof(uint),
-                    _ => throw new NotSupportedException(),
-                };
-            }
-            else if (column.Format == ParseSchema.ColumnFormat.COLOR)
-            {
-                underlyingType = column.Token switch
-                {
-                    Parse.TokenType.Int32 => typeof(uint),
-                    _ => throw new NotSupportedException(),
+                    _ => throw new NotSupportedException($"enum token {column.Token} for column {column.Name}"),
                 };
             }
             else
             {
-                throw new NotSupportedException();
+                underlyingType = column.Token switch
+                {
+                    Parse.TokenType.Int32 => typeof(uint),
+                    _ => throw new NotSupportedException($"color enum token {column.Token} for column {column.Name}"),
+                };
             }
 
             if (column.StaticDefineListIsExternal == true)
