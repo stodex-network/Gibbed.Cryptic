@@ -1,12 +1,12 @@
 [submodule "projects/Gibbed.IO"]
 	path = projects/Gibbed.IO
-	url = https://github.com/gibbed/Gibbed.IO.git
+	url = https://github.com/stodex-network/Gibbed.IO.git
 [submodule "projects/NDesk.Options"]
 	path = projects/NDesk.Options
-	url = https://github.com/gibbed/NDesk.Options.git
+	url = https://github.com/stodex-network/NDesk.Options.git
 [submodule "projects/Gibbed.PortableExecutable"]
 	path = projects/Gibbed.PortableExecutable
-	url = https://github.com/gibbed/Gibbed.PortableExecutable.git
+	url = https://github.com/stodex-network/Gibbed.PortableExecutable.git
 [submodule "configs/schemas/Star Trek Online"]
 	path = configs/schemas/Star Trek Online
 	url = https://github.com/gibbed/StarTrekOnlineSchemas.git
