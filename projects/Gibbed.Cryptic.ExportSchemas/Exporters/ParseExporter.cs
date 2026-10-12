@@ -132,11 +132,17 @@ namespace Gibbed.Cryptic.ExportSchemas.Exporters
             Directory.CreateDirectory(Path.Combine(outputBasePath, "parses"));
 
             var failures = new List<string>();
+            var parseFilter = Environment.GetEnvironmentVariable("GIBBED_PARSE_FILTER");
 
             foreach (var parse in parses.OrderBy(kv => kv.Name))
             {
                 var name = parse.Name;
                 var pointer = parse.Value;
+                if (string.IsNullOrEmpty(parseFilter) == false &&
+                    string.Equals(name, parseFilter, StringComparison.OrdinalIgnoreCase) == false)
+                {
+                    continue;
+                }
 
                 Console.WriteLine("[parse] {0}", name);
 

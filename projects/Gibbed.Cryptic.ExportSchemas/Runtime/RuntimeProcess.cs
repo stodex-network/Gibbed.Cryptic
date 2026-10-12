@@ -82,7 +82,9 @@ namespace Gibbed.Cryptic.ExportSchemas.Runtime
                 this._Handle = IntPtr.Zero;
             }
 
-            var handle = Win32.OpenProcess(Win32.ProcessAllAccess, false, (uint)process.Id);
+            // Schema export only reads memory and queries the module; it never
+            // needs process write, termination, or debugger rights.
+            var handle = Win32.OpenProcess(0x0400 | 0x0010, false, (uint)process.Id);
             if (handle == IntPtr.Zero)
             {
                 return false;

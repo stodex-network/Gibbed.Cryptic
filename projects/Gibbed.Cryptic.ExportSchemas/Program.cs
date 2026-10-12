@@ -44,6 +44,7 @@ namespace Gibbed.Cryptic.ExportSchemas
             string dumpPath = null;
             string projectName = null;
             string outputPath = null;
+            int? processId = null;
             bool showHelp = false;
 
             var options = new OptionSet()
@@ -55,6 +56,7 @@ namespace Gibbed.Cryptic.ExportSchemas
                     v => projectName = v
                 },
                 { "o|output=", "output directory for schemas", v => outputPath = v },
+                { "pid=", "explicit GameClient PID (requires --project)", (int v) => processId = v },
                 { "h|help", "show this help message", v => showHelp = v != null },
             };
 
@@ -93,6 +95,10 @@ namespace Gibbed.Cryptic.ExportSchemas
 
             if (dumpPath != null)
             {
+                if (processId.HasValue)
+                {
+                    throw new InvalidOperationException("--pid and --dump are mutually exclusive.");
+                }
                 // Use dump file
                 if (projectName == null)
                 {
@@ -127,7 +133,23 @@ namespace Gibbed.Cryptic.ExportSchemas
             else
             {
                 // Use running process
-                var process = FindSuitableProcess(out projectName);
+                Process process;
+                if (processId.HasValue)
+                {
+                    if (string.IsNullOrEmpty(projectName))
+                    {
+                        throw new InvalidOperationException("--project is required with --pid.");
+                    }
+                    process = Process.GetProcessById(processId.Value);
+                    if (!string.Equals(process.ProcessName, "GameClient", StringComparison.OrdinalIgnoreCase))
+                    {
+                        throw new InvalidOperationException("Explicit PID must identify GameClient.");
+                    }
+                }
+                else
+                {
+                    process = FindSuitableProcess(out projectName);
+                }
                 if (process == null)
                 {
                     Console.WriteLine("No suitable game process found.");
