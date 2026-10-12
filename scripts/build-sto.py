@@ -12,6 +12,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -93,6 +94,16 @@ def main():
                     'mapping_source': str(args.mappings.resolve()), 'mapping_source_sha256': sha(args.mappings),
                     'commands': commands, 'dotnet_sdk': subprocess.check_output(['dotnet', '--version'], text=True).strip(),
                     'serializer': filename, 'outputs': outputs}
+        # Old mappings use parser_hash, while this converter requires parse_hash.
+        # It loads every mapping at startup, so archive the old mapping directories.
+        # Preserve old assemblies for replay with their historical bundles.
+        archive_id = uuid.uuid4().hex
+        for kind in ('resources', 'objects'):
+            active = bundle / 'serializers' / kind
+            if active.exists():
+                archive = bundle / 'serializers/history' / archive_id / kind
+                archive.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(active), str(archive))
         (stage / 'serializers/objects').mkdir()
         shutil.copytree(stage, bundle, dirs_exist_ok=True, ignore=shutil.ignore_patterns('logs'))
         evidence = bundle / 'serializers/manifests' / (identity + '.' + args.schema_id)
