@@ -394,3 +394,5 @@ FodyWeavers.xsd
 /sto-build-*/
 
 /bin-net48/
+
+/bin-net10-expanded/

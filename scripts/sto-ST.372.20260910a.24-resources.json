@@ -536,6 +536,28 @@
     ]
   },
   {
+    "name": "Terrain_Default_Atlases",
+    "mode": "object",
+    "targets": [
+      {
+        "parse_hash": 2367835613,
+        "class": "Gibbed.StarTrekOnline.Serialization.TerrainAtlasRegionData",
+        "versions": []
+      }
+    ]
+  },
+  {
+    "name": "Terrain_Default_Deps",
+    "mode": "object",
+    "targets": [
+      {
+        "parse_hash": 1462543738,
+        "class": "Gibbed.StarTrekOnline.Serialization.BinFileList",
+        "versions": []
+      }
+    ]
+  },
+  {
     "name": "Texopts",
     "mode": "object",
     "targets": [
@@ -626,6 +648,28 @@
         "parse_hash": 482059605,
         "class": "Gibbed.StarTrekOnline.Serialization.WaveformDef",
         "key": "NodeCategory",
+        "versions": []
+      }
+    ]
+  },
+  {
+    "name": "World_Cells",
+    "mode": "object",
+    "targets": [
+      {
+        "parse_hash": 2223914705,
+        "class": "Gibbed.StarTrekOnline.Serialization.WorldStreamingInfo",
+        "versions": []
+      }
+    ]
+  },
+  {
+    "name": "World_Cells_Shared",
+    "mode": "object",
+    "targets": [
+      {
+        "parse_hash": 1800282195,
+        "class": "Gibbed.StarTrekOnline.Serialization.WorldStreamingPooledInfo",
         "versions": []
       }
     ]
