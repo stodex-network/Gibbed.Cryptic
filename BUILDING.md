@@ -113,3 +113,9 @@ dotnet run --project tests/JsonSchemas/JsonSchemas.csproj -c Release -- <bundle>
 ```
 
 The ST.372.20260910a.24 control compares all 6,263 parses and 1,335 enums. Its JSON-generated serializer matches counts and first/middle/last record JSON/XML samples for all eight admitted BINs; both object-root color resources match completely, including all 2,324 resolved RGBA values. The original XML serializer regression also passes. This does not establish support for additional BIN mappings or a live memory-reader update.
+
+## Expanded installed-resource mappings
+
+`scripts/sto-ST.372.20260910a.24-resources.json` admits 50 current-build resource mappings, including costume bones/categories/colors/sets, species, model keys, texture options, UI atlases, nested MapSnap headers and bounded packed materials. The original eight-resource mapping set remains available as a smaller baseline. The matching installed first/middle/last controls are recorded in `tests/resource-admission/ST.372.20260910a.24.json`. Packed MaterialLoadInfo requires the HOGG helper's bounded field protocol; a successful schema mapping is not a claim of evaluated material effects or player eligibility.
+
+The expanded mapping set retains UI font/atlas variant aliases and matched font parse-column indices for authored masks. Modelheaders uses ModelName and Zonemaps_Client uses MapName as keys. Build a distinct bundle with this mapping file and the same validated schema tree; do not change a decoder bundle that is already loaded by a running helper.

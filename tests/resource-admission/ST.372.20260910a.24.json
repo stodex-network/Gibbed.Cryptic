@@ -1,0 +1,1560 @@
+{
+  "version": 1,
+  "utc": "2026-10-14T22:27:15.341002+00:00",
+  "build": "ST.372.20260910a.24",
+  "helper_sha256": "df28dd49c6adf6f92d65cee1e178a8f562235fa133ad1aa15c4e3909b8edcf3e",
+  "mappings_sha256": "1fd9b7f213aed21c207e314bf6889340ac7bbe90073154ff383af0b06cc8dc3e",
+  "controls": [
+    {
+      "resource": "Blendinfos",
+      "member": "Bin/Blendinfos.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "216f025798d300d035300ed9ec248cfa96f76024bc40a024a3687ff7fd323221",
+          "xml_sha256": "a9341208befe06d6a87dee1f95a01c333f26bf138c37fde05a52dbe52250be46"
+        },
+        {
+          "ordinal": 71,
+          "key": null,
+          "json_sha256": "30f2eb1df05092d7ff1e11aebe2e6e65f9348614c5dd74880a442746867537d5",
+          "xml_sha256": "62b85e8c9304712fad61f5fdb135f2f106c9307e70b1bd81bb8475d80beff61b"
+        },
+        {
+          "ordinal": 141,
+          "key": null,
+          "json_sha256": "d1378737fc26029bca8040f2c54c231614b4b69229e7ffe905dbbc453608faca",
+          "xml_sha256": "ba391212255ac2376e4559e7e86e6f7a35421b5513db3881fe1923b38f5b74a1"
+        }
+      ],
+      "total": 142,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Blendinfos.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Characterclassclientdata",
+      "member": "Bin/Characterclassclientdata.Bin",
+      "samples": [],
+      "total": 0,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Characterclassclientdata.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Charlodscale",
+      "member": "Bin/Charlodscale.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "ef563b2674c080564fbfe9018f3beba33bddeb8e9430761130ba4da93a5c5b98",
+          "xml_sha256": "59758a681a46af54b463f71de36297295c32a82217a8d83ead23c053b73491fb"
+        },
+        {
+          "ordinal": 7,
+          "key": null,
+          "json_sha256": "02459bf926ba51e0fd982ee8044b0865deb037425617b98f822540d87dfd9109",
+          "xml_sha256": "b09351d296d15144b56d68d2c52754de0501389bd24d1d7929b7282b49db6894"
+        },
+        {
+          "ordinal": 13,
+          "key": null,
+          "json_sha256": "a462f465de6c566b4140ccdcb1861f2e0f029e020fa8edb96c0405f7cb61d4a6",
+          "xml_sha256": "3f79f784f314d6a20ff948ea805519ad251b439c2cf6b3545f005e8c290b9c50"
+        }
+      ],
+      "total": 14,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Charlodscale.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Clientmessagesenglish",
+      "member": "Bin/Clientmessagesenglish.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Abandonmessage_Leaver",
+          "json_sha256": "b7ba5f3f71c4151d838156783b37c7857b1dd32300a1af841d40635927799eef",
+          "xml_sha256": "f9f73a3dcf223d8fcce39b04f27c698605b691e6f32810486e25a44696223fb9"
+        },
+        {
+          "ordinal": 89079,
+          "key": "Pd.Azh68c",
+          "json_sha256": "fceb9229ca74e2b5f4a91fe33b9813a5a1e104109da137e867104fc7dbd11ade",
+          "xml_sha256": "fd2e6cb690e9b6affdd217715cdf1c1dc30a555b770348e8bd85b5d1c8cb25ec"
+        },
+        {
+          "ordinal": 178158,
+          "key": "Yes",
+          "json_sha256": "90b9bff0b8539d28bdb04dbeea0862509b343dd6c03e8c86a239e86c373e0184",
+          "xml_sha256": "ee0aa7d7141af6694ae5112cf2894a827354ba41763c62b4ad086b9bec036a32"
+        }
+      ],
+      "total": 178159,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Clientmessagesenglish.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Colorpalettes",
+      "member": "Bin/Colorpalettes.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "da0b2ce997571ba6a2d32555b9e129632682bda7d5bb174cdf66a8317c69bb55",
+          "xml_sha256": "8ca6016961c67e8baee6c6deecbb4f7be54fbfcd7ba375f6252a76aa189c2552"
+        }
+      ],
+      "total": 1,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Colorpalettes.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Colors",
+      "member": "Bin/Colors.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "6e4f03afdb84d35bce4439986482242fa19df5d5ce365302f0dd4f88dcaafa87",
+          "xml_sha256": "e55ba3f975675a633cf643ab7ab4e5f5e8c181d63a7f1dedfb5c954aa4c3ff32"
+        }
+      ],
+      "total": 1,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Colors.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumebone",
+      "member": "Bin/Costumebone.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "1s1_Fleetlogo",
+          "json_sha256": "734e6cd4136c8f6ff020930d9a86cf91f4603fe0bd675a8075ef71256e1c0d2b",
+          "xml_sha256": "8c400d155452e60fc767a12bd492879b44b37557dd8abd6c31f5937c6a37cb5b"
+        },
+        {
+          "ordinal": 3685,
+          "key": "Fep1_Nacellelidnumber",
+          "json_sha256": "fb666ad0aa63e896bdd2f9ec066da983755ef357ca5a786bcda04795dc464acf",
+          "xml_sha256": "33e9c8befb0da1c9c9bc53d58216c1ddfbfe885947530c4ee4df901261874f63"
+        },
+        {
+          "ordinal": 7369,
+          "key": "Zc1_Stanchionr",
+          "json_sha256": "fa7af347210b9b06574674d55f8c91a46670a3a56c1cf75777f9844029995512",
+          "xml_sha256": "29759ea497faf5131da2cbaf112a710a66361f985cd05397478efb3e1603669a"
+        }
+      ],
+      "total": 7370,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumebone.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumecategory",
+      "member": "Bin/Costumecategory.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Bluegill_Heads",
+          "json_sha256": "0f1869893114c44a9d7a171017a18ffec52c3c1b6f6ac7d8a5416aabe63db84c",
+          "xml_sha256": "a88e8e319f3bca457229e5526a5b42f1fa3217b03527cf0101d81f051ea469ca"
+        },
+        {
+          "ordinal": 336,
+          "key": "Stm_Head_Gamma",
+          "json_sha256": "923d2a3fb8708e78032329c59d3e07a55be9de8a67a0c7883eed720ee861d12c",
+          "xml_sha256": "1fd8ee3cfd1f4fead32ad807a3b5a9871acace1582c997d84973125945ef1144"
+        },
+        {
+          "ordinal": 671,
+          "key": "Unassigned",
+          "json_sha256": "4455ebbbb5ccce3bf25c6b1cfe1350ce56c42c9d5147ac7acc348ff9f7c215c3",
+          "xml_sha256": "12da3f773c849dbfb46224644a937370ebbe0e7932d2a9ba8a872486897e0ff8"
+        }
+      ],
+      "total": 672,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumecategory.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumecolor",
+      "member": "Bin/Costumecolor.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "0718_Eye_Iris_Colorset",
+          "json_sha256": "583733055e75908532b8637188454473a66229e6ee79c3f977bab4363c565b85",
+          "xml_sha256": "cb8645616c4ba221cadc267d89470633c46e19fe4f43ccc7fb0481d48cb93bfb"
+        },
+        {
+          "ordinal": 204,
+          "key": "Genspeciescolorset012",
+          "json_sha256": "dfe205c89f1bff5b897f9567349939b6a813160b8b31ba8eafc2658242cd0bad",
+          "xml_sha256": "a5ce8bf92fac01d8f9c38544086af243e14e52f677e9051ea13acca181a05eb1"
+        },
+        {
+          "ordinal": 407,
+          "key": "Winterevent_Jacket_White_04",
+          "json_sha256": "ffeae0fe91c985f9f073e47ee90ee11ab361e593c1a04328e65f408e444d6da4",
+          "xml_sha256": "a238a004710dd2c16cd967e0636b4c73ccb8b6a9a5f8430c9539da94555e99b3"
+        }
+      ],
+      "total": 408,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumecolor.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumecolorquad",
+      "member": "Bin/Costumecolorquad.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "0718_Eye_Colorquad",
+          "json_sha256": "24858342115e5946c7ec4499014da943228ad531168a37334aeaa931a5ef25a2",
+          "xml_sha256": "e411a723ed5ffdf8f88c346bfab27323cab84c8001929683ad13ab82ca8ad2d6"
+        },
+        {
+          "ordinal": 30,
+          "key": "Geordi_Eye_Colorquad",
+          "json_sha256": "6f462dd31a2c24a1a5c12d8d54456e820db7023596f4a2d948266dbf9a273eaa",
+          "xml_sha256": "aa9bc23c67267e4efe90a93fe7a7f843d9830fc174a348f7d4f5315109270eae"
+        },
+        {
+          "ordinal": 59,
+          "key": "Winterevent_Jacket_White_Colorquad",
+          "json_sha256": "79de2dafb77b95728b9720c9a4d537759ae8e4be61bb05cbfc341a1620c1afcb",
+          "xml_sha256": "8bed107107f989b7c3e782c12fc4130a0f63b7b6a6899b558392105600ceff62"
+        }
+      ],
+      "total": 60,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumecolorquad.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumegeometry",
+      "member": "Bin/Costumegeometry.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "A_Body_Borg_Vinculum_01",
+          "json_sha256": "56da323547c93b9880116c94b2297184f9e49470f9cbba9df98285f47d8e0704",
+          "xml_sha256": "602f23cb60c489f9b5295752d3ed61634042ebd4377e119cca1dc0e89cd94a32"
+        },
+        {
+          "ordinal": 19133,
+          "key": "Geo_Ship_Fed_Fe5s_Stanchionlwinpods_Type2c",
+          "json_sha256": "258d97143a4a3f1cd11904c6697b97983a7d6ec496cd09851585675a391693d0",
+          "xml_sha256": "46ae7e2aa4a43d4a9160c19f7515dd2dc916d583d96df324b6c36308b59ad6a9"
+        },
+        {
+          "ordinal": 38265,
+          "key": "Xxxx_Test_Tholian_01",
+          "json_sha256": "fda35689502f14cfde4b928574a26fa396f9e22a5746cf85bfcf2bd7b585d646",
+          "xml_sha256": "cd9a1a6cf94bd0f3f2192aa309c326901f8539ac20c8fd3294a163cfc55a1a36"
+        }
+      ],
+      "total": 38266,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumegeometry.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumegeometryadd",
+      "member": "Bin/Costumegeometryadd.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Geo_Ship_Fed_Fc15_Hull_Type1",
+          "json_sha256": "13e06701deb81e2ea4467a9821f577b971d8c15c74c893e00c17f9aa5f8be29e",
+          "xml_sha256": "ff33b909b3e6f6204192c82aff907681444463886076a2564403b9bee3078dbe"
+        },
+        {
+          "ordinal": 3,
+          "key": "Geo_Ship_Fed_Fc1_Saucerwinpods_Type3",
+          "json_sha256": "bf620e8682d540c5bc90fe8efba13e86a594e1cf51ba8427d231b7f8cc4e1223",
+          "xml_sha256": "b88d6847bc4dad9be80e270b7dcb5400870a4c115f36a3d94613577881c1df4c"
+        },
+        {
+          "ordinal": 6,
+          "key": "Geo_Ship_Jem_Jf3_Naceller_Type1",
+          "json_sha256": "4e01b147aa17ca3ba79b4a82f410cf65fc0682c50715c4884d942128c2d8bd7b",
+          "xml_sha256": "52a40b3721f6ec6de303b4f44dd1acfa7739820f81123371dc92df1c43db3b40"
+        }
+      ],
+      "total": 7,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumegeometryadd.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumelayer",
+      "member": "Bin/Costumelayer.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Back",
+          "json_sha256": "21bb8c5c014beb6d33e7441e8c07f7b742451f5a4042920f12dacd9537f26b10",
+          "xml_sha256": "946d4503babce4606dfa5e1c881d7cd401688fae5da0834c801198625fdab303"
+        },
+        {
+          "ordinal": 169,
+          "key": "Sauceridnameleft",
+          "json_sha256": "5407b18d4280dff07c0490c0963a7ef2a6c2f4e2213a0937f8c353bb394f0228",
+          "xml_sha256": "2f6866dd11eecd183ce16bf68491218ca23e39d1532660d5f0a8f902a0225b19"
+        },
+        {
+          "ordinal": 337,
+          "key": "Visor",
+          "json_sha256": "86a6b3aaf0455fbe4f59ee7311230d48963079ac43fa36dfa79afab3bae91f29",
+          "xml_sha256": "286a16d970071b744248f245a37a80d98c579cea76474dd7bf4ee4b48a0d9fd9"
+        }
+      ],
+      "total": 338,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumelayer.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumematerial",
+      "member": "Bin/Costumematerial.Bin",
+      "samples": [],
+      "total": 0,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumematerial.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumeregion",
+      "member": "Bin/Costumeregion.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "All",
+          "json_sha256": "2e92542cf17d0eb05b0650136949c78d9b0e7d1d58226ccb682b382af254103d",
+          "xml_sha256": "7f31f52552321a12b37d3ef63bee41ef0c91e6d86377a2f7d2621b18b98abb2e"
+        },
+        {
+          "ordinal": 9,
+          "key": "Cm_Lowerbody",
+          "json_sha256": "772e692b3ce6f6563676f39947c6c8f29abd62fe8d3d2f9e504cd70d267e70c1",
+          "xml_sha256": "ac51b14563e2fe1ce14632c7217769363e3c1aa7b485d6a5aa9e614bc6feef49"
+        },
+        {
+          "ordinal": 18,
+          "key": "Turret_All",
+          "json_sha256": "bfdf959bb199d983635390fd579027ab3fb380b9d6c5a346a39428b29f78141c",
+          "xml_sha256": "d4e23cc9dab501812e7e95e2a3a6cebc200752e3c10d606646a0d39375939562"
+        }
+      ],
+      "total": 19,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumeregion.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumeset",
+      "member": "Bin/Costumeset.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Admiral",
+          "json_sha256": "f10c8d7517a9386fa76cdd7a9689a4e65ead4ac29ececd37388dc8c26e55f26b",
+          "xml_sha256": "9794a66eb3dd0a097e031348e5095906dd9ee34f640e6891f663c7ce931f7898"
+        },
+        {
+          "ordinal": 329,
+          "key": "Puppet_Escort_Hirogen_5_Upgrade",
+          "json_sha256": "bf6dc05343f4b908e35d3ab73a426cd13940b5d60ef37961ee710bd3eeabe227",
+          "xml_sha256": "fdcb406e68e95b26bbb4f3f0a2e2c1dddbce954f531c9e62756fe0aef9bff003"
+        },
+        {
+          "ordinal": 658,
+          "key": "Viceadmiral_Romulan_Kits",
+          "json_sha256": "18c05c087ad5037ebdd88a6f62ccf3b444c2eee4412d43339aab79059f5db266",
+          "xml_sha256": "3b2019a7c967e0549d883e46ad1573c4661524e03ba94d81b82870d650cd09aa"
+        }
+      ],
+      "total": 659,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumeset.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumeskeleton",
+      "member": "Bin/Costumeskeleton.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Angler_Fish",
+          "json_sha256": "5eceed5ceb241018f4c1c6aa397f5fd2ca8c8e91db9e205101a20b6dca15d573",
+          "xml_sha256": "4de32481bb1efa71da41ef95218bf17f79e09e92fa967e5c58d9af4be4864d18"
+        },
+        {
+          "ordinal": 372,
+          "key": "Ship_Fs5n_Skeleton",
+          "json_sha256": "4e7eea80be9ff76085019acc0a0f8ebbda88ad259a7386220d3ef1d58cfdb3e5",
+          "xml_sha256": "0cbd59ad9abcadb4ff4fdb5c81920f3350b904cadbe7b0c293176697ea1c83bd"
+        },
+        {
+          "ordinal": 744,
+          "key": "Whale",
+          "json_sha256": "6b2a2ae6267a940c3c2e1736e6ae93ccb51146ebe8e89853e18a086395ee6ce1",
+          "xml_sha256": "187d95073226a8ad5c7a72da3365304b91f579c8e3dc2c424b977e5f673906d7"
+        }
+      ],
+      "total": 745,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumeskeleton.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumeslotdef",
+      "member": "Bin/Costumeslotdef.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Bridgeofficer",
+          "json_sha256": "0fd7c3bd41d0633ec3e4a4a3aed037d4bf3dd7a6f9ee9d1ce5a92c4a138f99c7",
+          "xml_sha256": "bef8435aa2820f200ea5b1bb35b6763e5e718a87baffdf905a58cf9854fc0c39"
+        },
+        {
+          "ordinal": 2,
+          "key": "Klingoncaptain",
+          "json_sha256": "abe0f429a5fa0d39aabcbc2963d3127cdd72ea346c05cb3d1b234f738c9f1f50",
+          "xml_sha256": "80618c36bc354f0349ea1e17fcd9292f064333482ef870ab6e99e438de75fc4e"
+        },
+        {
+          "ordinal": 3,
+          "key": "Starship",
+          "json_sha256": "d0ab5a3f54d66eb6df959196b2789b38e7ebe2068471934b06382a0bc2f7abe4",
+          "xml_sha256": "e5c018a911dbfb62a77da7289e83d3988bd0b1b0017b04323503d8c98cc4c3d0"
+        }
+      ],
+      "total": 4,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumeslotdef.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumeslottype",
+      "member": "Bin/Costumeslottype.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Antiundine",
+          "json_sha256": "dd56d4266cade6bde05858e4e1c8eae99fadaa433664b11a1df53afbdcf8163a",
+          "xml_sha256": "a5ca4c1138441ccaca5c147e25f9781c82a2c6eac6e98fcdfe928dfb1c7324de"
+        },
+        {
+          "ordinal": 20,
+          "key": "Jemhadarev",
+          "json_sha256": "06b3288c339e101083c6ba4c31fbd38eef269d2f0cf74d440704817f11e4b973",
+          "xml_sha256": "dfee6333fb6c9bc0b2a7d9421e3a2730aeba8535f0715c2675235e4f3821c41b"
+        },
+        {
+          "ordinal": 39,
+          "key": "X3reputationarmor",
+          "json_sha256": "c0e1896f6c96557c304eaefb9ecf8572a8174b4eaca8b6f0637d4c5f188ff0d9",
+          "xml_sha256": "2ef726a12d7b577b21be442171cfacb40d3701807f368df1d24c5840cd6e41c6"
+        }
+      ],
+      "total": 40,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumeslottype.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Costumetexture",
+      "member": "Bin/Costumetexture.Bin",
+      "samples": [],
+      "total": 0,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Costumetexture.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Dynbouncer",
+      "member": "Bin/Dynbouncer.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "edd0b027a7da4c542f3e6a5de7891abc03eca16df871ddd909bbcd5227c66471",
+          "xml_sha256": "5b4f050b19c488f759d17c1be609058f1cb679b81d69d20f269623f8eb9b778a"
+        },
+        {
+          "ordinal": 10,
+          "key": null,
+          "json_sha256": "528627abfe2e014091d5da19ad095d6384a42e64b14546b9ee2ec06a2350498f",
+          "xml_sha256": "caba4d6fcaa10f1cd4771fb83f7b03ae0ff9fb0e0fd46c1834a2c41dee3ee4f8"
+        },
+        {
+          "ordinal": 20,
+          "key": null,
+          "json_sha256": "839ef557aa78656add350ae030398054e63efaa3a41d65622dbc276d85bc9bc0",
+          "xml_sha256": "88daf837f16593077c37cc464b0656fd3498e39b8c219544535a9a8e52221c02"
+        }
+      ],
+      "total": 21,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Dynbouncer.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Dyngroundregdata",
+      "member": "Bin/Dyngroundregdata.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Nw_Horse",
+          "json_sha256": "60d0b6fc42d60d98072099a7ceb942ffdbc95e0a1c5141e7bc1b892b992f78cb",
+          "xml_sha256": "7e3af5fa0a707da00db85605a21e883391f9c6f3600e9f6f40c4f4677f8ea2e3"
+        },
+        {
+          "ordinal": 2,
+          "key": "Sto_Female",
+          "json_sha256": "9191259f20df74c8220ea43689f5ff0fa2c05e66dc39652c9ae34c6f11fdd6cb",
+          "xml_sha256": "05cb2fdb7fa6aac6432b2ac3641b980701d9afbc69e8a198e2f59029db4a7fa4"
+        },
+        {
+          "ordinal": 3,
+          "key": "Sto_Male",
+          "json_sha256": "bb5d03ded01e21127598b74d6606132e8dc69b1c223d7afe69c9989c462d6891",
+          "xml_sha256": "a848e4f5b2ee23160feb98eadd4ea7df05551b525d0a09ced94658a77f830fd1"
+        }
+      ],
+      "total": 4,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Dyngroundregdata.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Dynragdolldata",
+      "member": "Bin/Dynragdolldata.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Core_Rag_Female",
+          "json_sha256": "98488cb8142cf809899e78a86f3ab1bc3e844dfd31562f16aaa951e77b61d43a",
+          "xml_sha256": "bc265a01444ef4213cb40e258dfd8dbc0d9349a15a620ad113160081af73c94c"
+        },
+        {
+          "ordinal": 3,
+          "key": "Coredefaulthd",
+          "json_sha256": "105e9ce38314451e80c0f2ac665a5b45216c77f094562bc5b8f45e401b1be888",
+          "xml_sha256": "4ce0f9d4f4925041276f03f9ee2b981cf80eb7ae6d914863b78a18b49964467d"
+        },
+        {
+          "ordinal": 5,
+          "key": "Sto_Fish",
+          "json_sha256": "fb10d47e8a78f2134108110763ce3c7fb637e5745e20fab0aa2fa48d283c1912",
+          "xml_sha256": "da8151490cc3cc824dee42509c0c098a6161522b0247bb041f55d69fb8006739"
+        }
+      ],
+      "total": 6,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Dynragdolldata.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Interioroptionchoices",
+      "member": "Bin/Interioroptionchoices.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Layoutandorian",
+          "json_sha256": "a3b185dd3ffb34776df922c98fe74140820aad88c2636d257656456a7542509e",
+          "xml_sha256": "665abfe409deb4280912ff998ae6c4cc0e08ed991839bfcdcc40b84ff4c365da"
+        },
+        {
+          "ordinal": 68,
+          "key": "Trophyfloor_Fluidicfleetaction_01",
+          "json_sha256": "f50e5b9d48dd308c8cabe9ffbf7c9eb28444ca6e13250dc5891283582d70b8ff",
+          "xml_sha256": "e31655e6e6d3b46fd29f2bd3c6a49c84c2fbb4c89b2f8116134faf5d8830ad6c"
+        },
+        {
+          "ordinal": 136,
+          "key": "Trophywall_Ship_Kr4",
+          "json_sha256": "7e7dc0f13372ceb11c8fb25763d4f607f027a0f04bed25e588245ba22d5e888f",
+          "xml_sha256": "ccaf48ef88e992152f15c468c0157809d5fb8bc2cdb3b1875e7ede574e78aa0e"
+        }
+      ],
+      "total": 137,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Interioroptionchoices.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Interioroptions",
+      "member": "Bin/Interioroptions.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Andorian_Shipinteriorlayout",
+          "json_sha256": "684b856fcf7db513f4664a3e2a1cbb221f42d105eadeeaff5a889ceb5f3c07be",
+          "xml_sha256": "ad433233c1aa457d8352ac1b635d6829b26e4efcb94e53db24f345539b6b2e43"
+        },
+        {
+          "ordinal": 32,
+          "key": "Nakuhl_Shipinteriorlayout",
+          "json_sha256": "ff5fd691020e7194ea4b35288ce05982295cd2cb0c4781dbdcfba5557c1ba0ba",
+          "xml_sha256": "f70d3e3f11a2ad23c0f400266a9a4831f5888f58a07e8688be8cc5d7e34dd3d2"
+        },
+        {
+          "ordinal": 64,
+          "key": "Xindireptilian_Shipinteriorlayout",
+          "json_sha256": "4125a713589bd5c6fced0509bff8d310bf762b24198cbd061e444a226918b811",
+          "xml_sha256": "67d4e8dd9d0fc8554da017b9e59d837de90d5ddc655540198b9cbf2bf6e0bce7"
+        }
+      ],
+      "total": 65,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Interioroptions.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Interiors",
+      "member": "Bin/Interiors.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Fed_Andorian_01_Bridge",
+          "json_sha256": "6e81f48ebaf238bffa2d27bff8881fe636c1bbb653d572257ff1fdd49cd4ce5b",
+          "xml_sha256": "f22ca3e5b9ff5b4610c32e56ad42a6a7ddc72c59e7430f5d8237cbc35437f802"
+        },
+        {
+          "ordinal": 74,
+          "key": "Klg_Bortas_01_Bridge",
+          "json_sha256": "9e26a412f26e10182a4d4c7d7d54aa4b572d1419346549d0ba1bd4b22ba34bbc",
+          "xml_sha256": "509dc22189cab7923924a64729df00e285e031f951f844eeaa395b4843ca6389"
+        },
+        {
+          "ordinal": 147,
+          "key": "Shared_Xindi_Reptilian_01_Bridge",
+          "json_sha256": "d1f8b57e39dc1c97db831d8b5b11f9668f6e02fe03a9fc073502caea665a8145",
+          "xml_sha256": "1acf10e19f4add063508b0769afde4056861c60ef0add8a40fe3a1227fb7bbb2"
+        }
+      ],
+      "total": 148,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Interiors.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Invbagslottables",
+      "member": "Bin/Invbagslottables.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Addactivedoffslotground",
+          "json_sha256": "7718c2ee65ecddc41dd72ad1a68d5efc818af86efa929b1df717d0d21891fcd7",
+          "xml_sha256": "e54fe75e7f4ce948bbf507e34c97e451213d364b13901b30e92737da1052ab37"
+        },
+        {
+          "ordinal": 3,
+          "key": "BankSize",
+          "json_sha256": "8689d93f2e282adbb3c374dc38fa9ae2f95ade6c1c19888663ba2094d4ef7002",
+          "xml_sha256": "32923928ef5dea916c1ff2370a5d26f17a7e9d5c88e7dcdaadc5695ccbd8afdc"
+        },
+        {
+          "ordinal": 5,
+          "key": "KitModuleSize",
+          "json_sha256": "9fefb6a5430ff0cfa42b08327112400a38c6f03ee61ca8ba1ea147891f11acdd",
+          "xml_sha256": "1230c1bf27ba2053b11870644c2e78811acc775a7d01a6100e9396cd09b69721"
+        }
+      ],
+      "total": 6,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Invbagslottables.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemassignmentcategories",
+      "member": "Bin/Itemassignmentcategories.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Standard",
+          "json_sha256": "0b4866b3cc316e58fdf19a6413e3dc44df9c873c131159fbae3f9cb738a9e34d",
+          "xml_sha256": "80e37d439aea089d91a0df90f88310a475ab9e269ff8de67c140118e5ffa5203"
+        },
+        {
+          "ordinal": 13,
+          "key": "Beamscrafting",
+          "json_sha256": "5dee9c334304708d28f9b38aeea8257fa6473d03825c5ef144469bc2e51f2c9d",
+          "xml_sha256": "34d75f2e741b37c919595d1578af4de600cd10d82f6ed8714326110bf206e641"
+        },
+        {
+          "ordinal": 26,
+          "key": "Admiraltyferengi",
+          "json_sha256": "a5ee10ac2084786652536c8f79f3bc69788a90753bcb55de87a8196744b49280",
+          "xml_sha256": "074cbe4a1a0bc9fb388231d20b52c49a7431a00a40225642c21cb033cc19ff8b"
+        }
+      ],
+      "total": 27,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemassignmentcategories.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemassignmentmodifiertypes",
+      "member": "Bin/Itemassignmentmodifiertypes.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Critical",
+          "json_sha256": "8172eddf05edafdc4d830e22fc4ec41e7bcd1ef616c3ed7a4db73e95686243a3",
+          "xml_sha256": "3e9c2e48009eebe8430d0c05818520bd0b93bfed1536066b38ed7ba6e94fde49"
+        },
+        {
+          "ordinal": 8,
+          "key": "CraftingCommon",
+          "json_sha256": "9f79be32980fc885775d7343533cb27703e3ec8f4ee81100e196eeb150e5f1a6",
+          "xml_sha256": "5c796312100e8a6900d57e93e88a6b40477aec8bbe9e2df6bb52b4fcbaaf7b69"
+        },
+        {
+          "ordinal": 15,
+          "key": "CraftingCatalyst50",
+          "json_sha256": "10a411e54e0878e873b85c3ff788332daa10d9ae98b7bf4bb9010c48c85f5344",
+          "xml_sha256": "1e79e242030f011ec5982466347edd4c422c7aa01467cfe912a8d6b56c4d411a"
+        }
+      ],
+      "total": 16,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemassignmentmodifiertypes.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemassignmentraritycounts",
+      "member": "Bin/Itemassignmentraritycounts.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Availability_Personal_All_Common",
+          "json_sha256": "d4eb79e9f928690db53b89568e3f7098ec945ee96f46ce05d09026827a3612dc",
+          "xml_sha256": "de1878745bbd35c54184b241d8086370697660e817a32fb24043f1a1d00379ac"
+        },
+        {
+          "ordinal": 57,
+          "key": "Availability_Shipboard_Military_Common",
+          "json_sha256": "0d5a7f2aad80122d493e4762d64adc3db3ac560b53c02076b0c1d4fd9682268f",
+          "xml_sha256": "91538993eacbbbf3fe8f28e6d32ec6e023be4dfe40429c7ad10dc507111d9344"
+        },
+        {
+          "ordinal": 113,
+          "key": "Availability_Admiralty_April_Fools_Starship_Dating",
+          "json_sha256": "c61b01bf2aa113632a98806f9b61c6abc282bea136b05bff348b2e57f6d1ecb7",
+          "xml_sha256": "953336951a16863c33f6d2e0abb9dc26c70e7ec312260e146f301edb818c15fe"
+        }
+      ],
+      "total": 114,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemassignmentraritycounts.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemassignmentweights",
+      "member": "Bin/Itemassignmentweights.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Quality_Zero",
+          "json_sha256": "43befd070c0077e2436793798744687107999c5305b766770c9ebcffbaa1eb02",
+          "xml_sha256": "3a6580040e1c3d3fc95bd4588f28de16b6f88a8b518caba0eb8bb37a1ae7e87f"
+        },
+        {
+          "ordinal": 255,
+          "key": "Availability_Personal_Development_Veryrare",
+          "json_sha256": "aca935562f3ab138f55f3d309185c0c716fc5e4de97f79f81892643e0f5487bb",
+          "xml_sha256": "76335bef127bc70800c5a75c470d242b869260a9299cc27553fc1f9746f9ab1c"
+        },
+        {
+          "ordinal": 510,
+          "key": "Availability_Admiralty_April_Fools_Starship_Dating_Tourofduty_Epic",
+          "json_sha256": "a95b0171e0eabf3f686e0dcbc6c9ddf3313413810e6d7cfee5744f0d876ac837",
+          "xml_sha256": "ff2c341840bde72820d82961c4e8a3d90e2b853605dbf783056efd4683279e17"
+        }
+      ],
+      "total": 511,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemassignmentweights.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemcategories",
+      "member": "Bin/Itemcategories.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Tribble",
+          "json_sha256": "28f63df29e16bf58791f1de6ecbdc5d2461634b5b2d41a28dcb3d00b3422050e",
+          "xml_sha256": "dd6d8b316588a0429ff09e15fa96b71f69b86ab05b8b44dfbb613697384ad558"
+        },
+        {
+          "ordinal": 366,
+          "key": "Space_Set_Mycelial_Core",
+          "json_sha256": "4f4723e4c4b5208f78f4fbdd1fef23b73dee009b3c4351a6bd61018297c99d26",
+          "xml_sha256": "31bc39cfb24b235a4dc966cdb6e9f3f2698d57658dee855cf1f1371a303754fe"
+        },
+        {
+          "ordinal": 732,
+          "key": "Itemset_Tholian_Shocktroop_Cannon",
+          "json_sha256": "dce348a951c6e4af8d159d1259789fe32aca4a15bd648b9917756e9d0ffb7b21",
+          "xml_sha256": "d06a69a21241d9d19174e9e90fd79c107183e760cc0b97c333086045b8683443"
+        }
+      ],
+      "total": 733,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemcategories.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Itemequiplimitcategories",
+      "member": "Bin/Itemequiplimitcategories.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Groundwep_Antiproton_Autocarbine_Neu_Infiltrator",
+          "json_sha256": "77a45f462623a7c1259007fa4030c62610ab9c1a5f407844ffc39d5bbe7cd980",
+          "xml_sha256": "327249a4b0f864b21ffb539631487cae851e7f119c747c11125858b8036ef4ff"
+        },
+        {
+          "ordinal": 196,
+          "key": "Spacewep_Plasma_Turret_Xindi_Set",
+          "json_sha256": "d91eb27d87145690bc1c791db6e8391fbe1e7115c0b03cc7a976d8700460741f",
+          "xml_sha256": "96ba5517cb5f328a77bca215307907cb47fe478bfa835da0a2490cae9085d22b"
+        },
+        {
+          "ordinal": 391,
+          "key": "Stationmod_Universal_Nx_Grappler",
+          "json_sha256": "d7407b8db4a2a767bbc15eaa1fb72968560cd485b9eaed5d0580901c8393f4ac",
+          "xml_sha256": "d70371641a3feb00312c99934150c107b2484fe16dc68a23e5df5bf02b14d1b5"
+        }
+      ],
+      "total": 392,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Itemequiplimitcategories.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "MapSnapHeader",
+      "member": "Bin/Geobin/Maps/Klingon_Play/Klg_Qonos_Ground_02/Klg_Qonos_Ground_02.Zone/Map_Snap.Hogg!Mapsnapheader.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "dab77d7626af98269d54be5d99ad8df1889481dfe106a021fbcf27906a2dad86",
+          "xml_sha256": "e9e83a2aba0e0df0d9ac49e66990247a1f6e00625df34f1a93630e9e03f8024a"
+        }
+      ],
+      "total": 1,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Geobin/Maps/Klingon_Play/Klg_Qonos_Ground_02/Klg_Qonos_Ground_02.Zone/Map_Snap.Hogg!Mapsnapheader.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192",
+        "nested": [
+          {
+            "member": "Bin/Geobin/Maps/Klingon_Play/Klg_Qonos_Ground_02/Klg_Qonos_Ground_02.Zone/Map_Snap.Hogg",
+            "sha256": "95e857b11e38dd916efbc22e973281a0e70cee4ed192524e908ec8085ca82ef0",
+            "bytes": 1059328
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Materials",
+      "member": "Bin/Materials.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "ef25e86dfabdb2c38cf1490af8359936cfb64eb5c1f8d3ca28fb27803daf9ab0",
+          "xml_sha256": null
+        }
+      ],
+      "total": 1,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Materials.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "fields": {
+        "Shadertemplate": 666,
+        "Data_Infos_Serialize": 22448
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Modelheaders",
+      "member": "Bin/Modelheaders.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "_2121",
+          "json_sha256": "86f6f192c3a7162bc9340d4b6c0c76b1a79ce10068c75c3abac329a2b074f0f4",
+          "xml_sha256": "20494b6662079d8f7588509b71029cc03e6d6e4bb4a6b174172562de8b144ffb"
+        },
+        {
+          "ordinal": 57400,
+          "key": "Geo_Ship_Fed_Fb2_Nacelleraa_Type1.Geo_Ship_Fed_Fb2_Stanchionl_Type2_Hidden",
+          "json_sha256": "074916181d01c563b42980d7a66a89199eab1175f819195761940cc12bd39972",
+          "xml_sha256": "23aa84a08839d2be681189496ee0fa4443ef41512d771a1891b7f1889d7d8c03"
+        },
+        {
+          "ordinal": 114800,
+          "key": "Xxxx",
+          "json_sha256": "08d0009545f048e01bcb6734cc796d99f4cf193f5cce9f56103091a24bcc82c5",
+          "xml_sha256": "06b054d07a2e2a5b21861430d97727f59e57a6418ff15eec39c606507739dccc"
+        }
+      ],
+      "total": 114801,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Modelheaders.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Playercostume",
+      "member": "Bin/Playercostume.Bin",
+      "samples": [],
+      "total": 0,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Playercostume.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Powerstats",
+      "member": "Bin/Powerstats.Bin",
+      "samples": [],
+      "total": 0,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Powerstats.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Regionrules",
+      "member": "Bin/Regionrules.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "a2344fc84661f882d635f9cea6e0593556cd99dedbd359fad65736fd812d8494",
+          "xml_sha256": "8f89a0225d64be62f1d520736da50cb0efafcd7b08ef789658d88b0ea6f3f630"
+        },
+        {
+          "ordinal": 1,
+          "key": null,
+          "json_sha256": "338aaddf5a9f97af216820a621c6e2200bf41b2df6c2ecdb4455934f71c6eccd",
+          "xml_sha256": "6aa1a19681b46fc454338d6c8f0f873e10ac947f5cdd84ba1a4c716f420a3d30"
+        },
+        {
+          "ordinal": 2,
+          "key": null,
+          "json_sha256": "5d555e955b5f9cbead7750a3f088fbe0ca20a3bdfb9c156d3d2b1069e4928ccc",
+          "xml_sha256": "f0e0c31ab00e590c45d4ee645c398d266360cdecd0dc80f4c2c867d010653f8e"
+        }
+      ],
+      "total": 3,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Regionrules.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Rewardvaltable",
+      "member": "Bin/Rewardvaltable.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Dxp_Mission",
+          "json_sha256": "8d2dbf4df69116cf3952b89d2549c05b6964eeabe3a20551311ac432c06722ee",
+          "xml_sha256": "0f8ed986ef5dc745d2ef86d7558b16e4e1978eaf720a801021cdb2502fd80335"
+        },
+        {
+          "ordinal": 43,
+          "key": "Sp_Battleship_Tough",
+          "json_sha256": "43ac43656c31e63939098254d21ded0cd2f5d1a44231dac0997357f3a7ec4faf",
+          "xml_sha256": "037c086700609dde28c6da63ca36129cfce3c3abecd626703798789c8424457d"
+        },
+        {
+          "ordinal": 86,
+          "key": "Xp_Required_Ship_Progression_T5u",
+          "json_sha256": "77f8de0f63fbe15786b486102b47019ce07bb75e9867fcf180fa0f1d78d90dd1",
+          "xml_sha256": "8cdd7a3a51b59b48b2111d2e8e833f96fcb09ce7c8fc95e29ecbb943a49234a6"
+        }
+      ],
+      "total": 87,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Rewardvaltable.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Scaleinfos",
+      "member": "Bin/Scaleinfos.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "aa154e8a70937b57b7d357ec5d5811eb14e6e68262c7929aaee6df7c95372afb",
+          "xml_sha256": "00c894c5889ce6ef1c945c1fb676bbfd435300a93d15997dfe1a6f19381cfbe3"
+        },
+        {
+          "ordinal": 328,
+          "key": null,
+          "json_sha256": "ee8e781de39d9003fb15db7386e725da8f6808e82ba3db10f7ad8bfc0946abe0",
+          "xml_sha256": "b96a5e39cb6793023276abd6c753c9c4851a95077c7427764f9da777c53f4047"
+        },
+        {
+          "ordinal": 656,
+          "key": null,
+          "json_sha256": "85fe467f8877a8410152b0ef59685f0ff4626a46fe79a25eee8e667ed3fd315e",
+          "xml_sha256": "5eb735ac4dea331e6d1af56dc10cafcffedc3710d702e171f7a14e9d200d70bf"
+        }
+      ],
+      "total": 657,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Scaleinfos.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Skelinfos",
+      "member": "Bin/Skelinfos.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Angler_Fish",
+          "json_sha256": "cc0b29c0d1d0a8c2fae848d1465ae08abf4ad50702b01161c1d111d42977983f",
+          "xml_sha256": "f5544453d9e8ad29f6f4788728b6a62915c1a833701ae7b085623f28f4276345"
+        },
+        {
+          "ordinal": 368,
+          "key": "Ship_Fs31d_Skeleton",
+          "json_sha256": "0c1e2af501acc2ffa353af4910c9702a76ae2072bd35985fc4dee66ffef857c0",
+          "xml_sha256": "87176e35fa79fb3668c3ab62e7ed7ab90d5b8ad41ecdaf8b9c8869ac66b41b8c"
+        },
+        {
+          "ordinal": 735,
+          "key": "Walker",
+          "json_sha256": "86e64af33f0d688c2b4771ad2bb37f69699cf75d693a63fe072ca4f3d62d3d50",
+          "xml_sha256": "138cf6455b92a3983ed3664b15bead23f0ce64ea2d1ced1579521a56ceb59170"
+        }
+      ],
+      "total": 736,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Skelinfos.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Species",
+      "member": "Bin/Species.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Boff_Common_Romulan_Female",
+          "json_sha256": "74ea057e05a0b758e69ac11feeda8f7d6a7abe13cae66d2c410cdd61fca61ba8",
+          "xml_sha256": "80fd9832fabe3459526ba721e2a156f9c2d61a9e5eb175d1db17d68fb656e187"
+        },
+        {
+          "ordinal": 444,
+          "key": "Ship_Fa20_Skeleton",
+          "json_sha256": "ff5ed0984274e27c7dcac2ec9b162ccc7e615175a01f2fb6277b886b08441481",
+          "xml_sha256": "129657acbf41df58b71c433ce40b2957ac06912b8d34e961591496090ce11da0"
+        },
+        {
+          "ordinal": 888,
+          "key": "Tos_Sf_Vulcan_Male",
+          "json_sha256": "d59c181c29b4f771ebf9d8ea0aa880dc6c0473b88b40f9b2540fbef576b788d2",
+          "xml_sha256": "d45251b84b266a40b471304be26026409ccd4176757b02bab94b1c34a3564820"
+        }
+      ],
+      "total": 889,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Species.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Speciesfeature",
+      "member": "Bin/Speciesfeature.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Defaultfemalespecies",
+          "json_sha256": "383cddca437d82d5a7085a4d4f521da2d55fb3060f778b2b5978e310832145a1",
+          "xml_sha256": "cc89c1483ba6219c42ec178c1233925acfe21285e6e4073683c063ca124c0fce"
+        },
+        {
+          "ordinal": 63,
+          "key": "Speciesfeaturemaleaenar",
+          "json_sha256": "3a57d71c4f08de59f5b00413746c5e553e56a4ef5f12c3c616025d0fecca8246",
+          "xml_sha256": "6afffd699a66cf351d9ebe1d83ab3145f54aecf3b2725f339f778a8391b39fa9"
+        },
+        {
+          "ordinal": 125,
+          "key": "Speciesfeaturemaleverytallheight",
+          "json_sha256": "e0da7a4a2292aa1e22f4bb6ea2c4365a41b280c81e71cbc4e216ab7e640015a6",
+          "xml_sha256": "cbf60f8a01af0ab5ef4c2a5fc14f1af9f81091ab82545e6bb501a1066a40d05e"
+        }
+      ],
+      "total": 126,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Speciesfeature.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Speciesgendata",
+      "member": "Bin/Speciesgendata.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Basic",
+          "json_sha256": "36acdc3bce9a1aab14de39e2210b92c92d734f7986a939de9694fc82e4c148a1",
+          "xml_sha256": "6507366b3cfb39ac39ee85240539d1231fd8d079fa79fb834701c70dd3dfd965"
+        },
+        {
+          "ordinal": 1,
+          "key": "Basicwithscales",
+          "json_sha256": "c1262dc9aab304d74408c0275b1174537dd904f6194723d15705e776ec57ee69",
+          "xml_sha256": "ab222ea4bce11174fc4d75766f1ed600af7c179d8b8873af6bc51b57e330dfd0"
+        }
+      ],
+      "total": 2,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Speciesgendata.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Texopts",
+      "member": "Bin/Texopts.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "7616e8c3f4a04b69b52413bbc8ac703d2988ef65b9fd78dc7a86bc2f3ed71fbd",
+          "xml_sha256": "6f81b20c0f744a9b36f04da92cab61addb02da966762a32e47d9bd1ba25684bb"
+        }
+      ],
+      "total": 1,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Texopts.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Uifonts",
+      "member": "Bin/Uifonts.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Aidebug_List",
+          "json_sha256": "99251eba8bd5156b715d5460686ea247f4d197adb3132dc21cf1cfd0c83d0c63",
+          "xml_sha256": "f9cfaccae76e0e3949e85031883cc60a026ba241e1fcfba64a701a1ba6f8e94f"
+        },
+        {
+          "ordinal": 128,
+          "key": "Game_ItemPower",
+          "json_sha256": "426c13a74525342dad5b8c9c3113e6ea08b5a6222fa5cda17156b242732a70fa",
+          "xml_sha256": "deb166484fa89b9d8e4c10a8acb8f747401543082cef34c6f0f5eef1cb8e213c"
+        },
+        {
+          "ordinal": 256,
+          "key": "WorldEditor_UniqueName",
+          "json_sha256": "81b4ea8618e8088dc44152c2264897abd8e3e921765c5e89cd58cbae59badd69",
+          "xml_sha256": "f56fb10c34f9dfd48bd937c647388e4ebcb73966418a2e3d54edefcc1d1222e7"
+        }
+      ],
+      "total": 257,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Uifonts.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Uitextureassembly",
+      "member": "Bin/Uitextureassembly.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Accolade_Frame",
+          "json_sha256": "a57951ebed6d64ccac894f6e6804ec0412303f27178636a8b76a6cca0a9a5091",
+          "xml_sha256": "6d7f157364d2aef3845fb0e42d1435475eece11ea5a36ecae34ac73f9934c0aa"
+        },
+        {
+          "ordinal": 5475,
+          "key": "Ship_Health_Dreadnought_Scimitar_Sci_Quarter_Empty",
+          "json_sha256": "c4999952c4acdb1f5659ad8e756edebf202849a375c574100a183a8c5dea78b8",
+          "xml_sha256": "bf8f34048628faf0746ecc09d168d38b35adbdd128a031920ca66fd0b3a2a37a"
+        },
+        {
+          "ordinal": 10950,
+          "key": "ZoneControl_Notch",
+          "json_sha256": "4601a10b709623805d1e3afe939a0ed3d86062f238777920298bba877903bd17",
+          "xml_sha256": "9bc4f1477cf011c65009e6f7f05fbfdba88a87a1ff7b9a8f2f80300397454380"
+        }
+      ],
+      "total": 10951,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Uitextureassembly.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Waveformmodulation",
+      "member": "Bin/Waveformmodulation.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "json_sha256": "f38e2fa7451981e008131caf3e33eeb39150909da74e088b6c010492e7f43e6f",
+          "xml_sha256": "31dbe2f6153a577538127da37166d0431eeaa939693568d15ca146cd0ca74e51"
+        },
+        {
+          "ordinal": 7,
+          "key": null,
+          "json_sha256": "3ff8d66b8092c937af52d1f216cce09a12bac8a434ec9352cdda428129416e94",
+          "xml_sha256": "543dce868bdec6de7821ca4509b5458d5005b2229c5f4859202d996fcadb7bc5"
+        },
+        {
+          "ordinal": 14,
+          "key": null,
+          "json_sha256": "3e386ced2f9f6d9123dfe06a474493260161d926e3b5bd99d81de649df15afe4",
+          "xml_sha256": "082318557b8383ba3a5dc402e48bc2069d66628dcaf314e2765647776dee4106"
+        }
+      ],
+      "total": 15,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Waveformmodulation.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    },
+    {
+      "resource": "Zonemaps_Client",
+      "member": "Bin/Zonemaps_Client.Bin",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Aetherian_Development_01",
+          "json_sha256": "8f9ed28c05ca6b505ded74f4279691bfeef6067ec9b3d66457915664ae9a5c5f",
+          "xml_sha256": "c386951598b0760267ec6d6596ed95b66c5f4f873479571aa239e4be9ce52fa9"
+        },
+        {
+          "ordinal": 923,
+          "key": "Kfr_Pjem_System",
+          "json_sha256": "5e2170d04ad5f4473052fda7999bac38b531b098d3c5823b9f9c7c499440767a",
+          "xml_sha256": "2d1f07ceedf6cabbe4223c7978e181bc3dc358912e83838015f93c9199967dee"
+        },
+        {
+          "ordinal": 1845,
+          "key": "Zfightingshadowtest",
+          "json_sha256": "e2f42803bca8eff5f7bfab59d44ce5e7c4b27be2e87ab30362b3fa758b2d7565",
+          "xml_sha256": "ccd80e8aefd2671b9298134b05c74d45118c2c0ccff0a4db735b781184fa0d1f"
+        }
+      ],
+      "total": 1846,
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639275895615985639",
+        "member": "Bin/Zonemaps_Client.Bin",
+        "cached": false,
+        "decoder": "C:\\Users\\ryan.STARBUG\\AppData\\Local\\Temp\\hogg-completion\\expanded-decoder\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "4234a43d3093a0f20f0bc12fb14f0d2b9fcc2994a5d2994f03927f5f4bc14192"
+      },
+      "status": "passed"
+    }
+  ],
+  "status": "passed"
+}
