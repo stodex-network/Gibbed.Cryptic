@@ -3,7 +3,7 @@
   "utc": "2026-10-14T22:27:15.341002+00:00",
   "build": "ST.372.20260910a.24",
   "helper_sha256": "df28dd49c6adf6f92d65cee1e178a8f562235fa133ad1aa15c4e3909b8edcf3e",
-  "mappings_sha256": "1fd9b7f213aed21c207e314bf6889340ac7bbe90073154ff383af0b06cc8dc3e",
+  "mappings_sha256": "5dd6f080d465461df9d2166b1433159a88bf45053f93bea3edb8ba7351bb8d3f",
   "controls": [
     {
       "resource": "Blendinfos",
@@ -1556,5 +1556,6 @@
       "status": "passed"
     }
   ],
-  "status": "passed"
+  "status": "passed",
+  "mapping_normalization": "JSON values unchanged; source and receipt normalized to LF."
 }
