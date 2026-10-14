@@ -569,6 +569,17 @@
     ]
   },
   {
+    "name": "Texwords",
+    "mode": "object",
+    "targets": [
+      {
+        "parse_hash": 2808015135,
+        "class": "Gibbed.StarTrekOnline.Serialization.TexWordList",
+        "versions": []
+      }
+    ]
+  },
+  {
     "name": "Uifonts",
     "mode": "single",
     "targets": [

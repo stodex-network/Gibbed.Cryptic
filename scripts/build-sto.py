@@ -33,6 +33,7 @@ def main():
     parser.add_argument('--mappings', required=True, type=Path,
                         help='JSON resource mapping list; hashes must match the supplied BINs')
     parser.add_argument('--output', type=Path, default=ROOT / 'bin-net10')
+    parser.add_argument('--repair-texword-size', action='store_true', help='Generate the known fixed Size enum as raw int32 in an isolated schema copy')
     args = parser.parse_args()
     for value in (args.build, args.schema_id):
         if not re.fullmatch(r'[A-Za-z0-9_.-]+', value):
@@ -57,6 +58,24 @@ def main():
         logs = stage / 'logs'
         logs.mkdir()
         commands = []
+        generation_schemas = schemas
+        repairs = []
+        if args.repair_texword_size:
+            import xml.etree.ElementTree as ET
+            generation_schemas = stage / 'schema-input'
+            shutil.copytree(schemas, generation_schemas)
+            path = generation_schemas / 'parses/Texword.parse.xml'
+            tree = ET.parse(path)
+            column = tree.find('./table/column[@name="Size"]')
+            enum = column.find('static_define_list') if column is not None else None
+            if column is None or column.get('type') != 'INTFIXEDARRAY' or column.findtext('num_elements') != '2' or enum is None or enum.get('external') != 'TexWordSizeOptions':
+                raise ValueError('Texword.Size does not match the retained repair premise')
+            before = sha(path)
+            column.remove(enum)
+            tree.write(path, encoding='utf-8', xml_declaration=True)
+            repairs.append({'path':'parses/Texword.parse.xml','before_sha256':before,'after_sha256':sha(path),
+                            'change':'Size fixed enum represented as raw int32[2]; original source unchanged'})
+
         for project in ('FileFormats', 'ConvertResource', 'GenerateSerializer', 'ExportSchemas', 'Unpack'):
             command = ['dotnet', 'build', str(ROOT / 'projects' / f'Gibbed.Cryptic.{project}' /
                        f'Gibbed.Cryptic.{project}.csproj'), '-c', 'Release',
@@ -68,7 +87,7 @@ def main():
         assemblies = stage / 'serializers/assemblies'
         assemblies.mkdir(parents=True)
         command = ['dotnet', str(stage / 'Gibbed.Cryptic.GenerateSerializer.dll'), '--game=StarTrekOnline',
-                   '--path=' + str(schemas), '--version=' + args.build + '/' + args.schema_id, filename]
+                   '--path=' + str(generation_schemas), '--version=' + args.build + '/' + args.schema_id, filename]
         commands.append(command)
         with (logs / 'generate.log').open('w') as log:
             subprocess.run(command, cwd=assemblies, stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -85,13 +104,13 @@ def main():
                 raise ValueError('Unsafe resource name: ' + name)
             (resources / (name + '.serializer.json')).write_text(json.dumps(mapping, indent=2) + '\n')
         outputs = {p.relative_to(stage).as_posix(): sha(p) for p in sorted(stage.rglob('*'))
-                   if p.is_file() and 'logs' not in p.relative_to(stage).parts}
+                   if p.is_file() and not {'logs','schema-input'} & set(p.relative_to(stage).parts)}
         manifest = {'build': args.build, 'schema_id': args.schema_id, 'source_commit': git('rev-parse', 'HEAD'),
                     'source_remote': git('remote', 'get-url', 'origin'),
                     'submodules': git('submodule', 'status', '--recursive'), 'schema_dir': str(schemas),
                     'schema_files': inputs, 'schema_fingerprint': hashlib.sha256(
                         json.dumps(inputs, sort_keys=True).encode()).hexdigest(),
-                    'mapping_source': str(args.mappings.resolve()), 'mapping_source_sha256': sha(args.mappings),
+                    'schema_repairs': repairs, 'mapping_source': str(args.mappings.resolve()), 'mapping_source_sha256': sha(args.mappings),
                     'commands': commands, 'dotnet_sdk': subprocess.check_output(['dotnet', '--version'], text=True).strip(),
                     'serializer': filename, 'outputs': outputs}
         # Old mappings use parser_hash, while this converter requires parse_hash.
@@ -105,7 +124,7 @@ def main():
                 archive.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(active), str(archive))
         (stage / 'serializers/objects').mkdir()
-        shutil.copytree(stage, bundle, dirs_exist_ok=True, ignore=shutil.ignore_patterns('logs'))
+        shutil.copytree(stage, bundle, dirs_exist_ok=True, ignore=shutil.ignore_patterns('logs', 'schema-input'))
         evidence = bundle / 'serializers/manifests' / (identity + '.' + args.schema_id)
         evidence.mkdir(parents=True, exist_ok=True)
         shutil.copytree(logs, evidence / 'logs', dirs_exist_ok=True)
