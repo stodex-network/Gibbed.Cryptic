@@ -694,6 +694,7 @@
         "versions": [],
         "key": "MapName"
       }
-    ]
+    ],
+    "is_server": true
   }
 ]
