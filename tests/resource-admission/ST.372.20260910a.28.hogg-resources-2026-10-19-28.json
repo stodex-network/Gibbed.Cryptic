@@ -1,0 +1,1835 @@
+{
+  "version": 1,
+  "utc": "2026-10-19T04:38:06.302294+00:00",
+  "build": "ST.372.20260910a.28",
+  "serializer_manifest": "bin-net10-expanded-28/serializers/manifests/STO.Serialization.ST.372.20260910a.28.expanded-resources-2026-10-17/manifest.json",
+  "release": "hogg-resources-2026-10-19-28",
+  "release_bundle": "ST.372.20260910a.28.expanded-resources-2026-10-17.25ec77d28569",
+  "helper_sha256": "73022c60bfc90881df76227e68c57f88795549d2bce514a74b72901b16ff8b31",
+  "mappings_sha256": "4a9c30eaef3189f557b92cec46887ee595401e2f7db6d2bb873937336598f30b",
+  "tool": "stodex-hogg-resource-server HttpTests mappings/packed/tables (HTTP engine, protocol 2)",
+  "packed": {
+    "Bin/Materials.Bin": {
+      "status": 200,
+      "seconds": 1.2,
+      "report": {
+        "root": "MaterialData",
+        "index_count": 22448,
+        "decoded": 22448,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": false,
+        "status_counts": {
+          "verified": 22448
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 68907,
+        "method": 0,
+        "flags": 3,
+        "field_types_decoded": [
+          "Bit",
+          "CurrentFile",
+          "F32[]",
+          "Int",
+          "Reference",
+          "String",
+          "String[]",
+          "Struct[]",
+          "U8"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Materials.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "disk"
+      }
+    },
+    "Bin/Costumematerial.Bin": {
+      "status": 200,
+      "seconds": 0.1,
+      "report": {
+        "root": "PCMaterialDef",
+        "index_count": 7401,
+        "decoded": 7401,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": false,
+        "status_counts": {
+          "verified": 7401
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 28865,
+        "method": 2,
+        "flags": 3,
+        "field_types_decoded": [
+          "Bit",
+          "CurrentFile",
+          "F32",
+          "F32[n]",
+          "Int",
+          "Reference",
+          "String",
+          "String[]",
+          "Struct embedded",
+          "Struct optional",
+          "Struct[]",
+          "U8",
+          "U8[n]"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Costumematerial.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "disk"
+      }
+    },
+    "Bin/Costumetexture.Bin": {
+      "status": 200,
+      "seconds": 0.1,
+      "report": {
+        "root": "PCTextureDef",
+        "index_count": 5645,
+        "decoded": 5645,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": false,
+        "status_counts": {
+          "verified": 5645
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 29929,
+        "method": 2,
+        "flags": 3,
+        "field_types_decoded": [
+          "Bit",
+          "CurrentFile",
+          "F32",
+          "Reference",
+          "String",
+          "Struct embedded",
+          "Struct optional",
+          "Struct[]",
+          "U8",
+          "U8[n]"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Costumetexture.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "disk"
+      }
+    },
+    "Bin/Playercostume.Bin": {
+      "status": 200,
+      "seconds": 0.3,
+      "report": {
+        "root": "PlayerCostume",
+        "index_count": 23398,
+        "decoded": 23398,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": false,
+        "status_counts": {
+          "verified": 23398
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 95471,
+        "method": 2,
+        "flags": 3,
+        "field_types_decoded": [
+          "CurrentFile",
+          "F32",
+          "F32[]",
+          "F32[n]",
+          "Int",
+          "Reference",
+          "String",
+          "String unpooled",
+          "Struct optional",
+          "Struct[]",
+          "U8",
+          "U8[n]"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Playercostume.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "disk"
+      }
+    },
+    "Bin/Dynparticle.Bin": {
+      "status": 200,
+      "seconds": 4.6,
+      "report": {
+        "root": "DynFxFastParticleInfo",
+        "index_count": 27635,
+        "decoded": 27635,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": false,
+        "status_counts": {
+          "verified": 27635
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 56379,
+        "method": 2,
+        "flags": 3,
+        "field_types_decoded": [
+          "BoolFlag",
+          "CurrentFile",
+          "F32",
+          "F32[n]",
+          "Int",
+          "String",
+          "Struct embedded"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Dynparticle.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "built"
+      }
+    },
+    "Bin/Dynfx.Bin": {
+      "status": 200,
+      "seconds": 9.2,
+      "report": {
+        "root": "DynFxInfo",
+        "index_count": 59541,
+        "decoded": 59541,
+        "checksum_failures": 0,
+        "checksum_failures_with_multival": 0,
+        "omit_defaults": true,
+        "status_counts": {
+          "verified": 59541
+        },
+        "complete": true,
+        "plain_records": 0,
+        "string_table": 156253,
+        "method": 2,
+        "flags": 3,
+        "field_types_decoded": [
+          "Bool",
+          "BoolFlag",
+          "CurrentFile",
+          "F32",
+          "F32[]",
+          "F32[n]",
+          "Int",
+          "Int[n]",
+          "LineNum",
+          "MultiVal",
+          "QuatPyr[n]",
+          "Reference",
+          "String",
+          "String unpooled",
+          "String[]",
+          "String[] unpooled",
+          "Struct embedded",
+          "Struct optional",
+          "Struct[]",
+          "Timestamp",
+          "U8"
+        ],
+        "unsupported_fields_in_schema": [],
+        "unsupported_fields_encountered": [],
+        "failures": []
+      },
+      "source": {
+        "archive": "bins.hogg",
+        "fingerprint": "6113433983:639278526104423968",
+        "member": "Bin/Dynfx.Bin",
+        "cached": false,
+        "cache": "miss",
+        "decoder": "C:\\Users\\ryan.STARBUG\\.claude\\jobs\\55cec270\\tmp\\t053\\prep-storage\\prepared\\554a82d995005fae5cd989ff90deeac56b29b505720990e1ff2dc521b7ac7633\\Gibbed.Cryptic.ConvertResource.exe",
+        "decoder_bundle_fingerprint": "8544dd464b5d7d34cf0acdb990dc06c80d7d01f26f30918ab574d6db40c67f5e",
+        "record_spool": "built"
+      }
+    }
+  },
+  "tables": {
+    "Bin/Inventorysetsclient.Bin": {
+      "records": 1013,
+      "read": 1013,
+      "missing_fields": [],
+      "seconds": 3.9
+    },
+    "Bin/Alwayspropslot.Bin": {
+      "records": 128,
+      "read": 128,
+      "missing_fields": [],
+      "seconds": 0
+    },
+    "Bin/Species.Bin": {
+      "records": 889,
+      "read": 889,
+      "missing_fields": [],
+      "seconds": 0.7
+    }
+  },
+  "mappings": {
+    "Alwayspropslot": {
+      "member": "Bin/Alwayspropslot.Bin",
+      "total": 128,
+      "parse_hash": 2918773072,
+      "class": "Gibbed.StarTrekOnline.Serialization.AlwaysPropSlotDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Cm_Command_Eng_Station",
+          "value_bytes": 392,
+          "json_sha256": "e16c5874aac580d489ce1a648fbe9edc4e8c73d3d45e629b7ff35fd6de86f21f"
+        },
+        {
+          "ordinal": 64,
+          "key": "En_Tempop_Tac_Station",
+          "value_bytes": 318,
+          "json_sha256": "1af04166a4974ea146cd6abc50e22722d4499b69cf2a0914162aa4f5a00b6c54"
+        },
+        {
+          "ordinal": 127,
+          "key": "TestDutyOfficer",
+          "value_bytes": 374,
+          "json_sha256": "e28d28351969c810eb72e3f7c98dcb3ad41895d287b48a77943eeb99a85b2a75"
+        }
+      ],
+      "errors": [],
+      "seconds": 1.1,
+      "status": "passed"
+    },
+    "Blendinfos": {
+      "member": "Bin/Blendinfos.Bin",
+      "total": 142,
+      "parse_hash": 1349788579,
+      "class": "Gibbed.StarTrekOnline.Serialization.SkelBlendInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 186,
+          "json_sha256": "2ff5e42bc843d490f393b8774313dddf8e8851478ab64dfca0baa313bea90adb"
+        },
+        {
+          "ordinal": 71,
+          "key": null,
+          "value_bytes": 618,
+          "json_sha256": "2ed539b300b743d1a1e6e588fb64d06d927aa38790123cd1bed64f6277d28055"
+        },
+        {
+          "ordinal": 141,
+          "key": null,
+          "value_bytes": 528,
+          "json_sha256": "137a7a2fe1695f5ae7a41fdfc6629d96f296d49ae3d94a0a7408da6a6ca8b435"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Characterclassclientdata": {
+      "member": "Bin/Characterclassclientdata.Bin",
+      "total": 0,
+      "parse_hash": 689293116,
+      "class": "Gibbed.StarTrekOnline.Serialization.CharacterClassClientData",
+      "samples": [],
+      "errors": [],
+      "seconds": 0.1,
+      "status": "passed"
+    },
+    "Charlodscale": {
+      "member": "Bin/Charlodscale.Bin",
+      "total": 14,
+      "parse_hash": 3691933183,
+      "class": "Gibbed.StarTrekOnline.Serialization.LodScale",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 42,
+          "json_sha256": "4d943af912b54943463fe9e1ad8a7111bbfc58b8508a57be2d18da212dc283ff"
+        },
+        {
+          "ordinal": 7,
+          "key": null,
+          "value_bytes": 34,
+          "json_sha256": "0553ffde63326e0388a20905df349b412f8edfcf0f215fbf30d98898b62a3bc6"
+        },
+        {
+          "ordinal": 13,
+          "key": null,
+          "value_bytes": 41,
+          "json_sha256": "5103102d9a706a31fd686d3ad8f4be13d3b4ba14f11c32ef721338aa736d1d78"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Clientmessagesenglish": {
+      "member": "Bin/Clientmessagesenglish.Bin",
+      "total": 178162,
+      "parse_hash": 187771444,
+      "class": "Gibbed.StarTrekOnline.Serialization.Message",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Abandonmessage_Leaver",
+          "value_bytes": 308,
+          "json_sha256": "8eb5204068924396ff0c5fb7d3e90c95b5e4cbf09873ccc47216c050c8161018"
+        },
+        {
+          "ordinal": 89081,
+          "key": "Pd.Azg1171",
+          "value_bytes": 288,
+          "json_sha256": "7ef3c7878e07e79cc336a7961d1a19c868e20750da3f8c6fd4efca0331e2e02e"
+        },
+        {
+          "ordinal": 178161,
+          "key": "Yes",
+          "value_bytes": 135,
+          "json_sha256": "8865977301f286c8a3ab476e831a849d706d5717849ceb12d29405ea574fba41"
+        }
+      ],
+      "errors": [],
+      "seconds": 5.9,
+      "status": "passed"
+    },
+    "Colorpalettes": {
+      "member": "Bin/Colorpalettes.Bin",
+      "total": 1,
+      "parse_hash": 49443798,
+      "class": "Gibbed.StarTrekOnline.Serialization.UIStyleColorPaletteLoading",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 154002,
+          "json_sha256": "45ae9e7cc48d24e767fb498e713e8b49bef6d419a7641ed8ab9b323023696694"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Colors": {
+      "member": "Bin/Colors.Bin",
+      "total": 1,
+      "parse_hash": 3020971407,
+      "class": "Gibbed.StarTrekOnline.Serialization.ColorDefLoading",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 45437,
+          "json_sha256": "ea182cb83088d539a039faef3643e8e87b54083fc3fa88eacf353380df80b0d8"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Costumebone": {
+      "member": "Bin/Costumebone.Bin",
+      "total": 7370,
+      "parse_hash": 3794989335,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCBoneDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "1s1_Fleetlogo",
+          "value_bytes": 851,
+          "json_sha256": "d64b40d32cad4495cd441ea91239e9e1b6a0bc659170de6d329361fbbe1531ab"
+        },
+        {
+          "ordinal": 3685,
+          "key": "Fep1_Nacellelidnumber",
+          "value_bytes": 865,
+          "json_sha256": "216c329cfcb273268506e1f27a83a475fa65b03704be0f316f9b0a505ec456ba"
+        },
+        {
+          "ordinal": 7369,
+          "key": "Zc1_Stanchionr",
+          "value_bytes": 868,
+          "json_sha256": "6620fab95aee7a621fbf1ddfd89bc3ee7a90145691b323830521e9d9353676a4"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.7,
+      "status": "passed"
+    },
+    "Costumecategory": {
+      "member": "Bin/Costumecategory.Bin",
+      "total": 672,
+      "parse_hash": 2123010972,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCCategory",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Bluegill_Heads",
+          "value_bytes": 185,
+          "json_sha256": "61a7ae8d549c42ba5121927335f18c760b4ea1ead1fba9b00724e904f0227c23"
+        },
+        {
+          "ordinal": 336,
+          "key": "Stm_Head_Gamma",
+          "value_bytes": 485,
+          "json_sha256": "214fd8cb155d04eab03bcdd24639b3f561045305235dfa3c7258bf2c1ae3c0ab"
+        },
+        {
+          "ordinal": 671,
+          "key": "Unassigned",
+          "value_bytes": 142,
+          "json_sha256": "feb2db34e09d5902c898055508a6adefdb13eb6620d84e1dad364ebbb835515c"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Costumecolor": {
+      "member": "Bin/Costumecolor.Bin",
+      "total": 408,
+      "parse_hash": 2367792848,
+      "class": "Gibbed.StarTrekOnline.Serialization.UIColorSet",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "0718_Eye_Iris_Colorset",
+          "value_bytes": 161,
+          "json_sha256": "327ff812fbcf33d7d83c658859005b61c1a926482ea42d23add676027f76cc90"
+        },
+        {
+          "ordinal": 204,
+          "key": "Genspeciescolorset012",
+          "value_bytes": 1372,
+          "json_sha256": "01b4ad1d8dafeaf410b50084408755495fba386a9a661406fb23600c4c0199bf"
+        },
+        {
+          "ordinal": 407,
+          "key": "Winterevent_Jacket_White_04",
+          "value_bytes": 162,
+          "json_sha256": "5e576f526fe38c19120d201d0efc4ac18c560cd42afe1e8e3e35adb00fb71639"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Costumecolorquad": {
+      "member": "Bin/Costumecolorquad.Bin",
+      "total": 60,
+      "parse_hash": 170047681,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCColorQuadSet",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "0718_Eye_Colorquad",
+          "value_bytes": 206,
+          "json_sha256": "7cbc50b5fc5d35770caa272e2161e0cb1f2a4e1b0f6fb09804e1d6023847ed04"
+        },
+        {
+          "ordinal": 30,
+          "key": "Geordi_Eye_Colorquad",
+          "value_bytes": 210,
+          "json_sha256": "afb055bea3f9451b9072ababd741ca62b184dbf70578053f1aa93efd1a8035aa"
+        },
+        {
+          "ordinal": 59,
+          "key": "Winterevent_Jacket_White_Colorquad",
+          "value_bytes": 228,
+          "json_sha256": "556e506dd3e874c79d20cc7f2c7755e2394e822132ff13dd342056295ef3d087"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Costumegeometry": {
+      "member": "Bin/Costumegeometry.Bin",
+      "total": 38266,
+      "parse_hash": 1143128247,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCGeometryDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "A_Body_Borg_Vinculum_01",
+          "value_bytes": 515,
+          "json_sha256": "1305f5322643eb1585372d9b5ef79a11eae6551a987e0965d40cef56e46d42e6"
+        },
+        {
+          "ordinal": 19133,
+          "key": "Geo_Ship_Fed_Fe5s_Stanchionlwinpods_Type2c",
+          "value_bytes": 781,
+          "json_sha256": "a8b500679d92dd1d2c55ba91e641309616fe6e6eb18146b4d61e3186d95b42e6"
+        },
+        {
+          "ordinal": 38265,
+          "key": "Xxxx_Test_Tholian_01",
+          "value_bytes": 661,
+          "json_sha256": "8c2aecf31e4f44e3475a261753b4f8b7c2d85f08400bfe2d677e08248ed5a8b5"
+        }
+      ],
+      "errors": [],
+      "seconds": 3.7,
+      "status": "passed"
+    },
+    "Costumegeometryadd": {
+      "member": "Bin/Costumegeometryadd.Bin",
+      "total": 7,
+      "parse_hash": 4044830142,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCGeometryAdd",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Geo_Ship_Fed_Fc15_Hull_Type1",
+          "value_bytes": 216,
+          "json_sha256": "8b877c5a1170d7e87a36ef1a8deeda820d040480d98f619dbf41152840b1a8d1"
+        },
+        {
+          "ordinal": 3,
+          "key": "Geo_Ship_Fed_Fc1_Saucerwinpods_Type3",
+          "value_bytes": 183,
+          "json_sha256": "ebf28f1d572ebfdb85920473fe6cae0f4a14a5c8accdca57c82659480704679a"
+        },
+        {
+          "ordinal": 6,
+          "key": "Geo_Ship_Jem_Jf3_Naceller_Type1",
+          "value_bytes": 227,
+          "json_sha256": "dc94fcf26888f276ca88d73c476bf5186e0312a56f301a274d01658a248ee70b"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Costumelayer": {
+      "member": "Bin/Costumelayer.Bin",
+      "total": 338,
+      "parse_hash": 3898379236,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCLayer",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Back",
+          "value_bytes": 148,
+          "json_sha256": "ee485fdb3b01a2b579e7831c58b494111dc611df44492b1327834a36cbc931bc"
+        },
+        {
+          "ordinal": 169,
+          "key": "Sauceridnameleft",
+          "value_bytes": 193,
+          "json_sha256": "e5a48fe84d4c1f0fe46d7b48a584d70410b8284a7ce6b66a9e4d003d3ab5b9d0"
+        },
+        {
+          "ordinal": 337,
+          "key": "Visor",
+          "value_bytes": 175,
+          "json_sha256": "8d6d2b5ebb9f3400dd42bf75c2d1c9261edc420b4573bad3a05a8b2226410921"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Costumematerial": {
+      "member": "Bin/Costumematerial.Bin",
+      "total": 7401,
+      "parse_hash": 3276253066,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCMaterialDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Xindi_Probe_Xra1",
+          "value_bytes": 741,
+          "json_sha256": "c4781f003db7290db9da0cf1326e71a70e05ce1b7c1d94e47396bb5bb62c6a1c"
+        },
+        {
+          "ordinal": 3700,
+          "key": "M_Mouthdetail_Benzite_01_Character_Skin_Body_01",
+          "value_bytes": 739,
+          "json_sha256": "7b1b8bacc969d5bc3fa06f933453e7f7cf3ff6ca6d15b9b5e46e443b6dfefc08"
+        },
+        {
+          "ordinal": 7400,
+          "key": "26c_Power_Default",
+          "value_bytes": 601,
+          "json_sha256": "2795f62d3e9044f6ab3c056ee2f713af93e5eb242093f81fb1f3b9911c1f68aa"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.7,
+      "status": "passed"
+    },
+    "Costumeregion": {
+      "member": "Bin/Costumeregion.Bin",
+      "total": 19,
+      "parse_hash": 3563491294,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCRegion",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "All",
+          "value_bytes": 187,
+          "json_sha256": "615fe70cf9705e2ffa999277b15b94e584edd5bfb5d916e484e4d2a4aae994ff"
+        },
+        {
+          "ordinal": 9,
+          "key": "Cm_Lowerbody",
+          "value_bytes": 352,
+          "json_sha256": "dee3325b00171e5ec3f5d97ba37c3df299efe6c2adc7a232935ff04da2c98351"
+        },
+        {
+          "ordinal": 18,
+          "key": "Turret_All",
+          "value_bytes": 235,
+          "json_sha256": "3ba28adeecbc75d534c36b5623ccfbece8f69f146b8f64d077895b8ba39fab18"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Costumeset": {
+      "member": "Bin/Costumeset.Bin",
+      "total": 659,
+      "parse_hash": 3894364411,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCCostumeSet",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Admiral",
+          "value_bytes": 2300,
+          "json_sha256": "2badf57f65b8c48837df7580567480b057bbbe3d95f616b17a1c23d9ef4480fb"
+        },
+        {
+          "ordinal": 329,
+          "key": "Puppet_Escort_Hirogen_5_Upgrade",
+          "value_bytes": 759,
+          "json_sha256": "13846dc18a5c66f326d256919838fb0350d601a7fbcf795584998f658040deff"
+        },
+        {
+          "ordinal": 658,
+          "key": "Viceadmiral_Romulan_Kits",
+          "value_bytes": 7409,
+          "json_sha256": "d4c7b0977df98681568d21cb370f24edf9e699de331bf63cca622207a20f6a16"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Costumeskeleton": {
+      "member": "Bin/Costumeskeleton.Bin",
+      "total": 745,
+      "parse_hash": 1007899907,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCSkeletonDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Angler_Fish",
+          "value_bytes": 1010,
+          "json_sha256": "c7b02416d3fe8a8e083fcf4d1df6915987964acacc1779419b5dcbf4ec405580"
+        },
+        {
+          "ordinal": 372,
+          "key": "Ship_Fs5n_Skeleton",
+          "value_bytes": 5812,
+          "json_sha256": "536bc9ee1e34341615a3af78ebd5f183e35ff888c69a49abb048e2c6d3639d5c"
+        },
+        {
+          "ordinal": 744,
+          "key": "Whale",
+          "value_bytes": 978,
+          "json_sha256": "a21522073d2d10529952ef6a6b83683d2ef6d046d7aa71d1b80388af95d78f3c"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.5,
+      "status": "passed"
+    },
+    "Costumeslotdef": {
+      "member": "Bin/Costumeslotdef.Bin",
+      "total": 4,
+      "parse_hash": 957361149,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCSlotSet",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Bridgeofficer",
+          "value_bytes": 954,
+          "json_sha256": "58543146a2dc36f1c2ffeebe9aac4800652532d87f5e4f56ce1e9aeb04ec2775"
+        },
+        {
+          "ordinal": 2,
+          "key": "Klingoncaptain",
+          "value_bytes": 2799,
+          "json_sha256": "d5e715b4a410b4cdd40da8f3ebebdf093915222f5a1f93528174cc3c14879331"
+        },
+        {
+          "ordinal": 3,
+          "key": "Starship",
+          "value_bytes": 368,
+          "json_sha256": "24461b35878e66b9912498756dfa5c40bb6e55a294963719f4745d08a102a0ae"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Costumeslottype": {
+      "member": "Bin/Costumeslottype.Bin",
+      "total": 40,
+      "parse_hash": 337128753,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCSlotType",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Antiundine",
+          "value_bytes": 1901,
+          "json_sha256": "163393beecf92f53e60aba87d49577e3f90831fe2401693d9421c76a6fa60997"
+        },
+        {
+          "ordinal": 20,
+          "key": "Jemhadarev",
+          "value_bytes": 1901,
+          "json_sha256": "53800018a62364c0c3b40b2aa1a0a4fe2e9b368eb88c5dec2bf3cca398028aec"
+        },
+        {
+          "ordinal": 39,
+          "key": "X3reputationarmor",
+          "value_bytes": 1923,
+          "json_sha256": "fb808740655b817a7607ac1d9058483c72a7cf166ad2387c3f2ed964a88fe45c"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Costumetexture": {
+      "member": "Bin/Costumetexture.Bin",
+      "total": 5645,
+      "parse_hash": 2207753056,
+      "class": "Gibbed.StarTrekOnline.Serialization.PCTextureDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Xxx_Male_Base_02_Test_Xxx",
+          "value_bytes": 709,
+          "json_sha256": "ef197c455077eafeb588a91d9676cee020948faf19c88c05ba78d61912fec83b"
+        },
+        {
+          "ordinal": 2822,
+          "key": "M_Feet_Boots_Knee_Offduty_01_C",
+          "value_bytes": 1162,
+          "json_sha256": "250b049dcaf938d60e68ad74f0e904bd60ed4ce7a50ce9b370ca3c51177502f1"
+        },
+        {
+          "ordinal": 5644,
+          "key": "Aetherian_Construct_Triangle_001_C",
+          "value_bytes": 1214,
+          "json_sha256": "965471f8b6bd60f54f124ed82128c9a9e9ef9ea63636494c5ebc05802d793cd3"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.6,
+      "status": "passed"
+    },
+    "Dynbouncer": {
+      "member": "Bin/Dynbouncer.Bin",
+      "total": 21,
+      "parse_hash": 908997184,
+      "class": "Gibbed.StarTrekOnline.Serialization.DynBouncerGroupInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 355,
+          "json_sha256": "eb1b4bf5a74d7c9359eecf4f6ff7cf1ae992a4e97176d61ca21b8e4da54fb7d1"
+        },
+        {
+          "ordinal": 10,
+          "key": null,
+          "value_bytes": 953,
+          "json_sha256": "2c79ba0197440191ebd89b6ee1557bf87e60c4d4d7d19a10fb43bc7c7a4a901d"
+        },
+        {
+          "ordinal": 20,
+          "key": null,
+          "value_bytes": 493,
+          "json_sha256": "0ff5aee5264787c6ccc1bd1e5db72619106e5a11ac816bdcf657b2d537091620"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Dyngroundregdata": {
+      "member": "Bin/Dyngroundregdata.Bin",
+      "total": 4,
+      "parse_hash": 782419353,
+      "class": "Gibbed.StarTrekOnline.Serialization.DynGroundRegData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Nw_Horse",
+          "value_bytes": 909,
+          "json_sha256": "0e5570e4797c9790a830e4d6898fd7082adc3c4190bfe1d480263ed2690cf21d"
+        },
+        {
+          "ordinal": 2,
+          "key": "Sto_Female",
+          "value_bytes": 1124,
+          "json_sha256": "ac10bd1dd2624dd55f7a47f5469bac7e83eae26a6b2be2c838838f930b1796d5"
+        },
+        {
+          "ordinal": 3,
+          "key": "Sto_Male",
+          "value_bytes": 1096,
+          "json_sha256": "74860836ff71ad772bb7326c9290f6bcc1f272d1029f4d1b9000ec548dfe9e97"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Dynragdolldata": {
+      "member": "Bin/Dynragdolldata.Bin",
+      "total": 6,
+      "parse_hash": 3502740833,
+      "class": "Gibbed.StarTrekOnline.Serialization.DynRagdollData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Core_Rag_Female",
+          "value_bytes": 5446,
+          "json_sha256": "453d8e2cce835030f5b9152df4a802da6de2a63215dc5d8637426fd9b0835a09"
+        },
+        {
+          "ordinal": 3,
+          "key": "Coredefaulthd",
+          "value_bytes": 6102,
+          "json_sha256": "ddd1335c03c271b38f7370faa7790f682c991ed37c0378d8a7e1fd42406ff81f"
+        },
+        {
+          "ordinal": 5,
+          "key": "Sto_Fish",
+          "value_bytes": 452,
+          "json_sha256": "2492657eaaa95bde579dd94419ef3c98659f2e0db1026029e243bafdc5824fe6"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Interioroptionchoices": {
+      "member": "Bin/Interioroptionchoices.Bin",
+      "total": 137,
+      "parse_hash": 1413177528,
+      "class": "Gibbed.StarTrekOnline.Serialization.InteriorOptionChoice",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Layoutandorian",
+          "value_bytes": 325,
+          "json_sha256": "e6ed140ad37e5fe7770c76e25f94e243317f1d24dcebf8fd44cb36ca4e9e6333"
+        },
+        {
+          "ordinal": 68,
+          "key": "Trophyfloor_Fluidicfleetaction_01",
+          "value_bytes": 514,
+          "json_sha256": "6b9277e917fb3c0262aaf93241997c12e2b54425b6e44e3aeb40cfdc11cb0521"
+        },
+        {
+          "ordinal": 136,
+          "key": "Trophywall_Ship_Kr4",
+          "value_bytes": 483,
+          "json_sha256": "17946746e58bbb947265dac890723f957064c40a99b094de050c3fbbee9e2493"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Interioroptions": {
+      "member": "Bin/Interioroptions.Bin",
+      "total": 65,
+      "parse_hash": 3761655224,
+      "class": "Gibbed.StarTrekOnline.Serialization.InteriorOptionDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Andorian_Shipinteriorlayout",
+          "value_bytes": 260,
+          "json_sha256": "1a6fab5b66b98cd73b7db2418a6727f20761e4d1e47a291d18ca922eabb56181"
+        },
+        {
+          "ordinal": 32,
+          "key": "Nakuhl_Shipinteriorlayout",
+          "value_bytes": 254,
+          "json_sha256": "cd8dfa0809cf4d0be6c41bbeb3e294542a29a7e8a222931e32c473f31c37b441"
+        },
+        {
+          "ordinal": 64,
+          "key": "Xindireptilian_Shipinteriorlayout",
+          "value_bytes": 278,
+          "json_sha256": "d8c659186dece7fd36625d72ad4c5879241673a37751b8760923abf3d9754431"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Interiors": {
+      "member": "Bin/Interiors.Bin",
+      "total": 148,
+      "parse_hash": 3867300985,
+      "class": "Gibbed.StarTrekOnline.Serialization.InteriorDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Fed_Andorian_01_Bridge",
+          "value_bytes": 312,
+          "json_sha256": "d88bb6ee893a1d9af6f0c831bfe308973c502d1b80d3085218c6b732cb6ae18d"
+        },
+        {
+          "ordinal": 74,
+          "key": "Klg_Bortas_01_Bridge",
+          "value_bytes": 549,
+          "json_sha256": "6404b007a0730acf2c070d4e8f5331bc2bf6e00d75645359f60a4edf0e5e74fa"
+        },
+        {
+          "ordinal": 147,
+          "key": "Shared_Xindi_Reptilian_01_Bridge",
+          "value_bytes": 348,
+          "json_sha256": "2666072facc1b2a6922972358b2d1f26688c558c9bcda4b4511c55fb8ac97b90"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Invbagslottables": {
+      "member": "Bin/Invbagslottables.Bin",
+      "total": 6,
+      "parse_hash": 606120619,
+      "class": "Gibbed.StarTrekOnline.Serialization.InvBagSlotTable",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Addactivedoffslotground",
+          "value_bytes": 219,
+          "json_sha256": "4a1ed488683f6fb1c9ae9a0db8bc0309a95590c6419165e389be949dce5e54b5"
+        },
+        {
+          "ordinal": 3,
+          "key": "BankSize",
+          "value_bytes": 347,
+          "json_sha256": "e010a76861f1c80af6e6cabdb16104aadac53565ace40424a8da2a9707135a29"
+        },
+        {
+          "ordinal": 5,
+          "key": "KitModuleSize",
+          "value_bytes": 370,
+          "json_sha256": "63d7ad9f632048a12ee818f836b04fac9d687cfa536b5973d642590b40b61646"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Inventorysetsclient": {
+      "member": "Bin/Inventorysetsclient.Bin",
+      "total": 1013,
+      "parse_hash": 579262600,
+      "class": "Gibbed.StarTrekOnline.Serialization.DefaultInventory",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "AquariusDestroyerInventory",
+          "value_bytes": 15273,
+          "json_sha256": "f9b79e201b3bdf074e83d1045403d4e1ff7ef6d3f70f76730c7904fbd8c825ad"
+        },
+        {
+          "ordinal": 506,
+          "key": "EscortPilotKdfSciT6Inventory",
+          "value_bytes": 15840,
+          "json_sha256": "be63beda7f88444198b3857c286fdf6d5250534b6ecac42947e64cf4299d7b66"
+        },
+        {
+          "ordinal": 1012,
+          "key": "YellowstoneInventory",
+          "value_bytes": 14593,
+          "json_sha256": "f18fff2c17fdde9c01dc97fd09bf9181075ca4086876515ba61e061dd3a1c457"
+        }
+      ],
+      "errors": [],
+      "seconds": 1.2,
+      "status": "passed"
+    },
+    "Itemassignmentcategories": {
+      "member": "Bin/Itemassignmentcategories.Bin",
+      "total": 27,
+      "parse_hash": 4042493932,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemAssignmentCategorySettings",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Standard",
+          "value_bytes": 391,
+          "json_sha256": "b999084f60a43404f51faa85e7b2b844ecb1420b888d042d766c6f989c62f0af"
+        },
+        {
+          "ordinal": 13,
+          "key": "Beamscrafting",
+          "value_bytes": 1134,
+          "json_sha256": "3b6101cc752b3c8a490e76c210e2b0f19902c3c4b8453be5b6c482b65e114a16"
+        },
+        {
+          "ordinal": 26,
+          "key": "Admiraltyferengi",
+          "value_bytes": 548,
+          "json_sha256": "6cf5273c08fb68e50b88a98223cde8f26659dc6864f6baf4206a8ec7a51106ab"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Itemassignmentmodifiertypes": {
+      "member": "Bin/Itemassignmentmodifiertypes.Bin",
+      "total": 16,
+      "parse_hash": 1313230702,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemAssignmentOutcomeModifierTypeData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Critical",
+          "value_bytes": 332,
+          "json_sha256": "eac1c4b73f11f1b82dde7b6fb910749f27e305a5b81e7b2bfc42d07682f8cdc1"
+        },
+        {
+          "ordinal": 8,
+          "key": "CraftingCommon",
+          "value_bytes": 277,
+          "json_sha256": "fb8770ec38768ee9784c033687210a51e94a60969d48beac462c24b35620906e"
+        },
+        {
+          "ordinal": 15,
+          "key": "CraftingCatalyst50",
+          "value_bytes": 51,
+          "json_sha256": "26c9c458d5be89d9ff554b30124c13916ac3abd9f4a870be3afc5dd2bc572d9a"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Itemassignmentraritycounts": {
+      "member": "Bin/Itemassignmentraritycounts.Bin",
+      "total": 114,
+      "parse_hash": 3928378123,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemAssignmentRarityCount",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Availability_Personal_All_Common",
+          "value_bytes": 1143,
+          "json_sha256": "8b6bc68cf6edc0749472a3a970429baa08ec8bcbc71e9a12771f7d94ea1859d3"
+        },
+        {
+          "ordinal": 57,
+          "key": "Availability_Shipboard_Military_Common",
+          "value_bytes": 195,
+          "json_sha256": "2c5e0ebb250d9eb6da2b1d5239f31b6adb062628a25c630e8793afd716dda0e4"
+        },
+        {
+          "ordinal": 113,
+          "key": "Availability_Admiralty_April_Fools_Starship_Dating",
+          "value_bytes": 432,
+          "json_sha256": "ed16c382bdf46c04f3ba2b73db2655d1220ee1bfc91b98c34ab086c7e336ad6b"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Itemassignmentweights": {
+      "member": "Bin/Itemassignmentweights.Bin",
+      "total": 511,
+      "parse_hash": 2640301030,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemAssignmentWeight",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Quality_Zero",
+          "value_bytes": 52,
+          "json_sha256": "659c209d7a598cbb356082fbaa8bcf3481ae25bf41c1e7de243be97b799364bc"
+        },
+        {
+          "ordinal": 255,
+          "key": "Availability_Personal_Development_Veryrare",
+          "value_bytes": 94,
+          "json_sha256": "664a38588ba7018616f9dae581fc54f30c667041b67b73fb2bb3a1ac616c2941"
+        },
+        {
+          "ordinal": 510,
+          "key": "Availability_Admiralty_April_Fools_Starship_Dating_Tourofduty_Epic",
+          "value_bytes": 121,
+          "json_sha256": "3427098b29065115acd9be6fcd3a01a5a864b1ffb48b8678255aaa5e8a32e226"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Itemcategories": {
+      "member": "Bin/Itemcategories.Bin",
+      "total": 733,
+      "parse_hash": 3085632313,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemCategoryInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Tribble",
+          "value_bytes": 185,
+          "json_sha256": "a78859ca4ca91b58448c9bf71df77dcc64c4ce019e45f71c05c4e837f7614006"
+        },
+        {
+          "ordinal": 366,
+          "key": "Space_Set_Mycelial_Core",
+          "value_bytes": 201,
+          "json_sha256": "a341b879f7aa91caf62f013332d977f70d5f48976b37e8e2a7b7ed0c270d9a03"
+        },
+        {
+          "ordinal": 732,
+          "key": "Itemset_Tholian_Shocktroop_Cannon",
+          "value_bytes": 211,
+          "json_sha256": "feb0458effd98f6c6e1e001854b2b179ae57a2741af76b475dff6fa918d2a54e"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Itemequiplimitcategories": {
+      "member": "Bin/Itemequiplimitcategories.Bin",
+      "total": 392,
+      "parse_hash": 3579741939,
+      "class": "Gibbed.StarTrekOnline.Serialization.ItemEquipLimitCategoryData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Groundwep_Antiproton_Autocarbine_Neu_Infiltrator",
+          "value_bytes": 163,
+          "json_sha256": "c9728934445774d75c84032f5a655df118d2b30593be17d9c897867641bf9fcb"
+        },
+        {
+          "ordinal": 196,
+          "key": "Spacewep_Plasma_Turret_Xindi_Set",
+          "value_bytes": 131,
+          "json_sha256": "d6c6ee57be0e3761fb0f434cb8f7d8ad51140aafeab15583ab922207b2051e6b"
+        },
+        {
+          "ordinal": 391,
+          "key": "Stationmod_Universal_Nx_Grappler",
+          "value_bytes": 89,
+          "json_sha256": "03bdd0fa885bb6b433b3391f063c076926d5ba90baf3002d0ed9cd0de18b00e3"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "MapSnapHeader": {
+      "member": "Bin/Geobin/Maps/Klingon_Play/Klg_Qonos_Ground_02/Klg_Qonos_Ground_02.Zone/Map_Snap.Hogg!Mapsnapheader.Bin",
+      "total": 1,
+      "parse_hash": 2383033314,
+      "class": "Gibbed.StarTrekOnline.Serialization.ZoneMapMapSnapHeader",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 18,
+          "json_sha256": "b0992c5e4bf87a99b52ba72bbbaa4ca422c0c63aa2ef10600b59cae629704003"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Materials": {
+      "member": "Bin/Materials.Bin",
+      "total": 1,
+      "parse_hash": 2823068686,
+      "class": "Gibbed.StarTrekOnline.Serialization.MaterialLoadInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 14039704,
+          "json_sha256": "9bd4ba68914e3a6ca6e682bc807227462907d986c20e281afc41acf1b12e283d"
+        }
+      ],
+      "errors": [],
+      "seconds": 4.7,
+      "status": "passed"
+    },
+    "Modelheaders": {
+      "member": "Bin/Modelheaders.Bin",
+      "total": 114801,
+      "parse_hash": 2454075613,
+      "class": "Gibbed.StarTrekOnline.Serialization.ModelHeader",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "_2121",
+          "value_bytes": 221,
+          "json_sha256": "64738c5989a85d647cd932240eb4c4a66df98442632133e80d3a214f8cd90286"
+        },
+        {
+          "ordinal": 57400,
+          "key": "Geo_Ship_Fed_Fb2_Nacelleraa_Type1.Geo_Ship_Fed_Fb2_Stanchionl_Type2_Hidden",
+          "value_bytes": 312,
+          "json_sha256": "f353b34aea5191b31d5573c317ddef4a7393e6d5afc705140a33b55ab26c0b64"
+        },
+        {
+          "ordinal": 114800,
+          "key": "Xxxx",
+          "value_bytes": 232,
+          "json_sha256": "de1b0c268a1115c67f202d15d24b8c5ae2c9dfd9104c2bdddd68791c89a76a8a"
+        }
+      ],
+      "errors": [],
+      "seconds": 6.6,
+      "status": "passed"
+    },
+    "Playercostume": {
+      "member": "Bin/Playercostume.Bin",
+      "total": 23398,
+      "parse_hash": 2437703942,
+      "class": "Gibbed.StarTrekOnline.Serialization.PlayerCostume",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Yourvisibledrop",
+          "value_bytes": 1003,
+          "json_sha256": "7ab685038797376014936ca52044914c4fefc2b215b8c3320db637f0ac4230f7"
+        },
+        {
+          "ordinal": 11699,
+          "key": "Pips_Fleetadmiral_F_01",
+          "value_bytes": 16551,
+          "json_sha256": "9cb5697ef76fda62cd91a361387ceee2b0c2cce74472499c08c3e48a9c2c783c"
+        },
+        {
+          "ordinal": 23397,
+          "key": "/Dscmirror_Terran_Lieutenant_Human_M_07",
+          "value_bytes": 11651,
+          "json_sha256": "e4703f6e6d7a99cc1a19863e988df6497e7a9ddcc80393013936be88cac6ce33"
+        }
+      ],
+      "errors": [],
+      "seconds": 6.4,
+      "status": "passed"
+    },
+    "Powerstats": {
+      "member": "Bin/Powerstats.Bin",
+      "total": 0,
+      "parse_hash": 1432531988,
+      "class": "Gibbed.StarTrekOnline.Serialization.PowerStat",
+      "samples": [],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Regionrules": {
+      "member": "Bin/Regionrules.Bin",
+      "total": 3,
+      "parse_hash": 894199683,
+      "class": "Gibbed.StarTrekOnline.Serialization.RegionRules",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 3511,
+          "json_sha256": "487be7c8a06741d6cf4e550c503febe84031cfac8a419d53a0c432822d236741"
+        },
+        {
+          "ordinal": 1,
+          "key": null,
+          "value_bytes": 2697,
+          "json_sha256": "67e20754bf0dbba5d87868a3ba253baa00fef724eb822223605b2b37be84090a"
+        },
+        {
+          "ordinal": 2,
+          "key": null,
+          "value_bytes": 4814,
+          "json_sha256": "b3d22555e4c0c713d89493a7046ec787355dfa03bcafacd95fd4ed7b275582f0"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Rewardvaltable": {
+      "member": "Bin/Rewardvaltable.Bin",
+      "total": 87,
+      "parse_hash": 2037863,
+      "class": "Gibbed.StarTrekOnline.Serialization.RewardValTable",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Dxp_Mission",
+          "value_bytes": 500,
+          "json_sha256": "92b4ed3c29f6f1a3ace48e9b7d641a35f181f3f5223af94d3fe9ba523627d080"
+        },
+        {
+          "ordinal": 43,
+          "key": "Sp_Battleship_Tough",
+          "value_bytes": 652,
+          "json_sha256": "808899283d855e28181668297b1610011f62e43ad598536eb93e9f51f9a87afe"
+        },
+        {
+          "ordinal": 86,
+          "key": "Xp_Required_Ship_Progression_T5u",
+          "value_bytes": 185,
+          "json_sha256": "fe626608cdd66b9269fbaf3ea6f88871556100350e8b5ee65eb42af1649aefec"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Scaleinfos": {
+      "member": "Bin/Scaleinfos.Bin",
+      "total": 657,
+      "parse_hash": 3615348613,
+      "class": "Gibbed.StarTrekOnline.Serialization.SkelScaleInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 286,
+          "json_sha256": "4bb636103ee8922da333d1974d7151249b2fb00c574f8c9e4e9737efc9529246"
+        },
+        {
+          "ordinal": 328,
+          "key": null,
+          "value_bytes": 294,
+          "json_sha256": "da64985c990e674f782565bdbbd015fb6310d69ec92afe2953bc016b4afefb91"
+        },
+        {
+          "ordinal": 656,
+          "key": null,
+          "value_bytes": 300,
+          "json_sha256": "d9cafb6f117b5ecb9278c110ad236a2c8b020596ec968e0212291e69dacba82e"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Skelinfos": {
+      "member": "Bin/Skelinfos.Bin",
+      "total": 736,
+      "parse_hash": 4168720001,
+      "class": "Gibbed.StarTrekOnline.Serialization.SkelInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Angler_Fish",
+          "value_bytes": 613,
+          "json_sha256": "7a96e6271ddb578f4c0d3da6ba4479bf6666b1cb4f8833342ab7e063bce5466c"
+        },
+        {
+          "ordinal": 368,
+          "key": "Ship_Fs31d_Skeleton",
+          "value_bytes": 711,
+          "json_sha256": "4de926cc3be421470a5c311908706b77b77c7511fa6c334450239c1ed3f4fdc3"
+        },
+        {
+          "ordinal": 735,
+          "key": "Walker",
+          "value_bytes": 578,
+          "json_sha256": "6b4021f806be2f17c73f7b0eeef57959675b8a4e58d509b3a4940c9038696599"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Skies": {
+      "member": "Bin/Skies.Bin",
+      "total": 2322,
+      "parse_hash": 2421352952,
+      "class": "Gibbed.StarTrekOnline.Serialization.SkyInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "!space",
+          "value_bytes": 1176,
+          "json_sha256": "3deb974b00b671e9bfc1749685cf2788f5e092bd69a9456362bdd363f6678920"
+        },
+        {
+          "ordinal": 1161,
+          "key": "3_Spacesky_6_Wormhole_01",
+          "value_bytes": 2734,
+          "json_sha256": "d125162e681b6b2eb5d46a05c85919a2a436978b89f4ca4825095df10e1368ab"
+        },
+        {
+          "ordinal": 2321,
+          "key": "Z_Test_Thomas_Ships_Starfleet_Vesta",
+          "value_bytes": 3267,
+          "json_sha256": "34e927a0e4063935c644d8d8690c0891256f9c461d9f85f98f255e7ee6399237"
+        }
+      ],
+      "errors": [],
+      "seconds": 1.4,
+      "status": "passed"
+    },
+    "Species": {
+      "member": "Bin/Species.Bin",
+      "total": 889,
+      "parse_hash": 3070103120,
+      "class": "Gibbed.StarTrekOnline.Serialization.SpeciesDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Boff_Common_Romulan_Female",
+          "value_bytes": 11816,
+          "json_sha256": "1cfcd7dbe2e77fd1429449a524bf6fc5d3da3506aa4f15d6e2216c408773f5bb"
+        },
+        {
+          "ordinal": 444,
+          "key": "Ship_Fa20_Skeleton",
+          "value_bytes": 1061,
+          "json_sha256": "c57d7e1a7177bc4c7c889ae1bf19c37e856237f29878560908c55dfff608152c"
+        },
+        {
+          "ordinal": 888,
+          "key": "Tos_Sf_Vulcan_Male",
+          "value_bytes": 15354,
+          "json_sha256": "4227af7b8e1131615ad1f4128699bec1cafa9b9ac10fc72f34c147306dde1e90"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.6,
+      "status": "passed"
+    },
+    "Speciesfeature": {
+      "member": "Bin/Speciesfeature.Bin",
+      "total": 126,
+      "parse_hash": 3371624041,
+      "class": "Gibbed.StarTrekOnline.Serialization.SpeciesDefiningFeature",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Defaultfemalespecies",
+          "value_bytes": 6465,
+          "json_sha256": "d690c51c4e1327bff4bd29c3da0177722ab33a24832d8f45bd6f91f7e3f2b284"
+        },
+        {
+          "ordinal": 63,
+          "key": "Speciesfeaturemaleaenar",
+          "value_bytes": 858,
+          "json_sha256": "7be97a991633547de61af3dc0028a78e08e1e29c6606c246f384b3fa0013049a"
+        },
+        {
+          "ordinal": 125,
+          "key": "Speciesfeaturemaleverytallheight",
+          "value_bytes": 259,
+          "json_sha256": "e9df992c5e46392bb35eb252e16c0c3d333120bf95fe679da8aa4151bce0360d"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Speciesgendata": {
+      "member": "Bin/Speciesgendata.Bin",
+      "total": 2,
+      "parse_hash": 2223262161,
+      "class": "Gibbed.StarTrekOnline.Serialization.SpeciesGenData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Basic",
+          "value_bytes": 3041,
+          "json_sha256": "907bab429bb10db1fec53474d3b8555b52d71f747c3fb3ccb671d6d72f40bb5f"
+        },
+        {
+          "ordinal": 1,
+          "key": "Basicwithscales",
+          "value_bytes": 9011,
+          "json_sha256": "689ec94254340ebee8b71f1ed65d4dbaa66e425d130d022dd4e882e6b782d83e"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Terrain_Default_Atlases": {
+      "member": "Bin/Geobin/Maps/Demo/Kfr_Pjem_Ground/Kfr_Pjem_Ground.Zone/Terrain_Default_Atlases.Bin",
+      "total": 1,
+      "parse_hash": 2367835613,
+      "class": "Gibbed.StarTrekOnline.Serialization.TerrainAtlasRegionData",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 17381,
+          "json_sha256": "e7d49671aedf21ddf685d2e738a0f6ac2ecbddfce9e5d6acc4f82e8bb2dd193b"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Terrain_Default_Deps": {
+      "member": "Bin/Geobin/Maps/Demo/Kfr_Pjem_Ground/Kfr_Pjem_Ground.Zone/Terrain_Default_Deps.Bin",
+      "total": 1,
+      "parse_hash": 1462543738,
+      "class": "Gibbed.StarTrekOnline.Serialization.BinFileList",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 6726,
+          "json_sha256": "0ccc970672fa99f5f9d6e58408be784d395655bec1c3b292dc9f3ecd9d294e95"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Texopts": {
+      "member": "Bin/Texopts.Bin",
+      "total": 1,
+      "parse_hash": 3845897656,
+      "class": "Gibbed.StarTrekOnline.Serialization.TexOptList",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 1415424,
+          "json_sha256": "d625725f1124bf78da32887c246f9c16f437020b438b56a8294cbc299d97ba1f"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.6,
+      "status": "passed"
+    },
+    "Texwords": {
+      "member": "Bin/Texwords.Bin",
+      "total": 1,
+      "parse_hash": 2808015135,
+      "class": "Gibbed.StarTrekOnline.Serialization.TexWordList",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 656540,
+          "json_sha256": "35aad6c158e5b2aa82da2345d9ddfe8070ce795ff3f13e3046f9da06ac85e585"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.6,
+      "status": "passed"
+    },
+    "Uifonts": {
+      "member": "Bin/Uifonts.Bin",
+      "total": 257,
+      "parse_hash": 3735082712,
+      "class": "Gibbed.StarTrekOnline.Serialization.UIStyleFont",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Aidebug_List",
+          "value_bytes": 564,
+          "json_sha256": "2a9a5411b336a64ca99fe55b1405c819b3ef2bb0e7e367d911a27e945d498d2f"
+        },
+        {
+          "ordinal": 128,
+          "key": "Game_ItemPower",
+          "value_bytes": 606,
+          "json_sha256": "4cf5ca38d51869005ca77403545d8e4f2fbff9ee5c91939cb800d4170ee3a6c0"
+        },
+        {
+          "ordinal": 256,
+          "key": "WorldEditor_UniqueName",
+          "value_bytes": 591,
+          "json_sha256": "3a03b8dd8e0e909583909ec732ded6df1c12de3baaad19eef8606fe29c58b6e2"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.3,
+      "status": "passed"
+    },
+    "Uitextureassembly": {
+      "member": "Bin/Uitextureassembly.Bin",
+      "total": 10951,
+      "parse_hash": 3739719673,
+      "class": "Gibbed.StarTrekOnline.Serialization.UITextureAssembly",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Accolade_Frame",
+          "value_bytes": 999,
+          "json_sha256": "6b9e246af4c8d45487923c6fbfd5900b193e087057d45e1f1b5fb56e92f8c158"
+        },
+        {
+          "ordinal": 5475,
+          "key": "Ship_Health_Dreadnought_Scimitar_Sci_Quarter_Empty",
+          "value_bytes": 1643,
+          "json_sha256": "e1d12919b3d0f25dd142597313e640252dc34060143643a6a0ad7ebebb7de9bb"
+        },
+        {
+          "ordinal": 10950,
+          "key": "ZoneControl_Notch",
+          "value_bytes": 976,
+          "json_sha256": "43721c4de51ea898da8e85f2e7d97aebe9270c244be929f41eaafd842b332269"
+        }
+      ],
+      "errors": [],
+      "seconds": 1.5,
+      "status": "passed"
+    },
+    "Waveformmodulation": {
+      "member": "Bin/Waveformmodulation.Bin",
+      "total": 15,
+      "parse_hash": 482059605,
+      "class": "Gibbed.StarTrekOnline.Serialization.WaveformDef",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 514,
+          "json_sha256": "57d761cc92681458b8d54ba0ff44b27789beb9a7ebe96ee005e2b293f99e4bd5"
+        },
+        {
+          "ordinal": 7,
+          "key": null,
+          "value_bytes": 536,
+          "json_sha256": "9cc3b3a78db8fca664bb65c3b0a3a80cf96c4b722ca8b3a4e62a375f67a04caf"
+        },
+        {
+          "ordinal": 14,
+          "key": null,
+          "value_bytes": 1020,
+          "json_sha256": "496d090f42676efc611b766c50659948a8d12aebe989f8f22773083db7e7f660"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "World_Cells": {
+      "member": "Bin/Geobin/Maps/Character_Creation/Character_Creation_01/Character_Creation_01.Zone/World_Cells.Info",
+      "total": 1,
+      "parse_hash": 2223914705,
+      "class": "Gibbed.StarTrekOnline.Serialization.WorldStreamingInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 18603,
+          "json_sha256": "4faa07cc5b951d9a399ee6b56d76b05a5a9f01022d5f5373d2a8c2a806a57571"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "World_Cells_Shared": {
+      "member": "Bin/Geobin/Maps/Character_Creation/Character_Creation_01/Character_Creation_01.Zone/World_Cells_Shared.Info",
+      "total": 1,
+      "parse_hash": 1800282195,
+      "class": "Gibbed.StarTrekOnline.Serialization.WorldStreamingPooledInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": null,
+          "value_bytes": 105362,
+          "json_sha256": "d5e84d99b752a1c6c920d81ce2561fd4612cb3aa551ad095c756c26eb83b9da0"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.2,
+      "status": "passed"
+    },
+    "Zonemaps_Client": {
+      "member": "Bin/Zonemaps_Client.Bin",
+      "total": 1846,
+      "parse_hash": 2469071014,
+      "class": "Gibbed.StarTrekOnline.Serialization.ZoneMapInfo",
+      "samples": [
+        {
+          "ordinal": 0,
+          "key": "Aetherian_Development_01",
+          "value_bytes": 1500,
+          "json_sha256": "8e428cb9130d1c70751da1ef03a81913a643c04e1e47408fccbb1900041a3bf8"
+        },
+        {
+          "ordinal": 923,
+          "key": "Kfr_Pjem_System",
+          "value_bytes": 4438,
+          "json_sha256": "7799ab3c563bc007a1574f60b148511bee257d33cfac08327f32e59888398dfd"
+        },
+        {
+          "ordinal": 1845,
+          "key": "Zfightingshadowtest",
+          "value_bytes": 1090,
+          "json_sha256": "80fab01071d0258d4a688371a6ed7060cf877bddba2286d5751e86c0e3906a00"
+        }
+      ],
+      "errors": [],
+      "seconds": 0.6,
+      "status": "passed"
+    }
+  }
+}
