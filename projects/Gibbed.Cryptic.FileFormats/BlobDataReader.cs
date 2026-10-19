@@ -939,6 +939,51 @@ namespace Gibbed.Cryptic.FileFormats
                     break;
                 }
 
+                // Plain .Bin layouts of the array and vector types: textparser MultiVal_writebin / MultiVal_readbin
+                // (4-byte type name, then for the earray types a u32 count, then the elements; the fixed types have no count).
+                case MultiValueOpcode.INS:
+                {
+                    var count = this._Input.ReadValueU32();
+                    if (count > ParseSchemaFile.DefaultMaxArraySize)
+                    {
+                        throw new FormatException(string.Format("multival {0} exceeds maximum array size ({1} > {2})", op, count, ParseSchemaFile.DefaultMaxArraySize));
+                    }
+                    var ints = new int[count];
+                    for (uint i = 0; i < count; i++) { ints[i] = this._Input.ReadValueS32(); }
+                    arg = ints;
+                    break;
+                }
+
+                case MultiValueOpcode.FLS:
+                {
+                    var count = this._Input.ReadValueU32();
+                    if (count > ParseSchemaFile.DefaultMaxArraySize)
+                    {
+                        throw new FormatException(string.Format("multival {0} exceeds maximum array size ({1} > {2})", op, count, ParseSchemaFile.DefaultMaxArraySize));
+                    }
+                    arg = this.ReadMultiValueFloats((int)count);
+                    break;
+                }
+
+                case MultiValueOpcode.VEC: // Vec3
+                {
+                    arg = this.ReadMultiValueFloats(3);
+                    break;
+                }
+
+                case MultiValueOpcode.VC4: // Vec4
+                case MultiValueOpcode.QAT: // Quat
+                {
+                    arg = this.ReadMultiValueFloats(4);
+                    break;
+                }
+
+                case MultiValueOpcode.MAT: // Mat4 = Vec3[4] (stdtypes.h), 12 floats
+                {
+                    arg = this.ReadMultiValueFloats(12);
+                    break;
+                }
+
                 default:
                     throw new InvalidOperationException(
                         string.Format(
@@ -951,6 +996,13 @@ namespace Gibbed.Cryptic.FileFormats
                 Op = op,
                 Arg = arg,
             };
+        }
+
+        private float[] ReadMultiValueFloats(int count)
+        {
+            var floats = new float[count];
+            for (int i = 0; i < count; i++) { floats[i] = this._Input.ReadValueF32(); }
+            return floats;
         }
 
         public MultiValue[] ReadArrayMultiValue(int count, object state)

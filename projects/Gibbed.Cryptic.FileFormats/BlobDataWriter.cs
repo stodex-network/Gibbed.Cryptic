@@ -795,6 +795,38 @@ namespace Gibbed.Cryptic.FileFormats
                     break;
                 }
 
+                case MultiValueOpcode.INS:
+                {
+                    var ints = value.Arg as int[];
+                    if (ints == null)
+                    {
+                        throw new InvalidOperationException(string.Format("multival {0} had an unexpected data type (should be int[])", value.Op));
+                    }
+                    this._Output.WriteValueU32((uint)ints.Length);
+                    foreach (var item in ints) { this._Output.WriteValueS32(item); }
+                    break;
+                }
+
+                case MultiValueOpcode.FLS:
+                case MultiValueOpcode.VEC:
+                case MultiValueOpcode.VC4:
+                case MultiValueOpcode.QAT:
+                case MultiValueOpcode.MAT:
+                {
+                    var floats = value.Arg as float[];
+                    var fixedCount = (value.Op & MultiValueOpcode.TypeMask) == MultiValueOpcode.VEC ? 3
+                                     : (value.Op & MultiValueOpcode.TypeMask) == MultiValueOpcode.MAT ? 12
+                                     : (value.Op & MultiValueOpcode.TypeMask) == MultiValueOpcode.FLS ? -1 : 4;
+                    if (floats == null || (fixedCount >= 0 && floats.Length != fixedCount))
+                    {
+                        throw new InvalidOperationException(
+                            string.Format("multival {0} had an unexpected data type (should be float[{1}])", value.Op, fixedCount < 0 ? "n" : fixedCount.ToString()));
+                    }
+                    if (fixedCount < 0) { this._Output.WriteValueU32((uint)floats.Length); }
+                    foreach (var item in floats) { this._Output.WriteValueF32(item); }
+                    break;
+                }
+
                 default:
                     throw new InvalidOperationException(
                         string.Format(

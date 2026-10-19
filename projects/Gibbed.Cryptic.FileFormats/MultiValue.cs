@@ -25,6 +25,10 @@ using System.Collections.Generic;
 
 namespace Gibbed.Cryptic.FileFormats
 {
+    // Arg is long (INT), double (FLT), string (STR), uint/StaticVariableType, int[] (INS) or float[] (FLS, VEC, VC4, QAT, MAT).
+    // The known types let DataContractSerializer write an array held in the object-typed Arg.
+    [System.Runtime.Serialization.KnownType(typeof(float[]))]
+    [System.Runtime.Serialization.KnownType(typeof(int[]))]
     public class MultiValue
     {
         private static readonly Dictionary<string, StaticVariableType> _NamesToStaticVariables;
