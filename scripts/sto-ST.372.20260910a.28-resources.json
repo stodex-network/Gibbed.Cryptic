@@ -203,12 +203,11 @@
   },
   {
     "name": "Costumeslotdef",
-    "mode": "single",
+    "mode": "object",
     "targets": [
       {
         "parse_hash": 957361149,
-        "class": "Gibbed.StarTrekOnline.Serialization.PCSlotSet",
-        "key": "Name",
+        "class": "Gibbed.StarTrekOnline.Serialization.PCSlotSets",
         "versions": []
       }
     ]
