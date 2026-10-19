@@ -56,6 +56,120 @@ namespace Gibbed.Cryptic.FileFormats
             this._GetFileNameFromIndex = getFileNameFromIndex;
         }
 
+        // ---- Optional underrun diagnostics (stodex fork) ------------------------------------------------------
+        // A length-delimited structure that was read with fewer bytes than its size has its remainder skipped (see
+        // ReadValueStructure). When SkipObserver is set it is called as (stream position before the skip, bytes
+        // skipped, field path) at every such skip. The path is built from a stack of frames, one per structure being
+        // read, that exists only while an observer is set; with no observer every hook is a single null check and no
+        // frame, list or string is allocated. Column counting works because the generated Deserialize calls exactly one
+        // public Read* method per column, in field declaration order (columns hidden by IsClient/IsServer are not
+        // read, so the name is exact when both flags are true and best effort otherwise).
+        private Action<long, long, string> _Observer;
+
+        private List<DiagFrame> _Frames;
+
+        private sealed class DiagFrame
+        {
+            public Type Type;
+            public int Columns;
+            public int Element = -1;
+            public int Suppress;
+        }
+
+        private static readonly Dictionary<Type, string[]> _FieldNames = new Dictionary<Type, string[]>();
+
+        /// <summary>
+        /// Called at each underrun skip as (position before the skip, skipped byte count, path), for example
+        /// "GroupDef.Properties[3].Expression": the last column read by the structure that left bytes unread, reached
+        /// through the named fields and array indices that enclose it. Not thread safe; set before reading.
+        /// </summary>
+        public Action<long, long, string> SkipObserver
+        {
+            get { return this._Observer; }
+            set
+            {
+                this._Observer = value;
+                this._Frames = value == null ? null : new List<DiagFrame>();
+            }
+        }
+
+        private void NoteColumn()
+        {
+            var frames = this._Frames;
+            if (frames.Count > 0)
+            {
+                var top = frames[frames.Count - 1];
+                if (top.Suppress == 0)
+                {
+                    top.Columns++;
+                }
+            }
+        }
+
+        private DiagFrame PushFrame(Type type)
+        {
+            var frame = new DiagFrame() { Type = type };
+            this._Frames.Add(frame);
+            return frame;
+        }
+
+        private void PopFrame(DiagFrame frame)
+        {
+            var frames = this._Frames;
+            if (frames == null) { return; }
+            var index = frames.LastIndexOf(frame);
+            if (index >= 0) { frames.RemoveRange(index, frames.Count - index); }
+        }
+
+        private DiagFrame BeginElements()
+        {
+            var frames = this._Frames;
+            if (frames == null || frames.Count == 0) { return null; }
+            var top = frames[frames.Count - 1];
+            top.Suppress++;
+            return top;
+        }
+
+        private static void EndElements(DiagFrame frame)
+        {
+            if (frame != null) { frame.Suppress--; frame.Element = -1; }
+        }
+
+        private static string ColumnName(Type type, int column)
+        {
+            string[] names;
+            lock (_FieldNames)
+            {
+                if (_FieldNames.TryGetValue(type, out names) == false)
+                {
+                    var fields = type.GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+                    Array.Sort(fields, (a, b) => a.MetadataToken.CompareTo(b.MetadataToken));
+                    names = new string[fields.Length];
+                    for (int i = 0; i < fields.Length; i++) { names[i] = fields[i].Name; }
+                    _FieldNames[type] = names;
+                }
+            }
+            return column >= 0 && column < names.Length ? names[column] : "#" + column;
+        }
+
+        private string BuildPath()
+        {
+            var frames = this._Frames;
+            if (frames == null || frames.Count == 0) { return null; }
+            var sb = new StringBuilder();
+            sb.Append(frames[0].Type.Name);
+            for (int i = 0; i < frames.Count; i++)
+            {
+                var frame = frames[i];
+                if (frame.Columns > 0)
+                {
+                    sb.Append('.').Append(ColumnName(frame.Type, frame.Columns - 1));
+                    if (frame.Element >= 0 && i + 1 < frames.Count) { sb.Append('[').Append(frame.Element).Append(']'); }
+                }
+            }
+            return sb.ToString();
+        }
+
         private class ResourceLoader<TType> : Serialization.IStructure
             where TType : Serialization.IStructure, new()
         {
@@ -109,10 +223,13 @@ namespace Gibbed.Cryptic.FileFormats
             Func<BlobDataReader, object, TType> readValue)
         {
             var array = new TType[count];
+            var frame = this._Observer != null ? this.BeginElements() : null;
             for (uint i = 0; i < count; i++)
             {
+                if (frame != null) { frame.Element = (int)i; }
                 array[i] = readValue(this, state);
             }
+            EndElements(frame);
             return array;
         }
 
@@ -128,20 +245,25 @@ namespace Gibbed.Cryptic.FileFormats
             }
 
             var list = new List<TType>();
+            var frame = this._Observer != null ? this.BeginElements() : null;
             for (uint i = 0; i < count; i++)
             {
+                if (frame != null) { frame.Element = (int)i; }
                 list.Add(readValue(this, state));
             }
+            EndElements(frame);
             return list;
         }
 
         public byte ReadValueByte(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueU8();
         }
 
         public byte[] ReadArrayByte(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             var array = new byte[count];
             this._Input.Read(array, 0, count);
             return array;
@@ -149,6 +271,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<byte> ReadListByte(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -157,11 +280,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public short ReadValueInt16(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (short)this._Input.ReadValueS32();
         }
 
         public short[] ReadArrayInt16(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -170,6 +295,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<short> ReadListInt16(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -178,11 +304,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public int ReadValueInt32(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueS32();
         }
 
         public int[] ReadArrayInt32(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -191,6 +319,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<int> ReadListInt32(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -199,11 +328,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public long ReadValueInt64(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueS64();
         }
 
         public long[] ReadArrayInt64(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -212,6 +343,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<long> ReadListInt64(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -220,11 +352,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public float ReadValueFloat(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueF32();
         }
 
         public float[] ReadArrayFloat(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -233,6 +367,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<float> ReadListFloat(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -241,11 +376,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueString(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadStringPascalUncapped();
         }
 
         public string[] ReadArrayString(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -254,6 +391,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<string> ReadListString(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -262,6 +400,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueCurrentFile(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             var start = this._Input.Position;
             var index = this._Input.ReadValueU32();
 
@@ -293,6 +432,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string[] ReadArrayCurrentFile(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -301,6 +441,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<string> ReadListCurrentFile(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -309,11 +450,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public int ReadValueTimestamp(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueS32();
         }
 
         public int[] ReadArrayTimestamp(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -322,6 +465,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<int> ReadListTimestamp(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -330,11 +474,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public int ReadValueLineNumber(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueS32();
         }
 
         public int[] ReadArrayLineNumber(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -343,6 +489,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<int> ReadListLineNumber(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -351,11 +498,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public bool ReadValueBoolean(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public bool[] ReadArrayBoolean(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -364,6 +513,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<bool> ReadListBoolean(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -372,26 +522,31 @@ namespace Gibbed.Cryptic.FileFormats
 
         public object ReadValueNoAST(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public object[] ReadArrayNoAST(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public List<object> ReadListNoAST(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public bool ReadValueBooleanFlag(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueB8();
         }
 
         public bool[] ReadArrayBooleanFlag(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -400,6 +555,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<bool> ReadListBooleanFlag(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -408,11 +564,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public float ReadValueQUATPYR(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueF32();
         }
 
         public float[] ReadArrayQUATPYR(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -421,6 +579,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<float> ReadListQUATPYR(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -429,6 +588,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public MATPYR ReadValueMATPYR(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return new MATPYR()
             {
                 X = this._Input.ReadValueF32(),
@@ -439,6 +599,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public MATPYR[] ReadArrayMATPYR(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -447,6 +608,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<MATPYR> ReadListMATPYR(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -455,11 +617,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueFilename(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadStringPascalUncapped();
         }
 
         public string[] ReadArrayFilename(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -468,6 +632,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<string> ReadListFilename(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -476,11 +641,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public string ReadValueReference(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadStringPascalUncapped();
         }
 
         public string[] ReadArrayReference(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -489,6 +656,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<string> ReadListReference(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -497,11 +665,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public FunctionCall ReadValueFunctionCall(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public FunctionCall[] ReadArrayFunctionCall(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -510,6 +680,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<FunctionCall> ReadListFunctionCall(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -541,14 +712,27 @@ namespace Gibbed.Cryptic.FileFormats
             var end = this._Input.Position + dataSize;
 
             var instance = (Serialization.IStructure)Activator.CreateInstance(type);
-            instance.Deserialize(this, state);
-
-            if (this._Input.Position < end)
+            var frame = this._Observer != null ? this.PushFrame(type) : null;
+            try
             {
-                // Current resources can retain trailing/versioned fields that
-                // are not represented in the registered runtime parse table.
-                // Structure records are length-delimited, so skip them safely.
-                this._Input.Position = end;
+                instance.Deserialize(this, state);
+
+                if (this._Input.Position < end)
+                {
+                    // Current resources can retain trailing/versioned fields that
+                    // are not represented in the registered runtime parse table.
+                    // Structure records are length-delimited, so skip them safely.
+                    var observer = this._Observer;
+                    if (observer != null)
+                    {
+                        observer(this._Input.Position, end - this._Input.Position, this.BuildPath());
+                    }
+                    this._Input.Position = end;
+                }
+            }
+            finally
+            {
+                if (frame != null) { this.PopFrame(frame); }
             }
 
             if (this._Input.Position > end)
@@ -567,12 +751,14 @@ namespace Gibbed.Cryptic.FileFormats
         public TType ReadValueStructure<TType>(bool optional, object state)
             where TType : Serialization.IStructure, new()
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (TType)ReadValueStructure(typeof(TType), optional, state);
         }
 
         public TType[] ReadArrayStructure<TType>(int count, object state)
             where TType : Serialization.IStructure, new()
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -582,6 +768,7 @@ namespace Gibbed.Cryptic.FileFormats
         public List<TType> ReadListStructure<TType>(int maxCount, object state)
             where TType : Serialization.IStructure, new()
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -591,19 +778,29 @@ namespace Gibbed.Cryptic.FileFormats
         public List<TType> ReadListEmbeddedStructure<TType>(int maxCount, object state)
             where TType : Serialization.IStructure, new()
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
                 (a, b) =>
                 {
                     var instance = new TType();
-                    instance.Deserialize(a, b);
+                    var frame = a._Observer != null ? a.PushFrame(typeof(TType)) : null;
+                    try
+                    {
+                        instance.Deserialize(a, b);
+                    }
+                    finally
+                    {
+                        if (frame != null) { a.PopFrame(frame); }
+                    }
                     return instance;
                 });
         }
 
         public object ReadValuePolymorph(Type[] validTypes, bool optional, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             if (optional == true)
             {
                 var hasValue = this._Input.ReadValueU32();
@@ -625,6 +822,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public object[] ReadArrayPolymorph(Type[] validTypes, int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -633,6 +831,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<object> ReadListPolymorph(Type[] validTypes, int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -641,11 +840,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public StashTable ReadValueStashTable(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             throw new NotImplementedException();
         }
 
         public StashTable[] ReadArrayStashTable(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -654,6 +855,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<StashTable> ReadListStashTable(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -662,11 +864,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public uint ReadValueBit(int bitOffset, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this._Input.ReadValueU32();
         }
 
         public uint[] ReadArrayBit(int bitOffset, int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -675,6 +879,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<uint> ReadListBit(int bitOffset, int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -683,6 +888,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public MultiValue ReadValueMultiValue(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             object arg;
 
             var name = this._Input.ReadString(4, true, Encoding.ASCII);
@@ -749,6 +955,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public MultiValue[] ReadArrayMultiValue(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -757,6 +964,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<MultiValue> ReadListMultiValue(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -765,11 +973,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public TType ReadValueByteEnum<TType>(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (TType)Enum.ToObject(typeof(TType), this._Input.ReadValueU8());
         }
 
         public TType[] ReadArrayByteEnum<TType>(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -778,6 +988,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<TType> ReadListByteEnum<TType>(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -786,11 +997,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public TType ReadValueInt16Enum<TType>(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (TType)Enum.ToObject(typeof(TType), (short)this._Input.ReadValueS32());
         }
 
         public TType[] ReadArrayInt16Enum<TType>(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -799,6 +1012,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<TType> ReadListInt16Enum<TType>(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -807,11 +1021,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public TType ReadValueInt32Enum<TType>(object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (TType)Enum.ToObject(typeof(TType), this._Input.ReadValueS32());
         }
 
         public TType[] ReadArrayInt32Enum<TType>(int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -820,6 +1036,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<TType> ReadListInt32Enum<TType>(int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
@@ -828,11 +1045,13 @@ namespace Gibbed.Cryptic.FileFormats
 
         public TType ReadValueBitEnum<TType>(int bitOffset, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return (TType)Enum.ToObject(typeof(TType), this._Input.ReadValueU32());
         }
 
         public TType[] ReadArrayBitEnum<TType>(int bitOffset, int count, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeArray(
                 count,
                 state,
@@ -841,6 +1060,7 @@ namespace Gibbed.Cryptic.FileFormats
 
         public List<TType> ReadListBitEnum<TType>(int bitOffset, int maxCount, object state)
         {
+            if (this._Observer != null) { this.NoteColumn(); }
             return this.ReadNativeList(
                 maxCount,
                 state,
