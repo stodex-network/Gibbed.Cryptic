@@ -11,7 +11,7 @@ Tools for unpacking Star Trek Online's game files and converting its binary data
 
 To decode a BIN file, you need the converter, a serializer built from matching schemas, and a JSON mapping that tells the converter which class to use. The schemas describe the data layout; the mapping connects a BIN's parser hash to that layout. A game patch can change either one.
 
-The [STOdex HOGG server](https://github.com/stodex-network/stodex-hogg-resource-server) uses these tools and serializers to make game resources available to the STOdex app.
+The [STOdex HOGG server](https://github.com/stodex-network/stodex-game-resources-server) uses these tools and serializers to make game resources available to the STOdex app.
 
 ## Getting started
 
